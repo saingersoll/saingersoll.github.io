@@ -1,6 +1,6 @@
 ---
 title: "Sofia Ingersoll"
-image: headshot.png
+image: Website/headshot.png
 toc: false
 about:
   template: trestles
@@ -13,6 +13,9 @@ about:
     - text: Github
       icon: github
       href: https://github.com/saingersoll
+    - text: Email
+      href: mailto::singersoll@ucsd.edu
+      icon: email
 ---
 
 Howdy y\'all, my name is Sofia Ingersoll, but you can call me Soapy Soap because I'm always scrubbing data. I\'m an Environmental Data Scientist in training at the Bren School of Environmental Science & Management. I have experience with creative strategizing and my priority continues to be tidy data alongside quality data visualization. You\'ll find me always carrying a hefty toolbox of analytical techniques applicable to a broad scope of environmental issues.
