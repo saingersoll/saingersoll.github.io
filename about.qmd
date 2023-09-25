@@ -1,9 +1,8 @@
 ---
-title: "About"
+title: "Blog"
 ---
 
-About this site
+### Coming Soon
 
-```{r}
-1 + 1
+```{}
 ```
