@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "saingersoll.github.io"
+  title: "Soapy Soap"
   navbar:
     left:
       - href: index.qmd
