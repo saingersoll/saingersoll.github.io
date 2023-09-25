@@ -9,12 +9,18 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
+      - href: resources.qmd
+        text: Resources
 
 format:
   html:
-    theme: cosmo
+    theme:
+      light: quartz
+      dark: slate
     css: styles.css
     toc: true
+    page-layout: full
 
 editor: visual
+
 
