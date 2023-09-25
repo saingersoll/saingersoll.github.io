@@ -1,6 +1,6 @@
 ---
 title: "Sofia Ingersoll"
-image: Website/headshot.png
+image: images/headshot.png
 toc: false
 about:
   template: trestles
