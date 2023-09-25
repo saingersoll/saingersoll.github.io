@@ -1,7 +1,20 @@
 ---
-title: "saingersoll.github.io"
+title: "Sofia Ingersoll"
+image: headshot.png
+toc: false
+about:
+  template: trestles
+  image-shape: rounded
+  image-width: 20em
+  links: 
+    - text: LinkedIn
+      href: https://www.linkedin.com/in/sofia-ingersoll-078b931b7
 ---
 
-Howdy y\'all, my name is Sofia Ingersoll, but you can call me Soapy Soap. I\'m an Environmental Data Scientist in training at the Bren School of Environmental Science & Management. I have experience with creative strategizing and my priority continues to be tidy data alongside quality data visualization. You\'ll find me always carrying a hefty toolbox of analytical techniques applicable to a broad scope of environmental issues.
+Howdy y\'all, my name is Sofia Ingersoll, but you can call me Soapy Soap because I'm always scrubbing data. I\'m an Environmental Data Scientist in training at the Bren School of Environmental Science & Management. I have experience with creative strategizing and my priority continues to be tidy data alongside quality data visualization. You\'ll find me always carrying a hefty toolbox of analytical techniques applicable to a broad scope of environmental issues.
 
 I\'m seeking a part-time, entry-level, data analyst position to further develop my coding capabilities and scientific communication skills. I am devoted to bridging the communication gap amongst scientists, policymakers, and the public by delivering data in an articulate and accessible way.
+
+## Education
+
+## Experience
