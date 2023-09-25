@@ -4,14 +4,7 @@
     "href": "index.html",
     "title": "Sofia Ingersoll",
     "section": "",
-    "text": "Howdy y'all, my name is Sofia Ingersoll, but you can call me Soapy Soap because I’m always scrubbing data. I'm an Environmental Data Scientist in training at the Bren School of Environmental Science & Management. I have experience with creative strategizing and my priority continues to be tidy data alongside quality data visualization. You'll find me always carrying a hefty toolbox of analytical techniques applicable to a broad scope of environmental issues.\nI'm seeking a part-time, entry-level, data analyst position to further develop my coding capabilities and scientific communication skills. I am devoted to bridging the communication gap amongst scientists, policymakers, and the public by delivering data in an articulate and accessible way."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "Howdy y’all, my name is Sofia Ingersoll, but you can call me Soapy Soap because I’m always scrubbing data. I’m an Environmental Data Scientist in training at the Bren School of Environmental Science & Management. I have experience with creative strategizing and my priority continues to be tidy data alongside quality data visualization. You’ll find me always carrying a hefty toolbox of analytical techniques applicable to a broad scope of environmental issues.\nI’m seeking a part-time, entry-level, data analyst position to further develop my coding capabilities and scientific communication skills. I am devoted to bridging the communication gap amongst scientists, policymakers, and the public by delivering data in an articulate and accessible way."
   },
   {
     "objectID": "index.html#education",
@@ -26,5 +19,12 @@
     "title": "Sofia Ingersoll",
     "section": "Experience",
     "text": "Experience"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
   }
 ]
