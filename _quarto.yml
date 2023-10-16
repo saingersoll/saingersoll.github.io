@@ -17,9 +17,13 @@ format:
     theme:
       light: quartz
       dark: darkly
+      # - styles.scss to use style sheet for themes
     css: styles.css
+    mainfont: Nunito  
     toc: true
     page-layout: full
+#nunito is a nice font style 
+# font styles from google fonts need bold and nonbolded downloaded in order to work
 
 editor: visual
 
