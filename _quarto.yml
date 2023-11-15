@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "Soapy Soap"
+  title: "Soap"
   navbar:
     left:
       - href: index.qmd
@@ -11,6 +11,7 @@ website:
       - about.qmd
       - href: resources.qmd
         text: Resources
+      - posts.qmd
 
 format:
   html:

@@ -1,0 +1,75 @@
+---
+title: "GitHub Workshop"
+description: "GitHub essentials for collaborative workflows and reproducible open sourced projects."
+author:
+  - name: Sofia Ingersoll
+    url: https://saingersoll.github.io/
+    affiliation: The 2035 Initiative & Master of Environmental Data Science Program @ The Bren School (UCSB) 
+    affiliation-url: https://www.2035initiative.com/
+date: 11-15-2023
+categories: [Quarto, R, MEDS] # self-defined categories
+citation: 
+  url: https://samanthacsik.github.io/posts/2022-10-24-my-blog-post/ 
+image: GitHub-Logo.png
+draft: true # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
+---
+
+# GitHub Essentials
+
+Want a navigation tool on the side of the blog post so people can jump to a desired section
+
+## Terminal Commands (Summary of Code Covered)
+
+Insert a table here with all of the code chunks and descriptions - likely latex
+
+-   `git status`
+
+-   `git add  .`
+
+-   `git clone`
+
+## Creating a Repository
+
+image of what it looks like to make a repository
+
+### `.gitignore` Files
+
+#### What is a .gitignore file?
+
+Documentation we do not want to be pushed and made publicly available in GitHub.
+
+#### What do we hide and how?
+
+Typically, data sets that are too large are unable to be stored by GitHub. To avoid a catastrophic event where GitHub is overloaded, it is common practice to put the data folder in the `.gitignore` file.
+
+### `README` Files
+
+At the bottom of every GitHub repository page, reproducible projects include a `README` file that describes the objective of the project, the data sources utilized, and a synopesis of the workflow applied. These can be as creative as you please, through the inclusion of images, hyperlinks, and stylized text.
+
+Here are some examples of various `README` files:
+
+#### Licenses 
+
+GitHub provides the option to apply licensing to your repository. There are a collection of licenses available for selection in GitHub when you go to create a repository. Each contains their own specifications regarding the copyright use of the work it is applied to.
+
+### Adding Collaborators
+
+## Reproducible Workflows
+
+### Forking
+
+### Commiting Changes
+
+## Branches
+
+## Troubleshooting GitHub
+
+GitHub isn't always the friendliest tool and there are a number of things that could go wrong when working with it. Below, we will explore tactics to apply when experiencing issues with your GitHub.
+
+### Merge Conflicts
+
+#### What to do when you've already committed without pushing
+
+#### Pushing Data that's too Large
+
+#### 
