@@ -11,20 +11,26 @@ website:
       - href: posts.qmd
     #  - href: resources.qmd
      #   text: Resources
-
+  page-footer: 
+    background: light
+    left: 
+    - "Copyright 2023, Sofia Ingersoll"
+    right: 
+      - icon: github
+        href: https://github.com/saingersoll
 format:
   html:
-    theme:
-      light: quartz
-      dark: darkly
-      # - styles.scss to use style sheet for themes
-    css: styles.css
+    theme: 
+      - styles.scss
     mainfont: Nunito  
     toc: true
     page-layout: full
+editor: visual
 #nunito is a nice font style 
 # font styles from google fonts need bold and nonbolded downloaded in order to work
+      #light: quartz
+     # dark: darkly
+    #  - styles.scss to use style sheet for themes
 
-editor: visual
 
 
