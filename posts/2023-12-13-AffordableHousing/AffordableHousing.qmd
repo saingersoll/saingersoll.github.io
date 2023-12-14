@@ -1,9 +1,8 @@
 ---
 title: "Affordable Housing Project"
 description: "We collaborated with private developer, Rob Herschenfeld, and Environmental Land Use Planner & Community Council Member, Helen Eloyan, to compile a document that includes the critical issues and barriers when developing affordable housing, as well as, solutions to improve the current approach to address the Housing Crisis. "
-author:
-  - name: Sofia Ingersoll
-  - collaborator: Luna Herschenfeld-Catlán
+authors:
+  - name: Sofia Ingersoll & Luna Herschenfeld-Catlán
     affiliation: Master of Environmental Data Science Program @ The Bren School (UCSB) 
 date: 2023-12-08
 categories: [Ethics, Affordable Housing] # self-defined categories
