@@ -15,8 +15,6 @@ image: affordablehousing.jpg
 #draft: true # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
 ---
 
-Note: We collaborated with private developer, Rob Herschenfeld, and Environmental Land Use Planner & Community Council Member, Helen Eloyan, to compile a document that includes the critical issues and barriers when developing affordable housing, as well as, solutions to improve the current approach to address the Housing Crisis.
-
 # Main Takeaways
 
 -   There is not enough affordable housing available to meet the growing demand Gentrification leads to rising costs, and the displacement of people from rising housing costs has ramifications for access to public services like quality education, food, and transportation
