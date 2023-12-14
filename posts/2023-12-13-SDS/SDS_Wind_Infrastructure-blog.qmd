@@ -4,6 +4,7 @@ author: "Sofia Ingersoll"
 format: html
 editor: visual
 date: 2023-12-12
+categories: [Opinion Mapping, Sustainable Energy Transition]
 ---
 
 # **Spatially Distorted Signaling:**
