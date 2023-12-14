@@ -1,9 +1,9 @@
-\# options specified here will apply to all posts in this folder
-
-\# prevents posts from re-rendering unless explicitly told to do so (for more, see https://quarto.org/docs/projects/code-execution.html#freeze)
-
-freeze: auto
-
-\# enable banner style title blocks (see https://quarto.org/docs/authoring/title-blocks.html)
-
-title-block-banner: true
+---
+title: "My Blog"
+listing: 
+  contents: posts # all Quarto docs in the `posts` directory will be included on your listing page
+  type: grid # or `default` or `table`; each type has its own set of yaml options to include
+  sort: "date desc" # can also sort on more than one field
+  categories: true # allows you to sort posts by assigned categories 
+---
+# Check out my blogs!
