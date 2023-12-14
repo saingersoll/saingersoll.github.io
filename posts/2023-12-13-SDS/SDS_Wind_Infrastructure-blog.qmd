@@ -1,5 +1,5 @@
 ---
-title: "Spatially Distorted Signaling Wind Infrastructre"
+title: "SDS: How Opinions Against Wind Infrastructure Delay Our Transition to Renewable Energy"
 author: "Sofia Ingersoll"
 format: html
 editor: visual
