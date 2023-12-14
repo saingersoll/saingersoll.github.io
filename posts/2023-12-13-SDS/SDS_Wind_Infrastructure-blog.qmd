@@ -3,6 +3,7 @@ title: "SDS: How Opinions Against Wind Infrastructure Delay Our Transition to Re
 author: "Sofia Ingersoll"
 format: html
 editor: visual
+date: 2023-12-12
 ---
 
 # **Spatially Distorted Signaling:**
