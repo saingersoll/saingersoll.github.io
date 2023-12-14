@@ -155,6 +155,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#about-the-data" id="toc-about-the-data" class="nav-link active" data-scroll-target="#about-the-data">About the data</a></li>
+  <li><a href="#summary-code" id="toc-summary-code" class="nav-link" data-scroll-target="#summary-code">Summary Code</a></li>
   <li><a href="#loading-libraries-and-functions" id="toc-loading-libraries-and-functions" class="nav-link" data-scroll-target="#loading-libraries-and-functions">Loading Libraries and Functions</a></li>
   <li><a href="#reading-in-the-data-for-aqi" id="toc-reading-in-the-data-for-aqi" class="nav-link" data-scroll-target="#reading-in-the-data-for-aqi">Reading in the Data for AQI</a></li>
   <li><a href="#cleaning-wrangling-aqi-data" id="toc-cleaning-wrangling-aqi-data" class="nav-link" data-scroll-target="#cleaning-wrangling-aqi-data">Cleaning &amp; Wrangling AQI Data</a>
@@ -207,6 +208,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Second dataset</strong></p>
 <p>A shapefile of fire perimeters in California during 2017. The <a href="https://gis.data.ca.gov/datasets/CALFIRE-Forestry::california-fire-perimeters-all-1/about">complete file can be accessed in the CA state geoportal</a>.</p>
 <p>Citation: California fire perimeters (all). California State Geoportal. (n.d.). https://gis.data.ca.gov/datasets/CALFIRE-Forestry::california-fire-perimeters-all-1/about</p>
+</section>
+</section>
+<section id="summary-code" class="level2">
+<h2 class="anchored" data-anchor-id="summary-code">Summary Code</h2>
 <div class="cell" data-tags="[]" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading in Libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd                                                                                         </span>
@@ -293,7 +298,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="AQI_False_Color_Img_files/figure-html/cell-2-output-3.png" class="img-fluid"></p>
 </div>
 </div>
-</section>
 </section>
 <section id="loading-libraries-and-functions" class="level1">
 <h1>Loading Libraries and Functions</h1>
@@ -610,13 +614,13 @@ Frozen({'y': 731, 'x': 870}) Coordinates:
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">'AQI_Assessment.png'</span>)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">'SB_Thomas_Fire.png'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Read more about false color images here: <a href="https://earthobservatory.nasa.gov/features/FalseColor">NASA Earth Observatory - Why is that Forest Red and that Cloud Blue? How to Interpret a False-Color Satellite Image</a></p>
-<p>Information about Landsat bands from USGS:</p>
-<ul>
-<li><p><a href="https://www.usgs.gov/faqs/what-are-band-designations-landsat-satellites">What are the band designations for the Landsat satellites?</a></p></li>
-<li><p><a href="https://www.usgs.gov/media/images/common-landsat-band-combinations">Common Landsat Band Combinations</a></p></li>
-<li><p><a href="https://www.usgs.gov/faqs/how-do-i-use-a-scale-factor-landsat-level-2-science-products">How do I use a scale factor with Landsat Level-2 science products?</a></p></li>
-</ul>
+<p>Citations:</p>
+<ol type="1">
+<li><p>VCFD determines cause of The thomas fire. Ventura County Fire Department. (2019, March 13). https://vcfd.org/news/vcfd-determines-cause-of-the-thomas-fire/</p></li>
+<li><p>AirNow.gov, U.S. EPA. (n.d.). Aqi Basics. AQI Basics | AirNow.gov. https://www.airnow.gov/aqi/aqi-basics/</p></li>
+<li><p>Microsoft Planetary Computer. Planetary Computer. (n.d.). https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2</p></li>
+<li><p>California fire perimeters (all). California State Geoportal. (n.d.). https://gis.data.ca.gov/datasets/CALFIRE-Forestry::california-fire-perimeters-all-1/about</p></li>
+</ol>
 
 
 </section>
