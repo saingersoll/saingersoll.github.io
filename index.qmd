@@ -18,7 +18,9 @@ about:
       icon: email
 ---
 
-# Sofia Ingersoll ( it kinda sounds like papaya, Sof-aya Ing-er-saul )
+# Sofia Ingersoll 
+
+## It sounds like papaya, Sof-aya Ing-er-saul 
 
 Howdy y'all,
 
