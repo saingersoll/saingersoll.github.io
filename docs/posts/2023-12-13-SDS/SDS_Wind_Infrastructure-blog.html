@@ -8,7 +8,7 @@
 
 <meta name="author" content="Sofia Ingersoll">
 
-<title>Sofia Ingersoll - SDS: How Opinions Against Wind Infrastructure Delay Our Transition to Renewable Energy</title>
+<title>Sofia Ingersoll - Spatially Distorted Signaling Wind Infrastructre</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -136,7 +136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">SDS: How Opinions Against Wind Infrastructure Delay Our Transition to Renewable Energy</h1>
+      <h1 class="title">Spatially Distorted Signaling Wind Infrastructre</h1>
                       </div>
   </div>
     
@@ -172,17 +172,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   </ul></li>
   <li><a href="#read-in-the-data" id="toc-read-in-the-data" class="nav-link" data-scroll-target="#read-in-the-data">Read in the Data</a></li>
-  <li><a href="#wrangling-subsetting" id="toc-wrangling-subsetting" class="nav-link" data-scroll-target="#wrangling-subsetting">Wrangling &amp; Subsetting</a>
-  <ul class="collapse">
-  <li><a href="#converting-latlong-into-raster-data-i.e.-sticky-geometries" id="toc-converting-latlong-into-raster-data-i.e.-sticky-geometries" class="nav-link" data-scroll-target="#converting-latlong-into-raster-data-i.e.-sticky-geometries"><strong>Converting lat/long into Raster Data (i.e.&nbsp;sticky geometries)</strong></a></li>
-  </ul></li>
   <li><a href="#initial-visualization-of-the-data" id="toc-initial-visualization-of-the-data" class="nav-link" data-scroll-target="#initial-visualization-of-the-data">Initial Visualization of the Data</a></li>
   <li><a href="#linear-regression-models" id="toc-linear-regression-models" class="nav-link" data-scroll-target="#linear-regression-models">Linear Regression Models</a>
   <ul class="collapse">
   <li><a href="#variables-of-interest" id="toc-variables-of-interest" class="nav-link" data-scroll-target="#variables-of-interest">Variables of Interest:</a></li>
   <li><a href="#determining-variable-assignments-for-ols" id="toc-determining-variable-assignments-for-ols" class="nav-link" data-scroll-target="#determining-variable-assignments-for-ols">Determining Variable Assignments for OLS</a>
   <ul class="collapse">
-  <li><a href="#need-to-rename-status-output-variables" id="toc-need-to-rename-status-output-variables" class="nav-link" data-scroll-target="#need-to-rename-status-output-variables">Need to rename status output variables</a></li>
+  <li><a href="#redefining-status-as-a-binary-variable" id="toc-redefining-status-as-a-binary-variable" class="nav-link" data-scroll-target="#redefining-status-as-a-binary-variable">Redefining <code>status</code> as a Binary Variable</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#dude-thats-logit" id="toc-dude-thats-logit" class="nav-link" data-scroll-target="#dude-thats-logit">Dude, that’s Logit!</a>
@@ -231,10 +227,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="main-takeaways" class="level3">
 <h3 class="anchored" data-anchor-id="main-takeaways">Main Takeaways:</h3>
 <ul>
-<li><p>Linear Regression Models are not always the answer</p></li>
-<li><p>Dude, That’s Logit!</p></li>
-<li><p>What in the Log Odds?</p></li>
-<li><p>Binary Predictions for Binary Variables</p></li>
+<li><p>Intuitively as expected, a single unit increase in population density is associated with a minor increase in the odds ratio of a wind plant operating. Our models also described that for each single unit increase in median income, there is a decrease in the odds ratio that a wind plant is operational. Similarly, this is seen with anti wind infrastructure opinion holders.</p></li>
+<li><p>Although our p-values each of our models provided p-values for our coefficients that are hold because they are above the significance level of 0.05. We cannot make any definitive assumptions about our logistic regression models because there is insufficient evidence inspecting the influential effects of omitted variables bias and a lack of data for regions with non-operational wind plants.</p></li>
+<li><p>If given the opportunity, I would expand the dataset to include any more possible non-operational wind plants and explore in greater detail how exogenous our variables are and determine which values are likely interacting, to produce the best model fit.</p></li>
 </ul>
 </section>
 <section id="loading-libraries" class="level3">
@@ -242,8 +237,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The following libraries were selected based on their functionality and ability to optimize our data for mapping.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading Libraries</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)        <span class="co"># essential r package </span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)               <span class="co"># package simplifies spatial dataframes</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)        </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)               </span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spData)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
@@ -259,76 +254,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stars)</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(maptiles)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(smoothr)          <span class="co"># aesthetic and visual aid for buffers created</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(smoothr)       </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 </section>
 <section id="read-in-the-data" class="level1">
 <h1>Read in the Data</h1>
-<p>To simplify the following step, it is important to organize your folders in a way that makes sense for your workflow. In many cases, the data sets we work with are typically too large to be uploaded to GitHub. As a result, a common practice is storing your data in a folder, directly outside of your repository in a folder labeled “data”.</p>
-<p>The code chunk below for <code>read.csv</code> demonstrates how to exit your current location using <code>..</code> and enter the desired folder location using <code>/</code>. It is important that your file path does not contain any spaces and is directly reflective of the file path for the data you wish to read in.</p>
 <section id="u.s.-wind-data" class="level4">
 <h4 class="anchored" data-anchor-id="u.s.-wind-data">U.S. Wind Data</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reading in &amp; storing data</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>wind_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/wind_data_usa.csv"</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="confirm-the-data-loaded-properly" class="level5">
-<h5 class="anchored" data-anchor-id="confirm-the-data-loaded-properly">Confirm the Data Loaded Properly</h5>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#head(wind_data)                  # displays the first 6 rows of the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-</section>
-</section>
-<section id="wrangling-subsetting" class="level1">
-<h1>Wrangling &amp; Subsetting</h1>
-<section id="converting-latlong-into-raster-data-i.e.-sticky-geometries" class="level3">
-<h3 class="anchored" data-anchor-id="converting-latlong-into-raster-data-i.e.-sticky-geometries"><strong>Converting lat/long into Raster Data (i.e.&nbsp;sticky geometries)</strong></h3>
-<p>Below we will use the package <code>sf</code> to convert the lat/long data into a raster geometry column. In this single line, we will also be assigning the CRS EPSG:4326 to the sf data frame. Coordinate Reference Systems, CRS, are required in order for the data to be projected onto a map. The CRS was selected because it provides a relatively proportionate display of the United States. We are open to suggestions regarding our CRS if a different project better fits our data.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>wind_sf <span class="ot">&lt;-</span> wind_data <span class="sc">%&gt;%</span>             <span class="co"># calls desired dataset</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"longitude"</span>, <span class="st">"latitude"</span>), <span class="at">crs =</span> <span class="dv">4326</span>) </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="co"># creates geometry column with desired crs </span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(<span class="fu">crs</span>(wind_sf))                  <span class="co"># output should reveal WGS84, EPSG:4326</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> chr "GEOGCRS[\"WGS 84\",\n    ENSEMBLE[\"World Geodetic System 1984 ensemble\",\n        MEMBER[\"World Geodetic Sys"| __truncated__</code></pre>
-</div>
-</div>
-<section id="check-point" class="level4">
-<h4 class="anchored" data-anchor-id="check-point">Check-point</h4>
-<p>Let’s stop and see if our outputs are what we expect.</p>
-<p>Were the lat/long columns correctly converted into a geometry column?</p>
-<p><code>setdiff()</code> is a way to quickly determine the differences between two data sets.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setdiff</span>(<span class="fu">colnames</span>(wind_data), <span class="fu">colnames</span>(wind_sf))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "longitude" "latitude" </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setdiff</span>(<span class="fu">colnames</span>(wind_sf), <span class="fu">colnames</span>(wind_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "geometry"</code></pre>
-</div>
-</div>
-</section>
 </section>
 </section>
 <section id="initial-visualization-of-the-data" class="level1">
 <h1>Initial Visualization of the Data</h1>
-<p>Using the base R function <code>plot()</code>, we can see that the geometries stored by this data set correlate to the locations of wind infrastructure plants throughout the United States. In order to visualize these locations with respect to state and county jurisdictions, we’ll need to utilize another data set to create a base layer for our map.</p>
+<p>Below we can see the spatial scope of our data being considered. Each bubble represents a wind power project within the United States from 2010-2016.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First visual of the U.S. wind data provided by the geometry points</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>wind_plants <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(wind_sf) <span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotation_map_tile</span>(<span class="at">type =</span> <span class="st">"osm"</span>) <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">col =</span> <span class="st">'darkgreen'</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha =</span> <span class="fl">0.5</span>,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="dv">3</span>) </span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>wind_plants</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First visual of the U.S. wind data provided by the geometry points</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>wind_plants <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(wind_sf) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotation_map_tile</span>(<span class="at">type =</span> <span class="st">"osm"</span>) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">col =</span> <span class="st">'darkgreen'</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha =</span> <span class="fl">0.5</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="dv">3</span>) </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>wind_plants</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="SDS_Wind_Infrastructure-blog_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<p><img src="SDS_Wind_Infrastructure-blog_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -336,10 +290,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Linear Regression Models</h1>
 <section id="variables-of-interest" class="level3">
 <h3 class="anchored" data-anchor-id="variables-of-interest">Variables of Interest:</h3>
+<p>These variables focus more on regionally dependent factors that intuitively seem to have an impact on mobilization variables we don’t have time to cover in this project. We’ll be working with a mix of discrete and continuous data, so there some wrangling will be necessary to run the regressions we’re interested in.</p>
 <table class="table">
 <colgroup>
-<col style="width: 18%">
-<col style="width: 81%">
+<col style="width: 25%">
+<col style="width: 75%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -366,12 +321,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>These variables focus more on regionally dependent factors that intuitively seem to have an impact on mobilization variables we don’t have time to cover in this project. We’ll be working with a mix of discrete and continuous data, so there some wrangling will be necessary to run the regressions we’re interested in.</p>
 </section>
 <section id="determining-variable-assignments-for-ols" class="level2">
 <h2 class="anchored" data-anchor-id="determining-variable-assignments-for-ols">Determining Variable Assignments for OLS</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(wind_sf<span class="sc">$</span>status)     <span class="co"># displays unique values in this</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(wind_sf<span class="sc">$</span>status)     <span class="co"># displays unique values in this</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Operating"                    "Cancelled"                   
 [3] "Out of service (temporarily)" "Standby"                     
@@ -379,63 +333,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 [7] NA                            </code></pre>
 </div>
 </div>
-<section id="need-to-rename-status-output-variables" class="level3">
-<h3 class="anchored" data-anchor-id="need-to-rename-status-output-variables">Need to rename status output variables</h3>
+<section id="redefining-status-as-a-binary-variable" class="level3">
+<h3 class="anchored" data-anchor-id="redefining-status-as-a-binary-variable">Redefining <code>status</code> as a Binary Variable</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creating two categories: operating &amp; not_operating</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># We are removing 'Operating | Decommissioned' because it skews the data</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>unwanted_status <span class="ot">&lt;-</span> <span class="st">"Operating | Decommissioned"</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>replacement_status <span class="ot">&lt;-</span> <span class="st">"Uncertain Status"</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>wind_sf<span class="sc">$</span>status[wind_sf<span class="sc">$</span>status<span class="sc">==</span> unwanted_status]<span class="ot">&lt;-</span><span class="st">"Uncertain Status"</span>  </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># were we successful ?</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(wind_sf<span class="sc">$</span>status)     <span class="co"># displays unique values in this</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Operating"                    "Cancelled"                   
-[3] "Out of service (temporarily)" "Standby"                     
-[5] "Decommissioned"               "Uncertain Status"            
-[7] NA                            </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning out NAs for OLS</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>wind_sf <span class="ot">&lt;-</span> wind_sf <span class="sc">%&gt;%</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(status) <span class="sc">==</span> <span class="st">'FALSE'</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(is_anti_wind) <span class="sc">==</span> <span class="st">'FALSE'</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(pop_den) <span class="sc">==</span> <span class="st">'FALSE'</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(med_inc) <span class="sc">==</span> <span class="st">'FALSE'</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(median_age) <span class="sc">==</span> <span class="st">'FALSE'</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(n_turbs) <span class="sc">==</span> <span class="st">'FALSE'</span>)</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># were we successful ?</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(wind_sf<span class="sc">$</span>status)     <span class="co"># displays unique values in this</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Operating"                    "Cancelled"                   
-[3] "Out of service (temporarily)" "Standby"                     
-[5] "Decommissioned"               "Uncertain Status"            </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># if_else preserves the data type but replaces unwanted values</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>wind_us <span class="ot">&lt;-</span> wind_sf <span class="sc">%&gt;%</span> </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">status =</span> <span class="fu">if_else</span>(</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    status <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'Cancelled'</span>, <span class="st">'Out of service (temporarily)'</span>, <span class="st">'Standby'</span>, <span class="st">'Decommissioned'</span>, <span class="st">'Uncertain Status'</span>), <span class="st">'not_operating'</span>,</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'operating'</span>) </span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># are our only outputs "operating" and "not_operating"?</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">unique</span>(wind_us<span class="sc">$</span>status))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "operating"     "not_operating"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># status as factor and reassigned values</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>wind_us <span class="ot">&lt;-</span> wind_us <span class="sc">%&gt;%</span> </span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">status =</span> <span class="fu">case_when</span>(status <span class="sc">==</span> <span class="st">"operating"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>            status <span class="sc">==</span> <span class="st">"not_operating"</span> <span class="sc">~</span> <span class="dv">0</span>))</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># are our only outputs 0 or 1?</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">unique</span>(wind_us<span class="sc">$</span>status))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creating two categories: operating &amp; not_operating</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># We are removing 'Operating | Decommissioned' because it skews the data</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>unwanted_status <span class="ot">&lt;-</span> <span class="st">"Operating | Decommissioned"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>replacement_status <span class="ot">&lt;-</span> <span class="st">"Uncertain Status"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>wind_sf<span class="sc">$</span>status[wind_sf<span class="sc">$</span>status<span class="sc">==</span> unwanted_status]<span class="ot">&lt;-</span><span class="st">"Uncertain Status"</span>  </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># were we successful ?</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#unique(wind_sf$status)     # displays unique values in this</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning out NAs for OLS</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>wind_sf <span class="ot">&lt;-</span> wind_sf <span class="sc">%&gt;%</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(status) <span class="sc">==</span> <span class="st">'FALSE'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(is_anti_wind) <span class="sc">==</span> <span class="st">'FALSE'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(pop_den) <span class="sc">==</span> <span class="st">'FALSE'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(med_inc) <span class="sc">==</span> <span class="st">'FALSE'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(median_age) <span class="sc">==</span> <span class="st">'FALSE'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(n_turbs) <span class="sc">==</span> <span class="st">'FALSE'</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># were we successful ?</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">#unique(wind_sf$status)     # displays unique values in this</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># if_else preserves the data type but replaces unwanted values</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>wind_us <span class="ot">&lt;-</span> wind_sf <span class="sc">%&gt;%</span> </span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">status =</span> <span class="fu">if_else</span>(</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    status <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'Cancelled'</span>, <span class="st">'Out of service (temporarily)'</span>, <span class="st">'Standby'</span>, <span class="st">'Decommissioned'</span>, <span class="st">'Uncertain Status'</span>), <span class="st">'not_operating'</span>,</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">'operating'</span>) </span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co"># are our only outputs "operating" and "not_operating"?</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co">#print(unique(wind_us$status))</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co"># status as factor and reassigned values</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>wind_us <span class="ot">&lt;-</span> wind_us <span class="sc">%&gt;%</span> </span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">status =</span> <span class="fu">case_when</span>(status <span class="sc">==</span> <span class="st">"operating"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>            status <span class="sc">==</span> <span class="st">"not_operating"</span> <span class="sc">~</span> <span class="dv">0</span>))</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="co"># are our only outputs 0 or 1?</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">unique</span>(wind_us<span class="sc">$</span>status))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 0</code></pre>
 </div>
 </div>
-<p>Binary variable will be <code>status</code> column: <code>opertating</code> is 1, and <code>not_operating</code> will be 0.</p>
+<p>Binary variable will be <code>status</code> variable: <code>opertating</code> is 1, and <code>not_operating</code> will be 0.</p>
 </section>
 </section>
 </section>
@@ -446,26 +389,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="visualizing-ols-of-categorical-response-variable">Visualizing OLS of Categorical Response Variable</h3>
 <p>Our initial visualization demonstrates a correlation between smaller population density and wind infrastructure plants operating. This is likely associated with weight placed on voters in regions with smaller demographics. Local mobilization of minority opinion holders in these regions have a greater availability to push back against policymakers. However, this visual does not encapsulate all of the necessary information required to determine this with full certainty. Our data set has poor availability for non-operating infrastructure, these are being treated as outliers.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># visualization of relationship</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>jitter_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> wind_us, </span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">aes</span>(<span class="at">x =</span> pop_den,</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y =</span> status)) <span class="sc">+</span> </span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">col =</span> <span class="st">'plum'</span>,</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill =</span> <span class="st">"purple"</span>,</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">width =</span> <span class="dv">0</span>,</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">height =</span> <span class="fl">0.05</span>,</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.45</span>,</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="dv">6</span>) <span class="sc">+</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Population Density &amp; Wind Infrastructure Activation Status"</span>,</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Population Density"</span>,</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Wind Infrastructure Operating Status"</span>)</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>jitter_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="SDS_Wind_Infrastructure-blog_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<p><img src="SDS_Wind_Infrastructure-blog_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># useful information</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(wind_us<span class="sc">$</span>pop_den)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
     0.143     4.309    12.493   181.484    40.394 13940.515 </code></pre>
@@ -477,31 +403,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Our model below is describing the linear &amp; logistic regressions for the effect of population density on wind project operating status. This visual is very interesting and definitely explains why the <span class="math inline">\(R^2\)</span> value is only giving values in the 0.9 range. Since our data contains a significant number of <code>operating</code> wind plants for a wide range of population densities, the regression model is producing a fit according to the <code>operating</code> status. The values in the <code>not_opertating</code> status appear to be considered similar to that of an outlier.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="SDS_Wind_Infrastructure-blog_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<p><img src="SDS_Wind_Infrastructure-blog_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
 <section id="binary-dependent-variable" class="level3">
 <h3 class="anchored" data-anchor-id="binary-dependent-variable">Binary Dependent Variable</h3>
-<p><span class="math display">\[ \text{status}\ = \beta_0 + \beta_1 \text{pop_den}\_i + \varepsilon_i \]</span></p>
+<p><span class="math display">\[\text{status} = \beta_0 + \beta_1 \text{pop_den}\_i + \varepsilon_i\]</span></p>
 <ul>
 <li><p>Our summary table describes a null deviance <code>362.60</code>.(<code>1178 df</code>) and residual deviance <code>362.22</code> (<code>1177 df</code>).</p></li>
 <li><p>A p-value of <code>0.593</code> for <span class="math inline">\(\beta_1\)</span>, is greater than the significant value of 0.05, therefore, the model hypothesis that operation status is influenced by population density holds.</p></li>
 <li><p>However, I am still not convinced there isn’t a correlation shared with another factor, so let’s explore how our numbers change as we incorporate more variables into our equation later on.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inital regression 1 betas for null</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># function</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>status <span class="ot">&lt;-</span> <span class="fu">glm</span>(status <span class="sc">~</span> pop_den,</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                       wind_us,</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">family =</span> <span class="st">'binomial'</span>)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co"># summary to access coefficients</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>status1 <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">glm</span>(status <span class="sc">~</span> pop_den,</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                       wind_us,</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">family =</span> <span class="st">'binomial'</span>))</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co"># show me a summary table </span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>status1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -532,43 +446,19 @@ Number of Fisher Scoring iterations: 6</code></pre>
 <section id="logitplog-p-1pβ0β1xε" class="level4">
 <h4 class="anchored" data-anchor-id="logitplog-p-1pβ0β1xε"><span class="math display">\[logit(p)=log( p / 1−p)=β0+β1x+ε\]</span></h4>
 <p>so then, to solve for p:</p>
-<p><span class="math display">\[
-p̂=e^(β0+β1x1+eβ0+β1x)
-\]</span></p>
+<p><span class="math display">\[p̂=e^(β0+β1x1+eβ0+β1x)\]</span></p>
 <p>Alternatively, we’re going to solve for p using&nbsp;<span class="math inline">\(R^2\)</span> because that looks gross. The&nbsp;<code>uniroot</code>&nbsp;function searches over the provided interval to find the zero value of the function provided. We pass the expression that should equal zero, and it finds us the p that ensures it equals zero.</p>
 </section>
 <section id="finding-p" class="level2">
 <h2 class="anchored" data-anchor-id="finding-p">Finding p</h2>
 <p>Utilizing the funky relationship described above, we can solve for a range of p values using <span class="math inline">\(R^2\)</span>. We’re curious about the probability of <code>operating</code> wind plants for Population Density at <code>20,000</code>, <code>6,000</code>, and <code>600.</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creating a function to to describe the logistic regression model</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 100,000 </span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>fun <span class="ot">&lt;-</span> <span class="cf">function</span>(p) {</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span> <span class="sc">-</span> p)<span class="sc">*</span><span class="fu">exp</span>(status1<span class="sc">$</span>coefficients[<span class="dv">1</span>,<span class="st">'Estimate'</span>] <span class="sc">+</span> (status1<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="st">'Estimate'</span>]<span class="sc">*</span><span class="dv">20000</span>)) <span class="sc">-</span> p</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="fu">uniroot</span>(fun, <span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))<span class="sc">$</span>root</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.9989509</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 26000</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>fun <span class="ot">&lt;-</span> <span class="cf">function</span>(p) {</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span> <span class="sc">-</span> p)<span class="sc">*</span><span class="fu">exp</span>(status1<span class="sc">$</span>coefficients[<span class="dv">1</span>,<span class="st">'Estimate'</span>] <span class="sc">+</span> (status1<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="st">'Estimate'</span>]<span class="sc">*</span><span class="dv">6000</span>)) <span class="sc">-</span> p</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="fu">uniroot</span>(fun, <span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))<span class="sc">$</span>root</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.9872347</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6000</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>fun <span class="ot">&lt;-</span> <span class="cf">function</span>(p) {</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span> <span class="sc">-</span> p)<span class="sc">*</span><span class="fu">exp</span>(status1<span class="sc">$</span>coefficients[<span class="dv">1</span>,<span class="st">'Estimate'</span>] <span class="sc">+</span> (status1<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="st">'Estimate'</span>]<span class="sc">*</span><span class="dv">600</span>)) <span class="sc">-</span> p</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="fu">uniroot</span>(fun, <span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))<span class="sc">$</span>root</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.967067</code></pre>
 </div>
@@ -582,18 +472,18 @@ p̂=e^(β0+β1x1+eβ0+β1x)
 <p><span class="math inline">\(odds(p̂)=p̂1−p̂=exp(β̂0+β̂1⋅x)\)</span></p>
 <p>We’re going create an&nbsp;<code>odds_hat</code>&nbsp;variable for predicted odds. The ratio of the odds <em>after</em> a single unit increase in x to the odds <em>before</em> that one unit change is equal to&nbsp;eβ1.&nbsp;<strong>Notice this doesn’t depend on</strong> x&nbsp;anymore! Therefore, it’s a useful interpretation of coefficients.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>status_popden_predicted_odds <span class="ot">&lt;-</span>  status <span class="sc">%&gt;%</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">augment</span>(<span class="at">type.predict =</span> <span class="st">"response"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y_hat =</span> .fitted) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">odds_hat =</span> y_hat <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> y_hat)) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>status_popden_predicted_odds <span class="ot">&lt;-</span>  status <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">augment</span>(<span class="at">type.predict =</span> <span class="st">"response"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y_hat =</span> .fitted) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">odds_hat =</span> y_hat <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> y_hat)) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This is an “odds ratio”, meaning we care about how this number differs from 1. If it’s greater than 1, then the odds increase when&nbsp;x&nbsp;increases. Conversely, if it’s less than 1, then the odds decrease.</p>
 <ul>
 <li>By how much does our model predict that the odds of <code>operating status</code> will change with each additional unit increase in population density?</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(status1<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="st">'Estimate'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(status1<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="st">'Estimate'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.000179</code></pre>
 </div>
@@ -602,22 +492,13 @@ p̂=e^(β0+β1x1+eβ0+β1x)
 </section>
 <section id="logistic-model-with-2-continuous-variables" class="level2">
 <h2 class="anchored" data-anchor-id="logistic-model-with-2-continuous-variables">Logistic Model with 2 Continuous Variables</h2>
-<p><span class="math display">\[ \text{status}\ = \beta_0 + \beta_1 \text{pop_den}\_i + \beta_2 \text{med_inc} + \varepsilon_i \]</span></p>
+<p><span class="math display">\[\text{status}\ = \beta_0 + \beta_1 \text{pop_den}\_i + \beta_2 \text{med_inc} + \varepsilon_i\]</span></p>
 <ul>
 <li><p>Our summary table describes a null deviance 362.60.(1178 df) and residual deviance 359.84 (1176 df).</p></li>
 <li><p>Additionally, it provides a p-value of 0.511 for <span class="math inline">\(\beta_1\)</span>, indicating that the hypothesis here is accepted because it is greater than the significant value of 0.05.</p></li>
 <li><p>The p-value of <span class="math inline">\(\beta_2\)</span>, 0.957 is acceptable because it is above range of the significant value.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>status_2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(status <span class="sc">~</span> pop_den <span class="sc">+</span> med_inc,</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>               wind_us,</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">family =</span> <span class="st">'binomial'</span>)</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial regression 2 betas for null</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>status2 <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">glm</span>(status <span class="sc">~</span> pop_den <span class="sc">+</span> med_inc,</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>               wind_us,</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">family =</span> <span class="st">'binomial'</span>))</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>status2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -648,13 +529,13 @@ Number of Fisher Scoring iterations: 6</code></pre>
 <section id="logitplog-p-1pβ0β1xε-1" class="level4">
 <h4 class="anchored" data-anchor-id="logitplog-p-1pβ0β1xε-1"><span class="math display">\[logit(p)=log( p / 1−p)=β0+β1x+ε\]</span></h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># beta1 estimation exponentiated</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(status2<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="st">'Estimate'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># beta1 estimation exponentiated</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(status2<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="st">'Estimate'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.000248</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># beta2 estimation exponentiated</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(status2<span class="sc">$</span>coefficients[<span class="dv">3</span>,<span class="st">'Estimate'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># beta2 estimation exponentiated</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(status2<span class="sc">$</span>coefficients[<span class="dv">3</span>,<span class="st">'Estimate'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.497159e-05</code></pre>
 </div>
@@ -667,35 +548,35 @@ Number of Fisher Scoring iterations: 6</code></pre>
 <h1>Probabilistic Predictions</h1>
 <p>We are going to making some probability predictions using out-of-sample predictions using the <code>type.predict</code> argument set as “response”, to retrieve fitted values on the familiar probability scale.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># probability scale</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>probability_predictions <span class="ot">&lt;-</span> <span class="fu">augment</span>(status_2, <span class="at">type.predict =</span> <span class="st">"response"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># probability scale</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>probability_predictions <span class="ot">&lt;-</span> <span class="fu">augment</span>(status_2, <span class="at">type.predict =</span> <span class="st">"response"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For example, our model predicts the odds that an area with a population density of 124 and a median income of 46,094 and would have an operating wind plant is ~97%.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>exploring_model <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">pop_den =</span> <span class="dv">124</span>, <span class="at">med_inc =</span> <span class="dv">46094</span>)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(status_2, <span class="at">newdata =</span> exploring_model, <span class="at">type.predict =</span> <span class="st">"response"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>exploring_model <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">pop_den =</span> <span class="dv">124</span>, <span class="at">med_inc =</span> <span class="dv">46094</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(status_2, <span class="at">newdata =</span> exploring_model, <span class="at">type.predict =</span> <span class="st">"response"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="xqgozgjsmr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xqgozgjsmr table {
+<div id="kymroqyynm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kymroqyynm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xqgozgjsmr thead, #xqgozgjsmr tbody, #xqgozgjsmr tfoot, #xqgozgjsmr tr, #xqgozgjsmr td, #xqgozgjsmr th {
+#kymroqyynm thead, #kymroqyynm tbody, #kymroqyynm tfoot, #kymroqyynm tr, #kymroqyynm td, #kymroqyynm th {
   border-style: none;
 }
 
-#xqgozgjsmr p {
+#kymroqyynm p {
   margin: 0;
   padding: 0;
 }
 
-#xqgozgjsmr .gt_table {
+#kymroqyynm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -721,12 +602,12 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#xqgozgjsmr .gt_caption {
+#kymroqyynm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xqgozgjsmr .gt_title {
+#kymroqyynm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -738,7 +619,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-bottom-width: 0;
 }
 
-#xqgozgjsmr .gt_subtitle {
+#kymroqyynm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -750,7 +631,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-top-width: 0;
 }
 
-#xqgozgjsmr .gt_heading {
+#kymroqyynm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -762,13 +643,13 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xqgozgjsmr .gt_bottom_border {
+#kymroqyynm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xqgozgjsmr .gt_col_headings {
+#kymroqyynm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -783,7 +664,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xqgozgjsmr .gt_col_heading {
+#kymroqyynm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -803,7 +684,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   overflow-x: hidden;
 }
 
-#xqgozgjsmr .gt_column_spanner_outer {
+#kymroqyynm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -815,15 +696,15 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 4px;
 }
 
-#xqgozgjsmr .gt_column_spanner_outer:first-child {
+#kymroqyynm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xqgozgjsmr .gt_column_spanner_outer:last-child {
+#kymroqyynm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xqgozgjsmr .gt_column_spanner {
+#kymroqyynm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -835,11 +716,11 @@ Number of Fisher Scoring iterations: 6</code></pre>
   width: 100%;
 }
 
-#xqgozgjsmr .gt_spanner_row {
+#kymroqyynm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xqgozgjsmr .gt_group_heading {
+#kymroqyynm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -865,7 +746,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   text-align: left;
 }
 
-#xqgozgjsmr .gt_empty_group_heading {
+#kymroqyynm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -880,15 +761,15 @@ Number of Fisher Scoring iterations: 6</code></pre>
   vertical-align: middle;
 }
 
-#xqgozgjsmr .gt_from_md > :first-child {
+#kymroqyynm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xqgozgjsmr .gt_from_md > :last-child {
+#kymroqyynm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xqgozgjsmr .gt_row {
+#kymroqyynm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -907,7 +788,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   overflow-x: hidden;
 }
 
-#xqgozgjsmr .gt_stub {
+#kymroqyynm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -920,7 +801,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 5px;
 }
 
-#xqgozgjsmr .gt_stub_row_group {
+#kymroqyynm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -934,15 +815,15 @@ Number of Fisher Scoring iterations: 6</code></pre>
   vertical-align: top;
 }
 
-#xqgozgjsmr .gt_row_group_first td {
+#kymroqyynm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xqgozgjsmr .gt_row_group_first th {
+#kymroqyynm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xqgozgjsmr .gt_summary_row {
+#kymroqyynm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -952,16 +833,16 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 5px;
 }
 
-#xqgozgjsmr .gt_first_summary_row {
+#kymroqyynm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xqgozgjsmr .gt_first_summary_row.thick {
+#kymroqyynm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xqgozgjsmr .gt_last_summary_row {
+#kymroqyynm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -971,7 +852,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#xqgozgjsmr .gt_grand_summary_row {
+#kymroqyynm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -981,7 +862,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 5px;
 }
 
-#xqgozgjsmr .gt_first_grand_summary_row {
+#kymroqyynm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -991,7 +872,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#xqgozgjsmr .gt_last_grand_summary_row_top {
+#kymroqyynm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1001,11 +882,11 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#xqgozgjsmr .gt_striped {
+#kymroqyynm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xqgozgjsmr .gt_table_body {
+#kymroqyynm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1014,7 +895,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#xqgozgjsmr .gt_footnotes {
+#kymroqyynm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1028,7 +909,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xqgozgjsmr .gt_footnote {
+#kymroqyynm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1037,7 +918,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 5px;
 }
 
-#xqgozgjsmr .gt_sourcenotes {
+#kymroqyynm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1051,7 +932,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xqgozgjsmr .gt_sourcenote {
+#kymroqyynm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1059,63 +940,63 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 5px;
 }
 
-#xqgozgjsmr .gt_left {
+#kymroqyynm .gt_left {
   text-align: left;
 }
 
-#xqgozgjsmr .gt_center {
+#kymroqyynm .gt_center {
   text-align: center;
 }
 
-#xqgozgjsmr .gt_right {
+#kymroqyynm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xqgozgjsmr .gt_font_normal {
+#kymroqyynm .gt_font_normal {
   font-weight: normal;
 }
 
-#xqgozgjsmr .gt_font_bold {
+#kymroqyynm .gt_font_bold {
   font-weight: bold;
 }
 
-#xqgozgjsmr .gt_font_italic {
+#kymroqyynm .gt_font_italic {
   font-style: italic;
 }
 
-#xqgozgjsmr .gt_super {
+#kymroqyynm .gt_super {
   font-size: 65%;
 }
 
-#xqgozgjsmr .gt_footnote_marks {
+#kymroqyynm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xqgozgjsmr .gt_asterisk {
+#kymroqyynm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xqgozgjsmr .gt_indent_1 {
+#kymroqyynm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xqgozgjsmr .gt_indent_2 {
+#kymroqyynm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xqgozgjsmr .gt_indent_3 {
+#kymroqyynm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xqgozgjsmr .gt_indent_4 {
+#kymroqyynm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xqgozgjsmr .gt_indent_5 {
+#kymroqyynm .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1144,24 +1025,13 @@ Number of Fisher Scoring iterations: 6</code></pre>
 <h1>Binary Predictions</h1>
 <section id="model-containing-binary-independent-variable" class="level3">
 <h3 class="anchored" data-anchor-id="model-containing-binary-independent-variable">Model Containing Binary Independent Variable</h3>
-<p><span class="math display">\[ \text{status}\ = \beta_0 + \beta_1 \text{pop_den}\_i + + \beta_2 \text{is_anti_wind} + \varepsilon_i \]</span></p>
+<p><span class="math display">\[\text{status}\ = \beta_0 + \beta_1 \text{pop_den}\_i + + \beta_2 \text{is_anti_wind} + \varepsilon_i\]</span></p>
 <ul>
 <li><p>Our summary table describes a null deviance 362.60.(1178 df) and residual deviance 289.8 (1175 df).</p></li>
 <li><p>Additionally, it provides a p-value of 0.819 for <span class="math inline">\(\beta_1\)</span>, indicating that the hypothesis here is accepted because it is drastically smaller than the significant value of 0.05.</p></li>
 <li><p>The p-value of <span class="math inline">\(\beta_2\)</span>, 0.668 is acceptable because it is within range of the significant value.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Regression with 3 beta</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co"># function</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>status_3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(status <span class="sc">~</span> pop_den <span class="sc">+</span> is_anti_wind, </span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>                       wind_us,</span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">family =</span> <span class="st">'binomial'</span>)</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="co"># stored summary</span></span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>status3 <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">glm</span>(status <span class="sc">~</span> pop_den <span class="sc">+</span> is_anti_wind, </span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>                       wind_us,</span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">family =</span> <span class="st">'binomial'</span>))</span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>status3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1193,13 +1063,13 @@ Number of Fisher Scoring iterations: 7</code></pre>
 <li>Areas with an increase in population density observed an increase in their odds of having active wind infrastructure by a factor of 7.6e-05% when controlling the local opinion on wind constant. However, the odds of operating status decrease by ~7% for areas that identify as anti wind infrastructure.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># beta1 estimation exponentiated</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(status3<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="st">'Estimate'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># beta1 estimation exponentiated</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(status3<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="st">'Estimate'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.000076</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># beta2 estimation exponentiated</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(status3<span class="sc">$</span>coefficients[<span class="dv">3</span>,<span class="st">'Estimate'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># beta2 estimation exponentiated</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(status3<span class="sc">$</span>coefficients[<span class="dv">3</span>,<span class="st">'Estimate'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.9390681</code></pre>
 </div>
@@ -1210,12 +1080,12 @@ Number of Fisher Scoring iterations: 7</code></pre>
 <p>What do these predictions tell us?</p>
 <p>Well, they lend us some insight into whether or not we can definitively predict the status outcome of a region depending on their population density and position on wind opposition. They additionally provide the model fit (<span class="math inline">\(R^2\)</span>) value associated with the predicted value.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>status_binary <span class="ot">&lt;-</span> <span class="fu">augment</span>(status_3, <span class="at">type.predict =</span> <span class="st">"response"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">operating_hat =</span> <span class="fu">round</span>(.fitted))</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>binary_predictions <span class="ot">&lt;-</span> status_binary <span class="sc">%&gt;%</span></span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(status, pop_den, is_anti_wind, .fitted, operating_hat) <span class="sc">%&gt;%</span> </span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>status_binary <span class="ot">&lt;-</span> <span class="fu">augment</span>(status_3, <span class="at">type.predict =</span> <span class="st">"response"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">operating_hat =</span> <span class="fu">round</span>(.fitted))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>binary_predictions <span class="ot">&lt;-</span> status_binary <span class="sc">%&gt;%</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(status, pop_den, is_anti_wind, .fitted, operating_hat) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
