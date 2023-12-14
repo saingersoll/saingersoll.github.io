@@ -8,10 +8,10 @@ author:
     affiliation-url: https://www.2035initiative.com/
 date: 11-15-2023
 categories: [Quarto, R, MEDS] # self-defined categories
-citation: 
-  url: https://samanthacsik.github.io/posts/2022-10-24-my-blog-post/ 
-  url: https://ucsb-meds.github.io/meds-install-windows.html/
-  url: https://brunj7.github.io/EDS-214-analytical-workflows/day_1.html/
+#citation: 
+  #url: https://samanthacsik.github.io/posts/2022-10-24-my-blog-post/ 
+  #url: https://ucsb-meds.github.io/meds-install-windows.html/
+  #url: https://brunj7.github.io/EDS-214-analytical-workflows/day_1.html/
 image: GitHub-Logo.png
 draft: true # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
 ---
@@ -32,11 +32,11 @@ Insert a table here with all of the code chunks and descriptions - likely LaTeX
 
 ## Creating an Account
 
-If you don\'t already have a GitHub account, go to github.com and create one. Here are helpful considerations for choosing a username: [happygitwithr.com/github-acct.html](https://happygitwithr.com/github-acct.html)
+If you don't already have a GitHub account, go to github.com and create one. Here are helpful considerations for choosing a username: [happygitwithr.com/github-acct.html](https://happygitwithr.com/github-acct.html)
 
 ## Connecting GitHub to RStudio
 
-You should already have git on your device, but let\'s check for it anyway.
+You should already have git on your device, but let's check for it anyway.
 
 -   Open RStudio
 
@@ -48,9 +48,8 @@ where git
 
 -   If after running that you get something that looks like a file path to git on your computer, then you have git installed. For example, that might return something like this (or it could differ a bit): `/usr/local/bin/git`. If you instead get no response at all, you should download & install git from here: [**git-scm.com/downloads**](https://git-scm.com/downloads)
 
-```{=html}
 <!-- -->
-```
+
 -   In RStudio, open the Terminal. Run the following commands (by pressing Enter after each line), replacing the username (keep the quotation marks!) and email with your username and email used for your GitHub account.
 
 ```         
@@ -91,7 +90,7 @@ Here are some examples of various `README` files:
 
 \*\* Image of README file example \*\* \*\* Image of README file example \*\*
 
-#### Licenses 
+#### Licenses
 
 GitHub provides the option to apply licensing to your repository. There are a collection of licenses available for selection in GitHub when you go to create a repository. Each contains their own specifications regarding the copyright use of the work it is applied to.
 
