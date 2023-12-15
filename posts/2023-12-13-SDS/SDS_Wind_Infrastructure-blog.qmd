@@ -92,7 +92,7 @@ wind_plants
 These variables focus more on regionally dependent factors that intuitively seem to have an impact on mobilization variables we don't have time to cover in this project. We'll be working with a mix of discrete and continuous data, so there some wrangling will be necessary to run the regressions we're interested in.
 
 | Name         | Description                                                                                                                             |
-|-------------------|-----------------------------------------------------|
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------|
 | status       | Describes the project operating status. In this study, we have converted it into a binary variable: 1 is operating, 0 is not_operating. |
 | pop_den      | Tract-level 2010 census data for population density (per mi\^2)                                                                         |
 | med_inc      | Tract-level 2010 census data for median income                                                                                          |
@@ -420,7 +420,7 @@ Neglecting additional variables without testing is bad practice. Exogeneity is a
 
 #### Citations:
 
-1.  Stokes, Leah C. \"Electoral Backlash against Climate Policy: A Natural Experiment on Retrospective Voting and Local Resistance to Public Policy.\" *American Journal of Political Science*, vol. 60, no. 4, 2016, pp. 958--74. *JSTOR*, http://www.jstor.org/stable/24877466. Accessed 14 Dec. 2023.
+1.  Stokes, Leah C. "Electoral Backlash against Climate Policy: A Natural Experiment on Retrospective Voting and Local Resistance to Public Policy." *American Journal of Political Science*, vol. 60, no. 4, 2016, pp. 958--74. *JSTOR*, http://www.jstor.org/stable/24877466. Accessed 14 Dec. 2023.
 
 2.  
 
