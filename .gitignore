@@ -4,6 +4,13 @@
 .httr-oauth
 .DS_Store
 .quarto
+.gdb
+.gbdtable
+.gpkg
+.zip
+posts/.data/
+posts/data/
+posts/data/houston/
 .data
 .data/
 /.quarto/
