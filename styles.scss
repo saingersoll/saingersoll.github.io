@@ -21,7 +21,7 @@ $navbar-hl: $sandal; // highlight color when hovering over navbar links
 $body-bg: $cream; // pg background
 $body-color: $heavy-metal; // page text
 $footer-bg: $heavy-metal; // $footer
-$link-color: $rockblue; // hyperlinks
+$link-color: $sandal; // hyperlinks
 
 
 // Inline code
@@ -49,4 +49,14 @@ h1, h2 {
   background: $fruit-salad;
   color: $sandal;
   border-color: $heavy-metal;
+}
+
+
+.quarto-title-block .quarto-title-banner {
+  background-image: url(images/personal_logo.png);
+  background-size: 500px;
+  background-position: left;
+  background-repeat: no-repeat;
+  padding-left: 20px;
+  background-origin: content-box;
 }

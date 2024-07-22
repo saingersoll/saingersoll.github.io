@@ -3,14 +3,19 @@ project:
   output-dir: docs
 
 website:
-  title: "Sofia Ingersoll"
+ # title: "Sofia Ingersoll"
   navbar:
     left:
       - href: index.qmd
         text: Home
       - href: posts.qmd
+    #  - href: "https://saingersoll/saingersoll.github.io/"
+     #   class: "navbar-logo"
+      #  src: "./images/personal_logo.png"
+       # alt: "The name 'Sofia Ingersoll' written in brown text. Below the name is an icon showing a computer with code and a cloud behind it. Beneath that reads the phrase 'Creative Strategist' in brown."
     #  - href: resources.qmd
      #   text: Resources
+    logo: "images/personal_logo2.png"
   page-footer: 
     background: light
     left: 
@@ -30,7 +35,7 @@ editor: visual
 # font styles from google fonts need bold and nonbolded downloaded in order to work
       #light: quartz
      # dark: darkly
-    #  - styles.scss to use style sheet for themes
+     # - styles.scss  to use style sheet for themes
 
 
 

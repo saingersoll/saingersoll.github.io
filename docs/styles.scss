@@ -1,0 +1,62 @@
+/*-- scss:defaults --*/
+
+// Import fonts
+@import url("https://fonts.gstatic.com");
+
+// color-scheme: 
+$heavy-metal: #293F2C;
+$sandal: #B18873;
+$light-green: #D1D9CE;
+$cream: #FDFBF7;
+$rockblue: #A2B7CC;
+$fruit-salad: #569A50;
+$gray: #64605f;
+$purple: #9158A2;
+$orange: #ad7237;
+
+// base document colors
+$navbar-bg: $heavy-metal; // navbar 
+$navbar-fg: $cream; // navbar foreground elements
+$navbar-hl: $sandal; // highlight color when hovering over navbar links 
+$body-bg: $cream; // pg background
+$body-color: $heavy-metal; // page text
+$footer-bg: $heavy-metal; // $footer
+$link-color: $sandal; // hyperlinks
+
+
+// Inline code
+$code-bg: $cream; // inline code background color
+$code-color: $fruit-salad;
+
+// Code blocks
+$code-block-bg: $cream;
+
+/*-- scss:rules --*/
+h1, h2 {
+  letter-spacing: 5px;
+  color: $heavy-metal;
+}
+
+.title {
+  color: $heavy-metal;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.button-styling {
+  background: $fruit-salad;
+  color: $sandal;
+  border-color: $heavy-metal;
+}
+
+
+.quarto-title-block .quarto-title-banner {
+  background-image: url(images/personal_logo.png);
+  background-size: 500px;
+  background-position: left;
+  background-repeat: no-repeat;
+  padding-left: 20px;
+  background-origin: content-box;
+}
