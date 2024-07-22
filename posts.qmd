@@ -8,6 +8,6 @@ listing:
 css: styles.scss
 ---
 
-## Welcome! 
+## Welcome!
 
-Here you'll find a collection of The 2035 Initiative and Master of Environmental Data Science (MEDS) Projects I've worked on.
+Here you'll find a collection of projects I've worked on throughout my career as an environmental chemist and data engineer.

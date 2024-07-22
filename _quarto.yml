@@ -15,7 +15,7 @@ website:
        # alt: "The name 'Sofia Ingersoll' written in brown text. Below the name is an icon showing a computer with code and a cloud behind it. Beneath that reads the phrase 'Creative Strategist' in brown."
     #  - href: resources.qmd
      #   text: Resources
-    logo: "images/personal_logo2.png"
+    logo: "images/personal_logot.png"
   page-footer: 
     background: light
     left: 
