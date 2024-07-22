@@ -21,7 +21,7 @@ css: styles.scss
 
 ### Howdy y'all! I'm Sofia (it rhymes with papaya, Sof-aya).
 
-I am a creative strategist who loves tackling the never-ending challenges that come with coding and communicating complex information to an audience with inter-disciplinary backgrounds. In my free time, I'm a chemist in the kitchen, an amateur Spotify dj, and a zealous zumba goer. Feel free to explore my website and learn more about my work at The 2035 Initiative and projects from my master's program.
+I am a creative strategist who loves tackling the never-ending challenges that come with coding and communicating complex information to an audience with inter-disciplinary backgrounds. In my free time, I'm a chemist in the kitchen, an amateur Spotify DJ, and a zealous zumba goer. Feel free to explore my website and learn more about my work at The 2035 Initiative and projects from my master's program.
 
 I am seeking a full-time position at a forward-thinking organization where I can make meaningful contributions and further develop my skills as a data professional. I carry a hefty toolbox of analytical techniques applicable to a broad scope of tasks. I am a Master of Environmental Data Science, trained at the Bren School of Environmental Science & Management (June 2024). I am also an ACS certified chemist, I obtained my degree in Chemistry from the University of California, San Diego (June 2023). I am passionate about continuous learning and growth. Eager to explore new technologies and methodologies to stay ahead of the curve in this rapidly evolving field.
 
