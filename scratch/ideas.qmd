@@ -1,0 +1,11 @@
+::: column-margin
+```{r eval = FALSE}
+#| echo: false
+#| fig-alt: "Three young people smiling with golden hour sunlight shining on them. The person on the left is in a jean jacket. The young woman in the middle is wearing a jean jacket with a black string necklace with a carnelian gem. The young woman on the right is wearing a black shirt and black purse with large thick hooped earings. There are trees and a railway platform in the background."
+knitr::include_graphics("images/about/concert.jpeg")
+```
+
+::: {.center-text .extra-small-text .dark-gray-text .topbr}
+A couple of gal pals going to see Steve Lacy! Date: May 2023.
+:::
+:::

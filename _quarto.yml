@@ -5,10 +5,15 @@ project:
 website:
  # title: "Sofia Ingersoll"
   navbar:
-    left:
+    right:
       - href: index.qmd
         text: Home
+      - href: about.qmd
+        text: About Me
+     # - href: projects.qmd
+      #  text: Projects
       - href: posts.qmd
+        text: Posts
     #  - href: "https://saingersoll/saingersoll.github.io/"
      #   class: "navbar-logo"
       #  src: "./images/personal_logo.png"

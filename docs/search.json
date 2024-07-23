@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Sofia Ingersoll",
     "section": "",
-    "text": "Howdy y’all! I’m Sofia (it rhymes with papaya, Sof-aya).\nI am a creative strategist who loves tackling the never-ending challenges that come with coding and communicating complex information to an audience with inter-disciplinary backgrounds. In my free time, I’m a chemist in the kitchen, an amateur Spotify DJ, and a zealous zumba goer. Feel free to explore my website and learn more about my work at The 2035 Initiative and projects from my master’s program.\nI am seeking a full-time position at a forward-thinking organization where I can make meaningful contributions and further develop my skills as a data professional. I carry a hefty toolbox of analytical techniques applicable to a broad scope of tasks. I am a Master of Environmental Data Science, trained at the Bren School of Environmental Science & Management (June 2024). I am also an ACS certified chemist, I obtained my degree in Chemistry from the University of California, San Diego (June 2023). I am passionate about continuous learning and growth. Eager to explore new technologies and methodologies to stay ahead of the curve in this rapidly evolving field.\nIf my content resonates with you, let’s connect and discuss how I can bring value to your team!"
+    "text": "Howdy y’all! I’m Sofia (it rhymes with papaya, Sof-aya).\nI am a creative strategist who loves tackling the never-ending challenges that come with coding and communicating complex information to an audience with diverse backgrounds. In my free time, I’m a chemist in the kitchen, an amateur Spotify DJ, and a zealous zumba goer. Feel free to explore my website and learn more about me, my work at The 2035 Initiative, and my other projects.\nIf my content resonates with you, let’s connect and discuss how I can bring value to your team!"
   },
   {
     "objectID": "posts/2024-3-16-Infographic/fce-lter-infographic.html#wrangling-subsetting",
@@ -145,5 +145,26 @@
     "title": "My Portfolio",
     "section": "",
     "text": "Here you’ll find a collection of projects I’ve worked on throughout my career as an environmental chemist and data engineer."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About Me",
+    "section": "",
+    "text": "Professionally\nI am seeking a full-time position at a forward-thinking organization where I can make meaningful contributions and further develop my skills as a data professional. I carry a hefty toolbox of analytical techniques applicable to a broad scope of tasks. I received my Master of Environmental Data Science (MEDS) degree at the Bren School of Environmental Science & Management (June 2024). I am also an ACS certified chemist, I obtained my degree in Chemistry from the University of California, San Diego (June 2023). I am passionate about continuous learning and growth. Eager to explore new technologies and methodologies to stay ahead of the curve in this rapidly evolving field.\nAs a Data Engineer Graduate Research Assistant at The 2035 Initiative, I’ve had the opportunity to work on a variety of projects geared towards the sustainable transition to decarbonization. The majority of my projects are people-focused. I aid in gathering the public’s perspective on energy related policies and leverage collected data to help drive informed action. In my role, I employ various geo-spatial techniques to develop workflows for surveying projects. I analyze and interpret Qualtrics data by generating Tableau reports, as well as maps, and graphs using R and Python. I’ve debugged workflows and provided descriptive feedback on developmental changes for data mining projects. I foster collaboration among interdisciplinary teams to create unique solutions and deliverables.\n\n\n\n\n\n\n\n\nMEDS Class of 2024 the day of our Capstone Public Presentation! Date: May 2024.\n\nI aspire to work with an organization that shares my dedication to environmental stewardship and social equity. My goal is to amplify the voices of vulnerable communities, ensuring they are heard and considered in climate change decisions. By adopting a grassroots approach, I believe we can create a more just and sustainable world for future generations. Together, we can turn our collective vision into reality, forging a path toward a brighter, more equitable future for all.\n\n\nBehind the Screen\nIn case you were curious about my name pronunciation, (“Sof-aya” like papaya), it’s actually a piece of my family’s history. See, my mom’s ancestors immigrated from Trondheim, Norway and carried a tradition of namesakes. Unlike the typical Jr., Sr., The III, our family skips every other generation. For example, I’m named after my beloved grandmother, Sofia Anne. This tradition’s been in our family for eight generations! Growing up, I didn’t always love having a unique pronunciation, but it’s given me the confidence to speak up and politely correct someone. I love my name, the strength it gives me, and my lineage tied to it.\n\n\n\n\n\n\n\n\nThis is my lovely grandmother, whom I was named after, Sofia Anne. In this photo, we were out enjoying brunch at this tasty place called Madison on Park in San Diego. Date: June 2023.\n\nNow a little bit about me! My favorite way to spend my free time is dancing, trying out new recipes, yoga, and organizing get-togethers. I thoroughly enjoy every aspect of planning a gathering. From visualizing the event, creating task lists, and sending out invitations, to coordinating all the necessary elements to create meaningful memories. It brings me delight seeing it all come together in full fruition.\n\n\n\n\n\n\n\n\n\n\n\n\nOur zumba crew takes on ecstatic dance in Santa Barbara! Date: April 2024.\n\n\n\n\n\n\n\n\n\n\n\n\nBeach day meets craft time with the council (aka our nickname for our friend group lol) in Malibu. Date: July 2022.\n\n\nAs of recently, I’m in a post graduation limbo and only working part-time. Therefore, I am seizing the opportunity to experiment with containerization and delve deeper into continuous integration and continuous delivery. I often find myself thinking about the cost of carbon for code queries. Over the next few years, I am committed to refining my software development skills to achieve the highest efficiency and lowest computational cost."
+  },
+  {
+    "objectID": "scratch/about_scratch.html",
+    "href": "scratch/about_scratch.html",
+    "title": "",
+    "section": "",
+    "text": "A couple of gal pals going to see Steve Lacy! Date: May 2023."
+  },
+  {
+    "objectID": "scratch/ideas.html",
+    "href": "scratch/ideas.html",
+    "title": "",
+    "section": "",
+    "text": "A couple of gal pals going to see Steve Lacy! Date: May 2023."
   }
 ]
