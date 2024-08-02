@@ -241,7 +241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="software-specifications" class="level3">
 <h3 class="anchored" data-anchor-id="software-specifications">Software Specifications</h3>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ----    Load the Essentials    ----</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
@@ -269,7 +269,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="read-wrangle-sb-county-aqi-data">Read &amp; Wrangle SB County AQI Data</h3>
 <p>To simplify our workflow, we’re going to combine the 2017 and 2018 data sets, and wrangle a single concatonated dataset.</p>
 <p>Once we have one dataset, we will select our region of interest (ROI) and correct the Date <code>dtype</code> so it may be used as the <code>index</code> to calculate the average Air Quality Index over a 5 day rolling window.</p>
-<div class="cell" data-tags="[]" data-execution_count="3">
+<div class="cell" data-tags="[]" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ----       Read &amp; Wrangle      ----</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
@@ -302,7 +302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="check-point" class="level5">
 <h5 class="anchored" data-anchor-id="check-point">Check-point</h5>
 <p>Is everything looking as we expect it to?</p>
-<div class="cell" data-tags="[]" data-execution_count="4">
+<div class="cell" data-tags="[]" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ----        Check Point!       ----</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
@@ -321,7 +321,7 @@ The number of aqi observations between 2017-2018 were: 654338</code></pre>
 <section id="aqi-visualization-scatter-plot-of-5-day-average-aqi-assessment-santa-barbara-county-jan-2017---oct-2018" class="level3">
 <h3 class="anchored" data-anchor-id="aqi-visualization-scatter-plot-of-5-day-average-aqi-assessment-santa-barbara-county-jan-2017---oct-2018">AQI Visualization: Scatter Plot of 5 Day Average AQI Assessment, Santa Barbara County (Jan 2017 - Oct 2018)</h3>
 <p>The visual below displays the mean AQI over a 5 day rolling window between January 2017 and October 2018. A spike in air pollutants between the months of December 2017 and January 2018 is clearly observed, indicating negative effects on air quality resulting from the Thomas Fire.</p>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  ----     Customization        ----</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
@@ -415,7 +415,7 @@ The number of aqi observations between 2017-2018 were: 654338</code></pre>
 </section>
 <section id="read-inspect-burn-scar-data" class="level3">
 <h3 class="anchored" data-anchor-id="read-inspect-burn-scar-data">Read &amp; Inspect Burn Scar Data</h3>
-<div class="cell" data-tags="[]" data-execution_count="6">
+<div class="cell" data-tags="[]" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ----        Read  &amp; Inspect     ----</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
@@ -460,7 +460,7 @@ The number of aqi observations between 2017-2018 were: 654338</code></pre>
 <h4 class="anchored" data-anchor-id="mpc-landsat-collection-2-level-2">MPC Landsat Collection 2 Level-2</h4>
 <p>Together, we’re going to load in Landsat data directly from the Microsoft Planetary Computer STAC and collect our desired bands (SWIR22, NIR08, Red) to create a landsat array subset.<code>LE07_L2SP_042036_20171217_02_T1</code> was captured on 12/17/2017 18:36:51 UTC and will be leveraged for this project.</p>
 <p>In order to create a false color image, we need to adjust the dimensions of our data to only consider x and y coordinates. Furthermore, we will need to create an array containing the false color bands we intend on utilizing for our ROI. We’ll also be correcting the CRS so we can overlay the two datasets.</p>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--------------------------------------</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Pull directly from MPC STAC ----</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#--------------------------------------</span></span>
@@ -565,7 +565,7 @@ The number of aqi observations between 2017-2018 were: 654338</code></pre>
 <section id="check-point-1" class="level5">
 <h5 class="anchored" data-anchor-id="check-point-1">Check-point</h5>
 <p>It looks good, let’s take a quick peak at the geospatial attr</p>
-<div class="cell" data-tags="[]" data-execution_count="8">
+<div class="cell" data-tags="[]" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ----        Check Point!       ----</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
@@ -599,7 +599,7 @@ False Color CRS:  EPSG:32611</code></pre>
 <section id="inspecting-areas-burned-by-thomas-fire-in-santa-barbara-county-2017" class="level2">
 <h2 class="anchored" data-anchor-id="inspecting-areas-burned-by-thomas-fire-in-santa-barbara-county-2017">Inspecting Areas Burned by Thomas Fire in Santa Barbara County (2017)</h2>
 <p>Below, we’ve overlayed the fire perimeter boundaries for the Thomas Fire over it’s respective burn scar. Our false color image displays an outline of the fire scorn area of Santa Barbara County. Here, we can observe the severity of the damage by generally visualizing the area and the types of regions impacted by the wildfire.</p>
-<div class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ----  Plot Landsat False Color ----</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
@@ -632,7 +632,7 @@ False Color CRS:  EPSG:32611</code></pre>
 <section id="combining-the-visuals" class="level3">
 <h3 class="anchored" data-anchor-id="combining-the-visuals">Combining the Visuals</h3>
 <p>Let’s put the most informative visuals together into a single figure to gain a full sense of the extent of damage caused by the Thomas Fire. In the figure on the right, can see a large parcel of Santa Barbara County was exposed to the fire, explaining the uptake in particulate matter observed in December of 2017 in AQI the figure on the left.</p>
-<div class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  ----     Customization        ----</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
