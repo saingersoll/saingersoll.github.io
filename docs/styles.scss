@@ -32,10 +32,10 @@ $code-color: $fruit-salad;
 $code-block-bg: $cream;
 
 /*-- scss:rules --*/
-h1, h2 {
-  letter-spacing: 5px;
-  color: $heavy-metal;
-}
+//h1, h2 {
+  //letter-spacing: 5px;
+  //color: $heavy-metal;
+//}
 
 .title {
   color: $heavy-metal;
@@ -98,6 +98,13 @@ h1, h2 {
   text-align: right;
 }
 
+// allow images inline with text
+//#fixed {
+//  line-height: 0.5em;
+// vertical-align: -0.15em;
+  
+ // display: inline-flex;
+//}
 
 /* CLASS SELECTORS (copied from inspecting site -- Quarto defined?) */
 
@@ -106,4 +113,6 @@ h1, h2 {
   max-height: 50px;
   width: auto;
 }
+
+
 
