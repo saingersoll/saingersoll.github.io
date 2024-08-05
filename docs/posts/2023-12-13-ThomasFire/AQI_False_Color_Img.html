@@ -6,6 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Sofia Ingersoll">
+<meta name="dcterms.date" content="2023-12-08">
+<meta name="description" content="Leveraging MPC Landsat Collection 2 level-2 data &amp; County Level AQI reports to assess burned areas and public health conditions">
 
 <title>Investigation on the Thomas Fire Impacts in Santa Barbara County, CA (2017 - 2018)</title>
 <style>
@@ -138,13 +141,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
       <h1 class="title">Investigation on the Thomas Fire Impacts in Santa Barbara County, CA (2017 - 2018)</h1>
-                      </div>
+                  <div>
+        <div class="description">
+          Leveraging MPC Landsat Collection 2 level-2 data &amp; County Level AQI reports to assess burned areas and public health conditions
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Python</div>
+                <div class="quarto-category">MEDS</div>
+                <div class="quarto-category">Geospatial</div>
+              </div>
+                  </div>
   </div>
     
-  
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author"><a href="https://saingersoll.github.io/">Sofia Ingersoll</a> </p>
+    </div>
+      <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              <a href="https://ucsb-meds.github.io">
+              Master of Environmental Data Science Program
+              </a>
+            </p>
+        </div>
+      </div>
+
   <div class="quarto-title-meta">
 
-      
+        
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 8, 2023</p>
+      </div>
+    </div>
     
       
     </div>
@@ -158,7 +192,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#github-repo-httpsgithub.comsaingersollthomas_fire_investigation" id="toc-github-repo-httpsgithub.comsaingersollthomas_fire_investigation" class="nav-link active" data-scroll-target="#github-repo-httpsgithub.comsaingersollthomas_fire_investigation">🗃️GitHub Repo: https://github.com/saingersoll/Thomas_Fire_Investigation</a></li>
+  <li><a href="#investigation-on-the-thomas-fire-impacts-in-santa-barbara-county-ca-2017---2018" id="toc-investigation-on-the-thomas-fire-impacts-in-santa-barbara-county-ca-2017---2018" class="nav-link active" data-scroll-target="#investigation-on-the-thomas-fire-impacts-in-santa-barbara-county-ca-2017---2018">Investigation on the Thomas Fire Impacts in Santa Barbara County, CA (2017 - 2018)</a>
+  <ul class="collapse">
+  <li><a href="#github-repo-httpsgithub.comsaingersollthomas_fire_investigation" id="toc-github-repo-httpsgithub.comsaingersollthomas_fire_investigation" class="nav-link" data-scroll-target="#github-repo-httpsgithub.comsaingersollthomas_fire_investigation">🗃️GitHub Repo: https://github.com/saingersoll/Thomas_Fire_Investigation</a></li>
   <li><a href="#the-thomas-fire" id="toc-the-thomas-fire" class="nav-link" data-scroll-target="#the-thomas-fire">The Thomas Fire</a></li>
   <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective">Objective</a></li>
   <li><a href="#techniques-applied" id="toc-techniques-applied" class="nav-link" data-scroll-target="#techniques-applied">Techniques Applied</a></li>
@@ -167,6 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#read-wrangle-sb-county-aqi-data" id="toc-read-wrangle-sb-county-aqi-data" class="nav-link" data-scroll-target="#read-wrangle-sb-county-aqi-data">Read &amp; Wrangle SB County AQI Data</a></li>
   <li><a href="#aqi-visualization-scatter-plot-of-5-day-average-aqi-assessment-santa-barbara-county-jan-2017---oct-2018" id="toc-aqi-visualization-scatter-plot-of-5-day-average-aqi-assessment-santa-barbara-county-jan-2017---oct-2018" class="nav-link" data-scroll-target="#aqi-visualization-scatter-plot-of-5-day-average-aqi-assessment-santa-barbara-county-jan-2017---oct-2018">AQI Visualization: Scatter Plot of 5 Day Average AQI Assessment, Santa Barbara County (Jan 2017 - Oct 2018)</a></li>
   <li><a href="#read-inspect-burn-scar-data" id="toc-read-inspect-burn-scar-data" class="nav-link" data-scroll-target="#read-inspect-burn-scar-data">Read &amp; Inspect Burn Scar Data</a></li>
+  </ul></li>
   <li><a href="#inspecting-areas-burned-by-thomas-fire-in-santa-barbara-county-2017" id="toc-inspecting-areas-burned-by-thomas-fire-in-santa-barbara-county-2017" class="nav-link" data-scroll-target="#inspecting-areas-burned-by-thomas-fire-in-santa-barbara-county-2017">Inspecting Areas Burned by Thomas Fire in Santa Barbara County (2017)</a>
   <ul class="collapse">
   <li><a href="#combining-the-visuals" id="toc-combining-the-visuals" class="nav-link" data-scroll-target="#combining-the-visuals">Combining the Visuals</a></li>
@@ -180,7 +217,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>“title: "Investigation on the Thomas Fire Impacts in Santa Barbara County, CA (2017 - 2018)"”, “description: "Using Landsat Collection 2 level-2 data &amp; AQI reports"”, “”, “format:”, ” html:“,” code-fold: false“,” toc: true“,” toc-depth: 3“,”author:“,” - name: Flora Hamilton “,” url: https://saingersoll.github.io/“,” affiliation: Master of Environmental Data Science Program “,” affiliation-url: https://ucsb-meds.github.io“,”date: 12-12-2023“,”categories: [Python, MEDS, Geospatial]“,”citation:“,” url: hhttps://saingersoll.github.io/posts/2023-12-13-ThomasFire/AQI_False_Color_Img.html“,”—”</p>
+<section id="investigation-on-the-thomas-fire-impacts-in-santa-barbara-county-ca-2017---2018" class="level2">
+<h2 class="anchored" data-anchor-id="investigation-on-the-thomas-fire-impacts-in-santa-barbara-county-ca-2017---2018">Investigation on the Thomas Fire Impacts in Santa Barbara County, CA (2017 - 2018)</h2>
 <section id="author-sofia-ingersoll" class="level5">
 <h5 class="anchored" data-anchor-id="author-sofia-ingersoll">Author: Sofia Ingersoll</h5>
 </section>
@@ -597,6 +635,7 @@ False Color CRS:  EPSG:32611</code></pre>
 </section>
 </section>
 </section>
+</section>
 <section id="inspecting-areas-burned-by-thomas-fire-in-santa-barbara-county-2017" class="level2">
 <h2 class="anchored" data-anchor-id="inspecting-areas-burned-by-thomas-fire-in-santa-barbara-county-2017">Inspecting Areas Burned by Thomas Fire in Santa Barbara County (2017)</h2>
 <p>Below, we’ve overlayed the fire perimeter boundaries for the Thomas Fire over it’s respective burn scar. Our false color image displays an outline of the fire scorn area of Santa Barbara County. Here, we can observe the severity of the damage by generally visualizing the area and the types of regions impacted by the wildfire.</p>
@@ -804,7 +843,18 @@ False Color CRS:  EPSG:32611</code></pre>
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{ingersoll2023,
+  author = {Ingersoll, Sofia},
+  title = {Investigation on the {Thomas} {Fire} {Impacts} in {Santa}
+    {Barbara} {County,} {CA} (2017 - 2018)},
+  date = {2023-12-08},
+  url = {https://saingersoll.github.io/posts/2023-12-13-ThomasFire/AQI_False_Color_Img.html},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-ingersoll2023" class="csl-entry quarto-appendix-citeas" role="listitem">
+Ingersoll, Sofia. 2023. <span>“Investigation on the Thomas Fire Impacts
+in Santa Barbara County, CA (2017 - 2018).”</span> December 8, 2023. <a href="https://saingersoll.github.io/posts/2023-12-13-ThomasFire/AQI_False_Color_Img.html">https://saingersoll.github.io/posts/2023-12-13-ThomasFire/AQI_False_Color_Img.html</a>.
+</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
