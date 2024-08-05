@@ -471,7 +471,9 @@ The number of aqi observations between 2017-2018 were: 654338</code></pre>
 </section>
 <section id="read-inspect-burn-scar-data" class="level3">
 <h3 class="anchored" data-anchor-id="read-inspect-burn-scar-data">Read &amp; Inspect Burn Scar Data</h3>
-<p>Let’s get a full understanding of exactly how much local area was affected by the Thomas Fire by importing the fire perimeter boundary information &amp; some super cool Landsat 2 data.</p>
+<p>Let’s get a full understanding of exactly how much local area was affected by the Thomas Fire by importing the fire perimeter boundary information &amp; some super cool Landsat 2</p>
+<section id="ca-fire-perimeters" class="level4">
+<h4 class="anchored" data-anchor-id="ca-fire-perimeters">CA Fire Perimeters</h4>
 <div class="cell" data-tags="[]" data-execution_count="15">
 <details>
 <summary>Code</summary>
@@ -516,6 +518,7 @@ The number of aqi observations between 2017-2018 were: 654338</code></pre>
 <p><img src="AQI_False_Color_Img_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
 </div>
 </div>
+</section>
 <section id="mpc-landsat-collection-2-level-2" class="level4">
 <h4 class="anchored" data-anchor-id="mpc-landsat-collection-2-level-2">MPC Landsat Collection 2 Level-2</h4>
 <p>Together, we’re going to load in Landsat data directly from the Microsoft Planetary Computer STAC and collect our desired bands (SWIR22, NIR08, Red) to create a landsat array subset.<code>LE07_L2SP_042036_20171217_02_T1</code> was captured on 12/17/2017 18:36:51 UTC and will be leveraged for this project.</p>
