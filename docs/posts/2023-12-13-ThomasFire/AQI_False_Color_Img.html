@@ -197,6 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#github-repo-httpsgithub.comsaingersollthomas_fire_investigation" id="toc-github-repo-httpsgithub.comsaingersollthomas_fire_investigation" class="nav-link" data-scroll-target="#github-repo-httpsgithub.comsaingersollthomas_fire_investigation">🗃️GitHub Repo: https://github.com/saingersoll/Thomas_Fire_Investigation</a></li>
   <li><a href="#the-thomas-fire" id="toc-the-thomas-fire" class="nav-link" data-scroll-target="#the-thomas-fire">The Thomas Fire</a></li>
   <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective">Objective</a></li>
+  <li><a href="#outcome" id="toc-outcome" class="nav-link" data-scroll-target="#outcome">Outcome</a></li>
   <li><a href="#techniques-applied" id="toc-techniques-applied" class="nav-link" data-scroll-target="#techniques-applied">Techniques Applied</a></li>
   <li><a href="#data-access" id="toc-data-access" class="nav-link" data-scroll-target="#data-access">Data Access</a></li>
   <li><a href="#software-specifications" id="toc-software-specifications" class="nav-link" data-scroll-target="#software-specifications">Software Specifications</a></li>
@@ -239,6 +240,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="objective" class="level3">
 <h3 class="anchored" data-anchor-id="objective">Objective</h3>
 <p>To get a better understanding of the initial environmental and public health impacts caused by the Thomas Fire, together, we will explore the Air Quality Index (AQI) of SB County between 2017/01 - 2018/10. We’ll quanitfy and visualize the amount of particulate matter seen in the image abouve using both the Daily AQI and the average AQI over a 5 day rolling window in units of ppm. In addition, we will gain insight into what parts of Santa Barbara County were exposed to the Thomas Fire, through the examination of burn scars using false-color imaging on Landsat 8 satellite data from the Microsoft Planetary Computer (“MPC”). We will use a simplified collection of bands (red, green, blue, near-infrared and shortwave infrared) from the Landsat Collection 2 Level-2 atmosperically corrected surface reflectance data.</p>
+</section>
+<section id="outcome" class="level3">
+<h3 class="anchored" data-anchor-id="outcome">Outcome</h3>
+<p>In AQI the figure on the left, there is a sharp peak observed the day the Thomas Fire began (Dec.&nbsp;4, 2017) that fell within the <code>Very Unhealthy</code> category and over a 5 day period, averaged out into the <code>Unhealthy</code> category. This trend can be observed at the noted location in the figure below, indicating negative public health effects on air quality resulting from the Thomas Fire. The figure on the right, displays the large parcel of Santa Barbara County that was engulfed by the fire, explaining the uptake in particulate matter observed in December of 2017. There were significant direct impacts on public health in terms of air quality as a response to this fire and this can be understood when considering the size of the burn scar seen in the figure on the right.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="AQI_False_Color_Img_files/figure-html/efd64544-0d67-427f-8dd7-37ead6f3f99c-1-AQI_Assessment.png" class="img-fluid figure-img"></p>
@@ -368,7 +373,7 @@ The number of aqi observations between 2017-2018 were: 654338</code></pre>
 </section>
 <section id="aqi-visualization-scatter-plot-of-5-day-average-aqi-assessment-santa-barbara-county-jan-2017---oct-2018" class="level3">
 <h3 class="anchored" data-anchor-id="aqi-visualization-scatter-plot-of-5-day-average-aqi-assessment-santa-barbara-county-jan-2017---oct-2018">AQI Visualization: Scatter Plot of 5 Day Average AQI Assessment, Santa Barbara County (Jan 2017 - Oct 2018)</h3>
-<p>The visual below displays the mean AQI over a 5 day rolling window between January 2017 and October 2018. A spike in air pollutants between the months of December 2017 and January 2018 is clearly observed, indicating negative effects on air quality resulting from the Thomas Fire.</p>
+<p>The visual below displays the mean AQI over a 5 day rolling window between January 2017 and October 2018. The background of the plot is color categorized according to the AQI’s six categories of concern for ppm levels. A relative trend of moderate is seen throughout the year. However,a spike in air pollutants between the months of December 2017 and January 2018 is clearly observed. The sharp initial peak observed the day the Thomas Fire began (Dec.&nbsp;4, 2017) caused an inital AQI response within the <code>Very Unhealthy</code> category and over a 5 day period, averaged out into the <code>Unhealthy</code> category. This trend can be observed at the noted location in the figure below, indicating negative public health effects on air quality resulting from the Thomas Fire.</p>
 <div class="cell" data-execution_count="14">
 <details>
 <summary>Code</summary>
@@ -466,6 +471,7 @@ The number of aqi observations between 2017-2018 were: 654338</code></pre>
 </section>
 <section id="read-inspect-burn-scar-data" class="level3">
 <h3 class="anchored" data-anchor-id="read-inspect-burn-scar-data">Read &amp; Inspect Burn Scar Data</h3>
+<p>Let’s get a full understanding of exactly how much local area was affected by the Thomas Fire by importing the fire perimeter boundary information &amp; some super cool Landsat 2 data.</p>
 <div class="cell" data-tags="[]" data-execution_count="15">
 <details>
 <summary>Code</summary>
@@ -695,7 +701,7 @@ False Color CRS:  EPSG:32611</code></pre>
 </div>
 <section id="combining-the-visuals" class="level3">
 <h3 class="anchored" data-anchor-id="combining-the-visuals">Combining the Visuals</h3>
-<p>Let’s put the most informative visuals together into a single figure to gain a full sense of the extent of damage caused by the Thomas Fire. In the figure on the right, can see a large parcel of Santa Barbara County was exposed to the fire, explaining the uptake in particulate matter observed in December of 2017 in AQI the figure on the left.</p>
+<p>Let’s put the most informative visuals together into a single figure to gain a full sense of the extent of damage caused by the Thomas Fire. In AQI the figure on the left, there is a sharp peak observed the day the Thomas Fire began (Dec.&nbsp;4, 2017) that fell within the <code>Very Unhealthy</code> category and over a 5 day period, averaged out into the <code>Unhealthy</code> category. This trend can be observed at the noted location in the figure below, indicating negative public health effects on air quality resulting from the Thomas Fire. The figure on the right, displays the large parcel of Santa Barbara County that was engulfed by the fire, explaining the uptake in particulate matter observed in December of 2017. There were significant direct impacts on public health in terms of air quality as a response to this fire and this can be understood when considering the size of the burn scar seen in the figure on the right.</p>
 <div class="cell" data-execution_count="19">
 <details>
 <summary>Code</summary>
