@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Sofia Ingersoll">
-<meta name="dcterms.date" content="2023-12-08">
-<meta name="description" content="Leveraging MPC Landsat Collection 2 level-2 data &amp; County Level AQI reports to assess burned areas and public health conditions">
+<meta name="dcterms.date" content="2023-12-12">
+<meta name="description" content="Leveraging MPC Landsat Collection 2 level-2 data &amp; County Level AQI reports to assess burned areas and public health conditions.">
 
 <title>Investigation on the Thomas Fire Impacts in Santa Barbara County, CA (2017 - 2018)</title>
 <style>
@@ -143,7 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <h1 class="title">Investigation on the Thomas Fire Impacts in Santa Barbara County, CA (2017 - 2018)</h1>
                   <div>
         <div class="description">
-          Leveraging MPC Landsat Collection 2 level-2 data &amp; County Level AQI reports to assess burned areas and public health conditions
+          Leveraging MPC Landsat Collection 2 level-2 data &amp; County Level AQI reports to assess burned areas and public health conditions.
         </div>
       </div>
                           <div class="quarto-categories">
@@ -176,7 +176,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 8, 2023</p>
+        <p class="date">December 12, 2023</p>
       </div>
     </div>
     
@@ -281,6 +281,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="software-specifications" class="level3">
 <h3 class="anchored" data-anchor-id="software-specifications">Software Specifications</h3>
 <div class="cell" data-execution_count="11">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ----    Load the Essentials    ----</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
@@ -302,6 +304,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.lines <span class="im">import</span> Line2D</span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.patches <span class="im">as</span> mpatches</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="read-wrangle-sb-county-aqi-data" class="level3">
@@ -309,6 +312,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>To simplify our workflow, we’re going to combine the 2017 and 2018 data sets, and wrangle a single concatonated dataset.</p>
 <p>Once we have one dataset, we will select our region of interest (ROI) and correct the Date <code>dtype</code> so it may be used as the <code>index</code> to calculate the average Air Quality Index over a 5 day rolling window.</p>
 <div class="cell" data-tags="[]" data-execution_count="12">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ----       Read &amp; Wrangle      ----</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
@@ -337,11 +342,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># provides rolling window calculations of </span></span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># the mean aqi over 5 day periods  </span></span>
 <span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>aqi_sb[<span class="st">'five_day_average'</span>] <span class="op">=</span> aqi_sb.aqi.rolling(<span class="st">'5D'</span>).mean()         </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <section id="check-point" class="level5">
 <h5 class="anchored" data-anchor-id="check-point">Check-point</h5>
 <p>Is everything looking as we expect it to?</p>
 <div class="cell" data-tags="[]" data-execution_count="13">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ----        Check Point!       ----</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
@@ -349,6 +357,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'The number of aqi observations in 2017 were:'</span>, <span class="bu">len</span>(aqi_17.Date))</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'The number of aqi observations in 2018 were:'</span>, <span class="bu">len</span>(aqi_18.Date))</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'The number of aqi observations between 2017-2018 were:'</span>, <span class="bu">len</span>(aqi.date))        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>The number of aqi observations in 2017 were: 326801
 The number of aqi observations in 2018 were: 327537
@@ -361,6 +370,8 @@ The number of aqi observations between 2017-2018 were: 654338</code></pre>
 <h3 class="anchored" data-anchor-id="aqi-visualization-scatter-plot-of-5-day-average-aqi-assessment-santa-barbara-county-jan-2017---oct-2018">AQI Visualization: Scatter Plot of 5 Day Average AQI Assessment, Santa Barbara County (Jan 2017 - Oct 2018)</h3>
 <p>The visual below displays the mean AQI over a 5 day rolling window between January 2017 and October 2018. A spike in air pollutants between the months of December 2017 and January 2018 is clearly observed, indicating negative effects on air quality resulting from the Thomas Fire.</p>
 <div class="cell" data-execution_count="14">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  ----     Customization        ----</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
@@ -447,6 +458,7 @@ The number of aqi observations between 2017-2018 were: 654338</code></pre>
 <span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(top<span class="op">=</span><span class="fl">0.85</span>, bottom<span class="op">=</span><span class="fl">0.15</span>, left<span class="op">=</span><span class="fl">0.1</span>, right<span class="op">=</span><span class="fl">0.9</span>)</span>
 <span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <p><img src="AQI_False_Color_Img_files/figure-html/cell-5-output-1.png" class="img-fluid"></p>
 </div>
@@ -455,6 +467,8 @@ The number of aqi observations between 2017-2018 were: 654338</code></pre>
 <section id="read-inspect-burn-scar-data" class="level3">
 <h3 class="anchored" data-anchor-id="read-inspect-burn-scar-data">Read &amp; Inspect Burn Scar Data</h3>
 <div class="cell" data-tags="[]" data-execution_count="15">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ----        Read  &amp; Inspect     ----</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
@@ -491,6 +505,7 @@ The number of aqi observations between 2017-2018 were: 654338</code></pre>
 <span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
 <span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <p><img src="AQI_False_Color_Img_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
 </div>
@@ -500,6 +515,8 @@ The number of aqi observations between 2017-2018 were: 654338</code></pre>
 <p>Together, we’re going to load in Landsat data directly from the Microsoft Planetary Computer STAC and collect our desired bands (SWIR22, NIR08, Red) to create a landsat array subset.<code>LE07_L2SP_042036_20171217_02_T1</code> was captured on 12/17/2017 18:36:51 UTC and will be leveraged for this project.</p>
 <p>In order to create a false color image, we need to adjust the dimensions of our data to only consider x and y coordinates. Furthermore, we will need to create an array containing the false color bands we intend on utilizing for our ROI. We’ll also be correcting the CRS so we can overlay the two datasets.</p>
 <div class="cell" data-execution_count="16">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--------------------------------------</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Pull directly from MPC STAC ----</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#--------------------------------------</span></span>
@@ -597,6 +614,7 @@ The number of aqi observations between 2017-2018 were: 654338</code></pre>
 <span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <p><img src="AQI_False_Color_Img_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
 </div>
@@ -605,6 +623,8 @@ The number of aqi observations between 2017-2018 were: 654338</code></pre>
 <h5 class="anchored" data-anchor-id="check-point-1">Check-point</h5>
 <p>It looks good, let’s take a quick peak at the geospatial attr</p>
 <div class="cell" data-tags="[]" data-execution_count="17">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ----        Check Point!       ----</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
@@ -622,6 +642,7 @@ The number of aqi observations between 2017-2018 were: 654338</code></pre>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Print CRS to check alignment</span></span>
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Thomas Fire Boundary CRS: '</span>, thomas_fire.crs)</span>
 <span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'False Color CRS: '</span>, false_color.rio.crs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>height:  7271
 width:  8291 
@@ -640,6 +661,8 @@ False Color CRS:  EPSG:32611</code></pre>
 <h2 class="anchored" data-anchor-id="inspecting-areas-burned-by-thomas-fire-in-santa-barbara-county-2017">Inspecting Areas Burned by Thomas Fire in Santa Barbara County (2017)</h2>
 <p>Below, we’ve overlayed the fire perimeter boundaries for the Thomas Fire over it’s respective burn scar. Our false color image displays an outline of the fire scorn area of Santa Barbara County. Here, we can observe the severity of the damage by generally visualizing the area and the types of regions impacted by the wildfire.</p>
 <div class="cell" data-execution_count="18">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ----  Plot Landsat False Color ----</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
@@ -665,6 +688,7 @@ False Color CRS:  EPSG:32611</code></pre>
 <span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the figure with tight bounding box and high resolution</span></span>
 <span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'thomas_fire_plot.png'</span>)  </span>
 <span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <p><img src="AQI_False_Color_Img_files/figure-html/cell-9-output-1.png" class="img-fluid"></p>
 </div>
@@ -673,6 +697,8 @@ False Color CRS:  EPSG:32611</code></pre>
 <h3 class="anchored" data-anchor-id="combining-the-visuals">Combining the Visuals</h3>
 <p>Let’s put the most informative visuals together into a single figure to gain a full sense of the extent of damage caused by the Thomas Fire. In the figure on the right, can see a large parcel of Santa Barbara County was exposed to the fire, explaining the uptake in particulate matter observed in December of 2017 in AQI the figure on the left.</p>
 <div class="cell" data-execution_count="19">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  ----     Customization        ----</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------</span></span>
@@ -822,6 +848,7 @@ False Color CRS:  EPSG:32611</code></pre>
 <span id="cb11-147"><a href="#cb11-147" aria-hidden="true" tabindex="-1"></a><span class="co"># space well</span></span>
 <span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
 <span id="cb11-149"><a href="#cb11-149" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <p><img src="AQI_False_Color_Img_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
 </div>
@@ -847,13 +874,13 @@ False Color CRS:  EPSG:32611</code></pre>
   author = {Ingersoll, Sofia},
   title = {Investigation on the {Thomas} {Fire} {Impacts} in {Santa}
     {Barbara} {County,} {CA} (2017 - 2018)},
-  date = {2023-12-08},
+  date = {2023-12-12},
   url = {https://saingersoll.github.io/posts/2023-12-13-ThomasFire/AQI_False_Color_Img.html},
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-ingersoll2023" class="csl-entry quarto-appendix-citeas" role="listitem">
 Ingersoll, Sofia. 2023. <span>“Investigation on the Thomas Fire Impacts
-in Santa Barbara County, CA (2017 - 2018).”</span> December 8, 2023. <a href="https://saingersoll.github.io/posts/2023-12-13-ThomasFire/AQI_False_Color_Img.html">https://saingersoll.github.io/posts/2023-12-13-ThomasFire/AQI_False_Color_Img.html</a>.
+in Santa Barbara County, CA (2017 - 2018).”</span> December 12, 2023. <a href="https://saingersoll.github.io/posts/2023-12-13-ThomasFire/AQI_False_Color_Img.html">https://saingersoll.github.io/posts/2023-12-13-ThomasFire/AQI_False_Color_Img.html</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
