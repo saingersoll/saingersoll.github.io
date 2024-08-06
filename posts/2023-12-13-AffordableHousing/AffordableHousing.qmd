@@ -12,6 +12,8 @@ categories: [Ethics, Affordable Housing] # self-defined categories
   #url: https://brunj7.github.io/EDS-214-analytical-workflows/day_1.html/
 image: affordablehousing.jpg
 #draft: true # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
+citation:
+  url: https://saingersoll.github.io/posts/AffordableHousing.html
 ---
 
 # Main Takeaways
