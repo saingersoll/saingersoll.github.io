@@ -1,5 +1,5 @@
 ---
-title: "Spatially Distorted Signaling: How Opinions Against Wind Infrastructure Delay Our Transition to Renewable Energy"
+title: "Spatially Distorted Signalling: How Opinions Against Wind Infrastructure Delay Our Transition to Renewable Energy"
 author: "Sofia Ingersoll"
 editor: visual
 date: "2023-12-14"
@@ -301,7 +301,7 @@ density_plot <- ggplot(data = wind_us,
          # Background color for legend
         legend.key = element_rect(fill = "grey94", color = "grey94"), 
         
-        plot.background = element_rect(color = "#FDFBF7")
+        plot.background = element_rect(fill = "#FDFBF7")
         ) +  
   
   coord_flip()
@@ -382,7 +382,7 @@ jitter_plot_optimized <- ggplot(data = wind_us,
          # Background color for legend
         legend.key = element_rect(fill = "grey94", color = "grey94"), 
         
-        plot.background = element_rect(color = "#FDFBF7")
+        plot.background = element_rect(fill = "#FDFBF7")
         ) +   
   
    scale_color_manual(name = "Legend",  # Title for the legend
@@ -604,6 +604,8 @@ ggplot(plot_data, aes(x = income_group_label,
     
     plot.subtitle = element_text(size = 15,
                                  hjust = 1.25),
+    
+    plot.background = element_rect(fill = "#FDFBF7"),
 
     # Adjust legend
     legend.position = "top",
