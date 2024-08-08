@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sofia Ingersoll">
+<meta name="dcterms.date" content="2023-12-14">
+<meta name="description" content="The phenomenon of Spatial Distorted Signalling (SDS) describes the mobilization of minority opinion holders pushing back electorally to promote legislation that aligns with their beliefs. I am hoping to reproduce these naturally observed outcomes with US wind plant data and assess how the relationship of population density, income, and opinions against wind power effect the activitity of wind plants.">
+
+<title>Spatially Distorted Signalling: How Opinions Against Wind Infrastructure Delay Our Transition to Renewable Energy</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="styles.scss">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/personal_logot.png" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html" rel="" target="">
+ <span class="menu-text">Highlighted Projects</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Spatially Distorted Signalling: How Opinions Against Wind Infrastructure Delay Our Transition to Renewable Energy</h1>
+                  <div>
+        <div class="description">
+          The phenomenon of Spatial Distorted Signalling (SDS) describes the mobilization of minority opinion holders pushing back electorally to promote legislation that aligns with their beliefs. I am hoping to reproduce these naturally observed outcomes with US wind plant data and assess how the relationship of population density, income, and opinions against wind power effect the activitity of wind plants.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Statistical Analysis</div>
+                <div class="quarto-category">Logit</div>
+                <div class="quarto-category">Wind Power</div>
+                <div class="quarto-category">Energy Access</div>
+                <div class="quarto-category">Sustainable Energy Decarbonization Transition</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Sofia Ingersoll </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 14, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#spatially-distorted-signaling-how-opinions-against-wind-infrastructure-delay-our-transition-to-renewable-energy" id="toc-spatially-distorted-signaling-how-opinions-against-wind-infrastructure-delay-our-transition-to-renewable-energy" class="nav-link active" data-scroll-target="#spatially-distorted-signaling-how-opinions-against-wind-infrastructure-delay-our-transition-to-renewable-energy">Spatially Distorted Signaling: How Opinions Against Wind Infrastructure Delay Our Transition to Renewable Energy</a>
+  <ul class="collapse">
+  <li><a href="#github-repo-httpsgithub.comsaingersollspatially-distorted-signaling-us-wind-infrastructure" id="toc-github-repo-httpsgithub.comsaingersollspatially-distorted-signaling-us-wind-infrastructure" class="nav-link" data-scroll-target="#github-repo-httpsgithub.comsaingersollspatially-distorted-signaling-us-wind-infrastructure">🗃️GitHub Repo: https://github.com/saingersoll/Spatially-Distorted-Signaling-US-Wind-Infrastructure</a></li>
+  <li><a href="#main-takeaways" id="toc-main-takeaways" class="nav-link" data-scroll-target="#main-takeaways"><strong>Main Takeaways</strong></a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#techniques-applied" id="toc-techniques-applied" class="nav-link" data-scroll-target="#techniques-applied">Techniques Applied</a></li>
+  <li><a href="#u.s.-wind-power-plant-data" id="toc-u.s.-wind-power-plant-data" class="nav-link" data-scroll-target="#u.s.-wind-power-plant-data"><code>U.S. Wind Power Plant Data</code></a></li>
+  <li><a href="#loading-libraries" id="toc-loading-libraries" class="nav-link" data-scroll-target="#loading-libraries">Loading Libraries</a></li>
+  <li><a href="#read-wrangle-data" id="toc-read-wrangle-data" class="nav-link" data-scroll-target="#read-wrangle-data">Read &amp; Wrangle Data</a></li>
+  <li><a href="#determining-the-process" id="toc-determining-the-process" class="nav-link" data-scroll-target="#determining-the-process">Determining the Process</a></li>
+  <li><a href="#interpreting-coefficients-using-odds-ratio" id="toc-interpreting-coefficients-using-odds-ratio" class="nav-link" data-scroll-target="#interpreting-coefficients-using-odds-ratio">Interpreting Coefficients Using Odds Ratio</a></li>
+  <li><a href="#probabilistic-predictions" id="toc-probabilistic-predictions" class="nav-link" data-scroll-target="#probabilistic-predictions">Probabilistic Predictions</a></li>
+  <li><a href="#comprehensive-interaction-model-containing-binary-predictor-variable" id="toc-comprehensive-interaction-model-containing-binary-predictor-variable" class="nav-link" data-scroll-target="#comprehensive-interaction-model-containing-binary-predictor-variable">Comprehensive Interaction Model Containing Binary Predictor Variable</a></li>
+  <li><a href="#our-findings" id="toc-our-findings" class="nav-link" data-scroll-target="#our-findings">Our Findings</a></li>
+  <li><a href="#citations" id="toc-citations" class="nav-link" data-scroll-target="#citations">Citations</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+<section id="spatially-distorted-signaling-how-opinions-against-wind-infrastructure-delay-our-transition-to-renewable-energy" class="level1">
+<h1>Spatially Distorted Signaling: How Opinions Against Wind Infrastructure Delay Our Transition to Renewable Energy</h1>
+<section id="github-repo-httpsgithub.comsaingersollspatially-distorted-signaling-us-wind-infrastructure" class="level3">
+<h3 class="anchored" data-anchor-id="github-repo-httpsgithub.comsaingersollspatially-distorted-signaling-us-wind-infrastructure">🗃️GitHub Repo: <a href="https://github.com/saingersoll/Spatially-Distorted-Signaling-US-Wind-Infrastructure" class="uri">https://github.com/saingersoll/Spatially-Distorted-Signaling-US-Wind-Infrastructure</a></h3>
+</section>
+<section id="main-takeaways" class="level3">
+<h3 class="anchored" data-anchor-id="main-takeaways"><strong>Main Takeaways</strong></h3>
+<ul>
+<li><p><strong>Population Density</strong></p>
+<p>Effect: A unit increase in population density is associated with a slight increase in the odds of having an operational wind plant. This suggests that areas with higher population densities are marginally more likely to host wind plants and less likely to experience minority holder opinions taking the majority.</p></li>
+<li><p><strong>Median Income</strong></p>
+<p>Effect: An increase in median income is linked to a decrease in the odds of having an operational wind plant. Higher income areas show a lower likelihood of wind plant activity, potentially due to different local priorities or economic factors. Uneven socio-economic power-dynamics could lead to minority opinion holders preventing the development of wind power infrastructure, alongside other renewable energy solutions.</p></li>
+<li><p><strong>Anti-Wind Infrastructure Opinion</strong></p>
+<p>Effect: Areas with higher opposition to wind infrastructure are less likely to have operational wind plants. This aligns with expectations that local opposition impacts the establishment of wind plants.</p></li>
+</ul>
+<p><img src="https://lh7-rt.googleusercontent.com/slidesz/AGV_vUeReYZLcLoGac8Gl1cdwAqXSRl06Mso2M5l6JvkI9z5D5mBSgt1qTD4QFgLhmLvkR7-iRghcqZ5f5d4nyUVSdWbE03koNshZ0KY-9iLyOlPbbnN_6pB2uroqc2JJL7us-iaN861f3vNXypxYtJ_ADqGm5wljg6bdXdmFgdYEmtje-vNtgsQJg=s2048?key=blugCnJh2POr32GMhsUzOg.png" class="img-fluid" width="1020"></p>
+</section>
+<section id="overview" class="level3">
+<h3 class="anchored" data-anchor-id="overview">Overview</h3>
+<p>The phenomenon of Spatial Distorted Signalling (SDS) describes the mobilization of minority opinion holders pushing back electorally to promote legislation that aligns with their beliefs. Leah Stokes (et.al) has explored the SDS phenomenon as a natural experiment in her piece, <em>Electoral Backlash against Climate Policy: A Natural Experiment on Retrospective Voting and Local Resistance to Public Policy</em> (<a href="https://www.jstor.org/stable/24877466">2016</a>). The findings in this paper describe that rural Canadian communities had a greater ability to mobilize and organize political push back against majority chair holders in parliament after the passing of legislation which invited the development of wind infrastructure through incentives.</p>
+<p>Since then, Leah has navigated the nuances of varying percentiles in races, political affiliation (particularly the % precinct gop voting share), the scale and size of the project, as well as, the volume of local mobilization in her research, <em>Replication Data for: Prevalence and predictors of wind energy opposition in North America</em> (<a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LE2V0R">2023</a>).&nbsp;</p>
+<p>I am hoping to reproduce these naturally observed outcomes with US wind plant data and assess how the relationship of population density, income, and opinions against wind power effect the activitity of wind plants. Analysis of these relationships could provide insight into understanding the scaling effect that local resistance has on spatially distorted signalling in relation to wind infrastructure projects and and sustainable climate policy.</p>
+</section>
+<section id="techniques-applied" class="level3">
+<h3 class="anchored" data-anchor-id="techniques-applied">Techniques Applied</h3>
+<ul>
+<li>Single &amp; Multivariate Logit Regression Models</li>
+<li>Logit &amp; Log Odds</li>
+<li>Predictive Probability</li>
+<li>Ethical Critiques: Addressing Limitations</li>
+</ul>
+<section id="limitations" class="level4">
+<h4 class="anchored" data-anchor-id="limitations">Limitations</h4>
+<section id="considering-omitted-variable-bias-ovb" class="level5">
+<h5 class="anchored" data-anchor-id="considering-omitted-variable-bias-ovb"><code>Considering Omitted Variable Bias (OVB)</code></h5>
+<p>Neglecting additional variables without testing is improper practice. Exogeneity is a very difficult OLS assumption to uphold – alongside a normal distribution of the error mean. A means to determine relationships between variables is running various linear regression models and comparing the <span class="math inline">\(R^2\)</span> value. In this project, we focus our attention on the why OLS was not the analysis method of choice for our relationships of interest. In the instance of logistic regression, a log odds ratio must be taken to interpret each individual variable. There is a strong possibility that the models utilized in this project are not exogenous and require deeper analysis to determine the impact of underlining influences.</p>
+</section>
+<section id="insufficient-data" class="level5">
+<h5 class="anchored" data-anchor-id="insufficient-data"><code>Insufficient Data</code></h5>
+<p>The data set may not fully capture all relevant factors affecting wind plant activity, such as specific local policies or environmental conditions.</p>
+</section>
+</section>
+</section>
+<section id="u.s.-wind-power-plant-data" class="level3">
+<h3 class="anchored" data-anchor-id="u.s.-wind-power-plant-data"><code>U.S. Wind Power Plant Data</code></h3>
+<ul>
+<li><a href="https://dataverse.harvard.edu/file.xhtml?fileId=7339850&amp;version=1.0">Replication Data for: Prevalence and predictors of wind energy opposition in North America</a></li>
+</ul>
+<p>The data source that was utilized in this project, US Wind Data, focuses on the public stance on wind infrastructure for census tract regions within a 3 km buffer zone of a wind infrastructure project. It contains categorical variables, binary variables, continuous socioeconomic factors such as % of races, % precinct political gop affiliated voting share, mobilization tactics, and more. This data is associated with the Replication Data for: Prevalence and predictors of wind energy opposition in North America, doi Harvard Dataverse, V1, 2023. The collaborators on that project include: Stokes, Leah; Franzblau, Emma; Lovering, Jessica R.; Miljanich, Chris. Leah Stokes and her awesome team gathered all of this information from American Wind Association (“awea”), operational, Columbia Sabin Center (“Columbia”).</p>
+<section id="variables-of-interest" class="level4">
+<h4 class="anchored" data-anchor-id="variables-of-interest">Variables of Interest:</h4>
+<table class="table">
+<colgroup>
+<col style="width: 37%">
+<col style="width: 62%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>status</td>
+<td>Describes the project operating status. In this study, we have converted it into a binary variable: 1 is operating, 0 is not_operating.</td>
+</tr>
+<tr class="even">
+<td>pop_den</td>
+<td>Tract-level 2010 census data for population density (per mi^2)</td>
+</tr>
+<tr class="odd">
+<td>med_inc</td>
+<td>Tract-level 2010 census data for median income ($)</td>
+</tr>
+<tr class="even">
+<td>is_anti_wind</td>
+<td>Binary measure of wind opposition: 1 is against wind power developments, 0 is pro wind power developments.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="data-citation" class="level4">
+<h4 class="anchored" data-anchor-id="data-citation">Data Citation</h4>
+<p><code>{1. Stokes, Leah; Franzblau, Emma; Lovering, Jessica R.; Miljanich, Chris. "Replication Data for: Prevalence and predictors of wind energy opposition in North America",&nbsp;https://doi.org/10.7910/DVN/LE2V0R, Harvard Dataverse, V1, 2023.}</code></p>
+</section>
+</section>
+<section id="loading-libraries" class="level3">
+<h3 class="anchored" data-anchor-id="loading-libraries">Loading Libraries</h3>
+<p>The following libraries were selected based on their functionality and ability to optimize our data for mapping.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading Libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)        <span class="co"># essential r package </span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)               <span class="co"># package simplifies spatial dataframes</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stars)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(maptiles)       </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggspatial)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">99</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> T, <span class="at">warning =</span> F, <span class="at">message =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="read-wrangle-data" class="level3">
+<h3 class="anchored" data-anchor-id="read-wrangle-data">Read &amp; Wrangle Data</h3>
+<p><strong>Converting Vector into Raster Data for Mapping</strong></p>
+<p>Below we will use the package <code>sf</code> to convert the lat/long vector data into a raster geometry column. In this single line, we will also be assigning the CRS EPSG:4326 to the sf data frame. Coordinate Reference Systems, CRS, are required in order for the data to be projected onto a map. The CRS was selected because it provides a relatively proportionate display of the United States. We are open to suggestions regarding our CRS if a different project better fits our data.</p>
+<section id="u.s.-wind-data" class="level4">
+<h4 class="anchored" data-anchor-id="u.s.-wind-data"><code>U.S. Wind Data</code></h4>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ----        Read &amp; Raster      ----</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># reading in &amp; storing data</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>wind_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/wind_data/wind_data_usa.csv"</span>) </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Confirm the Data Loaded Properly</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#head(wind_data)                  # displays the first 6 rows of the data</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's read in our data</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>wind_sf <span class="ot">&lt;-</span> wind_data <span class="sc">%&gt;%</span>       </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># creates geometry column with desired crs </span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"longitude"</span>, <span class="st">"latitude"</span>), <span class="at">crs =</span> <span class="dv">4326</span>) </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                                     </span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># quick CRS check</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#glimpse(crs(wind_sf))                  # output should reveal WGS84, EPSG:4326</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># ----        Check Point!       ----</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's stop and see if our outputs are what we expect.</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Were the lat/long columns correctly converted into a geometry column?</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># setdiff() is a way to quickly determine the differences between two data sets.</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Sweet! we are looking good</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co">#setdiff(colnames(wind_sf), colnames(wind_data))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="mapping-wind-power-infrastructure-plants-in-the-u.s." class="level4">
+<h4 class="anchored" data-anchor-id="mapping-wind-power-infrastructure-plants-in-the-u.s.">Mapping Wind Power Infrastructure Plants in the U.S.</h4>
+<p>Before diving in, let’s get a sense of where we’ll be investigating. Using `ggplot()`, we can visualize the locations of wind infrastructure power plants throughout the United States. To achieve a more granular map, we’ll need to utilize another data set to create a base layer for our map in order to observe these wind plants with respect to state and county jurisdictions.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First visual of the U.S. wind data provided by the geometry points</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>wind_plants <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(wind_sf) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotation_map_tile</span>(<span class="at">type =</span> <span class="st">"osm"</span>) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">col =</span> <span class="st">'darkgreen'</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha =</span> <span class="fl">0.5</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="dv">3</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>wind_plants</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="SDS_Wind_Infrastructure_files/figure-html/map_data-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="determining-the-process" class="level3">
+<h3 class="anchored" data-anchor-id="determining-the-process">Determining the Process</h3>
+<p>We will employ a series of models to describe the effect of census tract level population density on the operating status of wind power infrastructure. A combination of binary and interaction logit regression will be considered.</p>
+<p>The initial model will apply OLS regression, this is really a formality to demonstrate why OLS is not the correct approach for interpreting our relationships of interest. The following will be a model with two continuous variables</p>
+<section id="regression-model-components" class="level4">
+<h4 class="anchored" data-anchor-id="regression-model-components">Regression Model Components</h4>
+<p><strong>Binary Indicator Variable will be <code>status</code> column: <code>opertating</code> is 1, and <code>not_operating</code> will be 0.</strong></p>
+<p>These variables focus more on regionally dependent factors that intuitively seem to have an impact on mobilization variables that we don’t have time to cover in this project. We’ll be working with a mix of discrete and continuous data, so there some wrangling will be necessary to run the regressions we’re interested in.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Inspect &amp; Standarize Data ----</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Determining Variable Assignments for OLS</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#unique(wind_sf$status)     # displays unique values in this</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Need to rename status output variables</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># creating two categories: operating &amp; not_operating</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># We are removing 'Operating | Decommissioned' because it skews the data</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>unwanted_status <span class="ot">&lt;-</span> <span class="st">"Operating | Decommissioned"</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>replacement_status <span class="ot">&lt;-</span> <span class="st">"Uncertain Status"</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>wind_sf<span class="sc">$</span>status[wind_sf<span class="sc">$</span>status<span class="sc">==</span> unwanted_status]<span class="ot">&lt;-</span><span class="st">"Uncertain Status"</span>  </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># were we successful ?</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">#unique(wind_sf$status)     # displays unique values in this</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning out NAs for OLS</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>wind_sf <span class="ot">&lt;-</span> wind_sf <span class="sc">%&gt;%</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(status) <span class="sc">==</span> <span class="st">'FALSE'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(is_anti_wind) <span class="sc">==</span> <span class="st">'FALSE'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(pop_den) <span class="sc">==</span> <span class="st">'FALSE'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(med_inc) <span class="sc">==</span> <span class="st">'FALSE'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(median_age) <span class="sc">==</span> <span class="st">'FALSE'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(n_turbs) <span class="sc">==</span> <span class="st">'FALSE'</span>)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co"># were we successful ?</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co">#unique(wind_sf$status)     # displays unique values in this</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co"># if_else preserves the data type but replaces unwanted values</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>wind_us <span class="ot">&lt;-</span> wind_sf <span class="sc">%&gt;%</span> </span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">status =</span> <span class="fu">if_else</span>(</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    status <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'Cancelled'</span>, <span class="st">'Out of service (temporarily)'</span>, <span class="st">'Standby'</span>, <span class="st">'Decommissioned'</span>, <span class="st">'Uncertain Status'</span>), <span class="st">'not_operating'</span>,</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">'operating'</span>) </span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="co"># are our only outputs "operating" and "not_operating"?</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="co">#print(unique(wind_us$status))</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="co"># status as factor and reassigned values</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>wind_us <span class="ot">&lt;-</span> wind_us <span class="sc">%&gt;%</span> </span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">status =</span> <span class="fu">case_when</span>(status <span class="sc">==</span> <span class="st">"operating"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>            status <span class="sc">==</span> <span class="st">"not_operating"</span> <span class="sc">~</span> <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="check-point" class="level4">
+<h4 class="anchored" data-anchor-id="check-point">Check Point!</h4>
+<p>Does the binary variable contain only 0s or 1s?</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ----        Check point!       ----</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># are our only outputs 0 or 1?</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">unique</span>(wind_us<span class="sc">$</span>status))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 0</code></pre>
+</div>
+</div>
+</section>
+<section id="visualizing-the-categorical-response-variable-across-a-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="visualizing-the-categorical-response-variable-across-a-distribution">Visualizing the Categorical Response Variable Across a Distribution</h4>
+<p>Before jumping into any analysis, it’s important to get a sense of how the data is distributed and if there are any underlying trends or biases. The two visual aids we’re going to create are a violin plot with jitter points (left) and a comparative regression plot using OLS and GLM (right). Combining two figures provides us fuller insights into both the general trend and changes in probability of the binary outcome for the population density predictor.</p>
+<p>The visualizations display the majority of the distribution lies within the actively operating wind infrastructure plants. A trend of inactive plants and lower population density is notable in both figures. Collectively they demonstrate smaller population densities contain more inactive wind infrastructure plants. This could be attributed to with weight of a singular vote in regions with smaller demographics.</p>
+<p>Local mobilization of minority opinion holders in these regions have a greater availability to push back against policymakers. However, this visual does not encapsulate all of the necessary information required to determine this with full certainty. Our data set has low availability for non-operating infrastructure and as such, in the regression figure on the right these are being treated as outliers.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ----           Violin Distribution          ----</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the violin plot with log scale</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>density_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> wind_us, </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(status), </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">y =</span> pop_den, </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">fill =</span> <span class="fu">factor</span>(status))) <span class="sc">+</span> </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>) <span class="sc">+</span> </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">col =</span> <span class="st">"#F84C0B"</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">width =</span> <span class="dv">0</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">height =</span> <span class="fl">0.05</span>,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.35</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Population Density vs Wind Power Plant Operating Status"</span>,</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle=</span> <span class="st">"Logorithimic Distribution"</span>,</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Activation Status"</span>,</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">expression</span>(<span class="st">"Population Density (Log Scale, "</span> <span class="sc">~</span> mi<span class="sc">^-</span><span class="dv">2</span> <span class="sc">~</span> <span class="st">")"</span>)) <span class="sc">+</span> </span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># rename x-axis labels for clarity</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"0"</span> <span class="ot">=</span> <span class="st">"Inactive"</span>, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Active"</span>)) <span class="sc">+</span>  </span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Apply logarithmic scale to y-axis</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span> </span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_538</span>() <span class="sc">+</span> </span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"skyblue"</span>, <span class="st">"darkblue"</span>)) <span class="sc">+</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Adjust title font and alignment</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">40</span>,</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">family =</span> <span class="st">"Georgia"</span>, </span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">face =</span> <span class="st">"bold"</span>,</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">hjust =</span> .<span class="dv">99</span>,</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">color =</span><span class="st">"#293F2C"</span>),  </span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adjust subtitle font and alignment</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">38</span>,</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">family =</span> <span class="st">"Georgia"</span>,</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">color =</span><span class="st">"#293F2C"</span>,</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">hjust =</span> <span class="fl">0.5</span>), </span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">36</span>,</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">family =</span> <span class="st">"Georgia"</span>,</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">color =</span><span class="st">"#293F2C"</span>),</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">34</span>,</span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">family =</span> <span class="st">"Georgia"</span>,</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">color =</span><span class="st">"#293F2C"</span>),</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Move legend to the bottom</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"top"</span>, </span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Remove legend title if not needed</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),  </span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adjust legend text size</span></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">34</span>,</span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">family =</span> <span class="st">"Georgia"</span>,</span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">color =</span><span class="st">"#293F2C"</span>), </span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Background color for legend</span></span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"grey94"</span>, <span class="at">color =</span> <span class="st">"grey94"</span>), </span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#FDFBF7"</span>)</span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">+</span>  </span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a><span class="co"># ----        Jitter OLS + GLM                ----</span></span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimized jitter plot with smooth lines</span></span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a>jitter_plot_optimized <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> wind_us, </span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">aes</span>(<span class="at">x =</span> pop_den, </span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">y =</span> status)) <span class="sc">+</span> </span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a>  <span class="co"># assign color to legend </span></span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="st">"Data Points"</span>),</span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a>              <span class="at">width =</span> <span class="dv">0</span>,</span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a>              <span class="at">height =</span> <span class="fl">0.05</span>,</span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.6</span>,</span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span>  <span class="co"># Adjusted size for better visibility</span></span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">color =</span> <span class="st">"OLS Line"</span>),</span>
+<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="fl">1.2</span>,  <span class="co"># Slightly thicker line for visibility</span></span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a>              <span class="at">linetype =</span> <span class="st">"solid"</span>) <span class="sc">+</span> </span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"glm"</span>,</span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> T,</span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">color =</span> <span class="st">"GLM Line"</span>),</span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="fl">1.2</span>,</span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a>              <span class="at">linetype =</span> <span class="st">"dashed"</span>,</span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a>              <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family =</span> <span class="st">"binomial"</span>)) <span class="sc">+</span></span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Population Density vs Wind Power Plant Operating Status"</span>,</span>
+<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle=</span> <span class="st">"Logorithimic Distribution Regression Comparison"</span>,</span>
+<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Activation Status"</span>,</span>
+<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="fu">expression</span>(<span class="st">"Population Density (Log Scale, "</span> <span class="sc">~</span> mi<span class="sc">^-</span><span class="dv">2</span> <span class="sc">~</span> <span class="st">")"</span>)) <span class="sc">+</span> </span>
+<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a>  <span class="co"># rename yaxis labels for clarity</span></span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"0"</span> <span class="ot">=</span> <span class="st">"Inactive"</span>, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Active"</span>)) <span class="sc">+</span> </span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span> </span>
+<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_538</span>() <span class="sc">+</span></span>
+<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Adjust title font and alignment</span></span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">40</span>,</span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">family =</span> <span class="st">"Georgia"</span>, </span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">face =</span> <span class="st">"bold"</span>,</span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">hjust =</span> .<span class="dv">99</span>,</span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">color =</span><span class="st">"#293F2C"</span>),  </span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adjust subtitle font and alignment</span></span>
+<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">38</span>,</span>
+<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">family =</span> <span class="st">"Georgia"</span>,</span>
+<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">hjust =</span> <span class="fl">0.5</span>,</span>
+<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">color =</span><span class="st">"#293F2C"</span>), </span>
+<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">36</span>,</span>
+<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">family =</span> <span class="st">"Georgia"</span>,</span>
+<span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">color =</span><span class="st">"#293F2C"</span>),</span>
+<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">34</span>,</span>
+<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">family =</span> <span class="st">"Georgia"</span>,</span>
+<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">color =</span><span class="st">"#293F2C"</span>),</span>
+<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Move legend to the bottom</span></span>
+<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"top"</span>, </span>
+<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Remove legend title if not needed</span></span>
+<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),  </span>
+<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adjust legend text size</span></span>
+<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">34</span>,</span>
+<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">family =</span> <span class="st">"Georgia"</span>,</span>
+<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">color =</span><span class="st">"#293F2C"</span>), </span>
+<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Background color for legend</span></span>
+<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"grey94"</span>, <span class="at">color =</span> <span class="st">"grey94"</span>), </span>
+<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#FDFBF7"</span>)</span>
+<span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">+</span>   </span>
+<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-152"><a href="#cb7-152" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Legend"</span>,  <span class="co"># Title for the legend</span></span>
+<span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Data Points"</span> <span class="ot">=</span> <span class="st">"#F84C0B"</span>, </span>
+<span id="cb7-154"><a href="#cb7-154" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"OLS Line"</span> <span class="ot">=</span> <span class="st">"blue"</span>, </span>
+<span id="cb7-155"><a href="#cb7-155" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"GLM Line"</span> <span class="ot">=</span> <span class="st">"skyblue"</span>),</span>
+<span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Data Points"</span> <span class="ot">=</span> <span class="st">"Data Points"</span>, </span>
+<span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"OLS Line"</span> <span class="ot">=</span> <span class="st">"OLS Line"</span>, </span>
+<span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"GLM Line"</span> <span class="ot">=</span> <span class="st">"GLM Line"</span>))</span>
+<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine plots horizontally</span></span>
+<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a>combined_plot <span class="ot">&lt;-</span> density_plot <span class="sc">+</span> </span>
+<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a>                  jitter_plot_optimized <span class="sc">+</span> </span>
+<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Arrange plots side-by-side</span></span>
+<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">plot_layout</span>(<span class="at">ncol =</span> <span class="dv">2</span>)  </span>
+<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a>combined_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="SDS_Wind_Infrastructure_files/figure-html/activity_distribution_visuals-1.png" class="img-fluid" width="3456"></p>
+</div>
+</div>
+</section>
+<section id="predictions-for-binary-indicator-variable" class="level4">
+<h4 class="anchored" data-anchor-id="predictions-for-binary-indicator-variable">Predictions for Binary Indicator Variable</h4>
+<section id="logistic-model-with-one-continuous-variable" class="level5">
+<h5 class="anchored" data-anchor-id="logistic-model-with-one-continuous-variable"><code>Logistic Model with One Continuous Variable</code></h5>
+<p><span class="math display">\[\operatorname{logit}(p)=\log \left(\frac{p}{1-p}\right)=\beta_0+\beta_1  (Population Density)  +\varepsilon \]</span></p>
+<p>In Table 2, the intercept has a log-odds of <code>3.272</code> is noted a statistically significant value (p-value &lt; 0.01). This value provides insights into the baseline probability of the outcome when all predictors are set to zero. It suggests that the baseline probability of having an active wind plant</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ----           1 Continuous Variable        ----</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial regression 1 betas for null</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># function</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>status <span class="ot">&lt;-</span> <span class="fu">glm</span>(status <span class="sc">~</span> pop_den,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                       wind_us,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">family =</span> <span class="st">'binomial'</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># model table</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">tab_model</span>(status,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">transform =</span> <span class="cn">NULL</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>           <span class="co"># predictor labels</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">pred.labels =</span> <span class="fu">c</span>(<span class="st">"Intercept"</span>, <span class="st">"Population Density (mi^-2)"</span>),</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>          <span class="co"># include p-val</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>          <span class="at">show.p =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>          <span class="at">p.style =</span> <span class="fu">c</span>(<span class="st">"numeric_stars"</span>),</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">p.threshold =</span> <span class="fu">c</span>(<span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.01</span>),</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">dv.labels =</span> <span class="fu">c</span>(<span class="st">"log Probability of Active Wind Power Plant Operating Status"</span>),</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">string.p =</span> <span class="st">"p-value"</span>,</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">show.r2 =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"Table 2: Logit Regression Model Results for Population Density"</span>,</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>          <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Table 2: Logit Regression Model Results for Population Density</caption>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
+<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">log Probability of Active Wind Power Plant Operating Status</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Log-Odds</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p-value</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Intercept</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">3.272 <sup>***</sup></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">2.968&nbsp;–&nbsp;3.605</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Population Density (mi^-2)</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.000 <sup></sup></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.000&nbsp;–&nbsp;0.001</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.593</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">1179</td>
+</tr>
+<tr class="even">
+<td colspan="4" style="text-align: right; font-style: italic; border-top: double black;">* p&lt;0.1&nbsp;&nbsp;&nbsp;** p&lt;0.05&nbsp;&nbsp;&nbsp;*** p&lt;0.01</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="logistic-model-with-two-continuous-variables" class="level5">
+<h5 class="anchored" data-anchor-id="logistic-model-with-two-continuous-variables"><code>Logistic Model with Two Continuous Variables</code></h5>
+<p><span class="math display">\[\operatorname{logit}(p)=\log \left(\frac{p}{1-p}\right)=\beta_0+\beta_1  (Population Density) + \beta_2  (Median Income) +\varepsilon \]</span></p>
+<p>In Table 3, the intercept has a log-odds of <code>4.028</code> is noted a statistically significant value (p-value &lt; 0.01). This value provides insights into the baseline probability of the outcome when all predictors are set to zero.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ----           2 Continuous Variables        ----</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>status_2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(status <span class="sc">~</span> pop_den <span class="sc">+</span> med_inc,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>               wind_us,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">family =</span> <span class="st">'binomial'</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># model table</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">tab_model</span>(status_2,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">transform =</span> <span class="cn">NULL</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>           <span class="co"># predictor labels</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">pred.labels =</span> <span class="fu">c</span>(<span class="st">"Intercept"</span>, <span class="st">"Population Density (mi^-2)"</span>, <span class="st">"Median Income ($)"</span>),</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>          <span class="co"># include p-val</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">show.p =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">p.style =</span> <span class="fu">c</span>(<span class="st">"numeric_stars"</span>),</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>          <span class="at">p.threshold =</span> <span class="fu">c</span>(<span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.01</span>),</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>          <span class="at">dv.labels =</span> <span class="fu">c</span>(<span class="st">"log Probability of Active Wind Power Plant Operating Status"</span>),</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>          <span class="at">string.p =</span> <span class="st">"p-value"</span>,</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">show.r2 =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"Table 3: Logit Regression Model Results for Population Density &amp; Median Income"</span>,</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Table 3: Logit Regression Model Results for Population Density &amp; Median Income</caption>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
+<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">log Probability of Active Wind Power Plant Operating Status</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Log-Odds</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p-value</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Intercept</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">4.028 <sup>***</sup></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">3.007&nbsp;–&nbsp;4.974</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Population Density (mi^-2)</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.000 <sup></sup></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.000&nbsp;–&nbsp;0.001</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.512</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Median Income ($)</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.000 <sup>*</sup></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.000&nbsp;–&nbsp;0.000</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.096</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">1179</td>
+</tr>
+<tr class="odd">
+<td colspan="4" style="text-align: right; font-style: italic; border-top: double black;">* p&lt;0.1&nbsp;&nbsp;&nbsp;** p&lt;0.05&nbsp;&nbsp;&nbsp;*** p&lt;0.01</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+</section>
+<section id="analysis-of-log-odds-ratio" class="level4">
+<h4 class="anchored" data-anchor-id="analysis-of-log-odds-ratio">Analysis of Log Odds Ratio</h4>
+<p>In order to calculate the baseline probability of having an active wind plant, the following equation will be applied:</p>
+<p><span class="math display">\[\operatorname{logit}(p)=\log \left(\frac{p}{1-p}\right)=\beta_0+\beta_1 + \beta_2+\varepsilon \]</span></p>
+<p>it is manipulated to solve for the probability, p: <span class="math display">\[p̂ = e^(β0+β1x1+eβ0+β1x)\]</span></p>
+<p>To simplify our workflow, we’re going to solve for p using the <code>uniroot</code>&nbsp;function to find the probability for different values of population density. It allows us to solve for a range of p values using <span class="math inline">\(R^2\)</span>.</p>
+<p>We’re going to inspect the operational probability according to the population density quantile.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a function to calculate probability from logistic regression coefficients</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>find_probability <span class="ot">&lt;-</span> <span class="cf">function</span>(pop_den, coefficients) {</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  fun <span class="ot">&lt;-</span> <span class="cf">function</span>(p) {</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">-</span> p) <span class="sc">*</span> <span class="fu">exp</span>(coefficients[<span class="dv">1</span>] <span class="sc">+</span> coefficients[<span class="dv">2</span>] <span class="sc">*</span> pop_den) <span class="sc">-</span> p</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">uniroot</span>(fun, <span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))<span class="sc">$</span>root</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Coefficients from the logistic regression model</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>coefficients <span class="ot">&lt;-</span> status<span class="sc">$</span>coefficients</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># What are the pop den quantiles?</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#quantile(wind_data$pop_den)</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Population density quantiles from the data</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>quantiles_pop_den <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">quantile</span>(wind_sf<span class="sc">$</span>pop_den))</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate probabilities for each quantile value</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>probabilities <span class="ot">&lt;-</span> <span class="fu">sapply</span>(quantiles_pop_den, <span class="cf">function</span>(d) <span class="fu">find_probability</span>(d, coefficients))</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dataframe with the quantile population densities and their corresponding probabilities</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>pop_den_prob <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">pop_density =</span> quantiles_pop_den,</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">probability =</span> probabilities</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the table using kable</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(pop_den_prob, </span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">format =</span> <span class="st">"pipe"</span>, </span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Population Density (mi^-2)"</span>, <span class="st">"Probability"</span>),</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Table 4: Probability of Active Wind Power Plant Operating Status at Different Population Densities"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Table 4: Probability of Active Wind Power Plant Operating Status at Different Population Densities</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Population Density (mi^-2)</th>
+<th style="text-align: right;">Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">0%</td>
+<td style="text-align: right;">1.431998e-01</td>
+<td style="text-align: right;">0.9634634</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">25%</td>
+<td style="text-align: right;">4.308644e+00</td>
+<td style="text-align: right;">0.9634896</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">50%</td>
+<td style="text-align: right;">1.249329e+01</td>
+<td style="text-align: right;">0.9635412</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">75%</td>
+<td style="text-align: right;">4.039379e+01</td>
+<td style="text-align: right;">0.9637166</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">100%</td>
+<td style="text-align: right;">1.394051e+04</td>
+<td style="text-align: right;">0.9968966</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the function to calculate probability</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>find_probability_2 <span class="ot">&lt;-</span> <span class="cf">function</span>(pop_den, med_inc, coefficients) {</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Logistic regression function</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  logit <span class="ot">&lt;-</span> coefficients_2[<span class="st">"(Intercept)"</span>] <span class="sc">+</span> coefficients_2[<span class="st">"pop_den"</span>] <span class="sc">*</span> pop_den <span class="sc">+</span> coefficients_2[<span class="st">"med_inc"</span>] <span class="sc">*</span> med_inc</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">exp</span>(logit) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(logit))</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(p)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Define quantiles for population density and income</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>quantiles_pop_den <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">4.31505</span>, <span class="fl">12.53426</span>, <span class="fl">40.79216</span>, <span class="fl">13940.51491</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>quantiles_med_inc <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">14962.0</span>, <span class="fl">41424.0</span>, <span class="fl">47750.0</span>, <span class="fl">55405.5</span>, <span class="fl">185769.0</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Coefficients from the logistic regression model</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>coefficients_2 <span class="ot">&lt;-</span> status_2<span class="sc">$</span>coefficients</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame for the plot</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">income_group =</span> quantiles_med_inc,</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">pop_den_group =</span> quantiles_pop_den) <span class="sc">%&gt;%</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">probability =</span> <span class="fu">mapply</span>(</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>      <span class="cf">function</span>(inc, den) <span class="fu">find_probability_2</span>(den, inc, coefficients_2),</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>      income_group,</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>      pop_den_group</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>     <span class="at">income_group_label =</span> <span class="fu">factor</span>(income_group,</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">levels =</span> quantiles_med_inc,</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">labels =</span> <span class="fu">paste0</span>(<span class="st">"Income Quantile "</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)),</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># name change for plotting ease</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">pop_den_group_label =</span> <span class="fu">factor</span>(pop_den_group, </span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">levels =</span> quantiles_pop_den,</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">labels =</span> <span class="fu">paste0</span>(<span class="st">"Quantile "</span>,</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>                                                 <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>))</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a> )</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>color_palette <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Quantile 1"</span> <span class="ot">=</span> <span class="st">"grey80"</span>,  <span class="co"># Very light blue</span></span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Quantile 2"</span> <span class="ot">=</span> <span class="st">"#D0EAFB"</span>,  <span class="co"># Light blue</span></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Quantile 3"</span> <span class="ot">=</span> <span class="st">"#A6C7E1"</span>,  <span class="co"># Medium-light blue</span></span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Quantile 4"</span> <span class="ot">=</span> <span class="st">"#4A90D3"</span>,  <span class="co"># Medium blue</span></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Quantile 5"</span> <span class="ot">=</span> <span class="st">"#003C71"</span>   <span class="co"># Dark blue</span></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot</span></span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot_data, <span class="fu">aes</span>(<span class="at">x =</span> income_group_label,</span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> probability,</span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>                      <span class="at">fill =</span> pop_den_group_label)) <span class="sc">+</span></span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>,</span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>           <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> color_palette) <span class="sc">+</span></span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Probability of Active Wind Power Plant Operating Status"</span> ,</span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="st">"Assessing Median Income ($) and Population Density ("</span>, <span class="fu">expression</span>(<span class="st">"mi^-2 "</span>), <span class="st">") Quantiles"</span>),</span>
+<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Income Quantile ($)"</span>,</span>
+<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Probability"</span>,</span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Population Density Quantile"</span></span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"Georgia"</span>,</span>
+<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a>                        <span class="at">size =</span> <span class="dv">18</span>),</span>
+<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">17</span>,</span>
+<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a>                              <span class="at">face =</span> <span class="st">"bold"</span>,</span>
+<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a>                              <span class="at">hjust =</span> .<span class="dv">99</span>),</span>
+<span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>,</span>
+<span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">hjust =</span> <span class="fl">1.25</span>),</span>
+<span id="cb11-92"><a href="#cb11-92" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-93"><a href="#cb11-93" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#FDFBF7"</span>),</span>
+<span id="cb11-94"><a href="#cb11-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-95"><a href="#cb11-95" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Adjust legend</span></span>
+<span id="cb11-96"><a href="#cb11-96" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb11-97"><a href="#cb11-97" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Smaller legend title</span></span>
+<span id="cb11-98"><a href="#cb11-98" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),   </span>
+<span id="cb11-99"><a href="#cb11-99" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Smaller legend text</span></span>
+<span id="cb11-100"><a href="#cb11-100" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),    </span>
+<span id="cb11-101"><a href="#cb11-101" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Smaller legend key (box size)</span></span>
+<span id="cb11-102"><a href="#cb11-102" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">0.5</span>, <span class="st">"cm"</span>),        </span>
+<span id="cb11-103"><a href="#cb11-103" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Space between legend items</span></span>
+<span id="cb11-104"><a href="#cb11-104" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.spacing.x =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">"cm"</span>),     </span>
+<span id="cb11-105"><a href="#cb11-105" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Space between legend items</span></span>
+<span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.spacing.y =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">"cm"</span>),      </span>
+<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>,</span>
+<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">color =</span> <span class="st">"grey100"</span>,</span>
+<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a>                                      <span class="co"># Background box</span></span>
+<span id="cb11-110"><a href="#cb11-110" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">size =</span> <span class="fl">0.5</span>)</span>
+<span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-114"><a href="#cb11-114" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">"Population Density Quantile"</span>, </span>
+<span id="cb11-115"><a href="#cb11-115" aria-hidden="true" tabindex="-1"></a>                             <span class="at">title.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb11-116"><a href="#cb11-116" aria-hidden="true" tabindex="-1"></a>                             <span class="at">title.hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="SDS_Wind_Infrastructure_files/figure-html/probability_plot_pop_den_med_inc-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The probability distribution of having an active local wind plant across different population density and median income quantiles reveals some notable trends:</p>
+<ul>
+<li><p><strong>Population Density</strong>: Consistent with expectations, areas with the highest population density show the highest probability of hosting wind plants in this example. This trend aligns with the assumption that regions with more people may have a higher demand for renewable energy sources like wind power. Studies have shown, “urban areas with higher population densities are often more likely to invest in environmental infrastructure, including wind energy projects” (Kahn, 2007, p.&nbsp;58).</p></li>
+<li><p><strong>Median Income</strong>: Interestingly, high-income areas with lower population densities tend to have the lowest likelihood of having an active local wind plant. This observation is intriguing and suggests that higher income alone may decrease the probability of wind power plant activity. A study on socio-economic dynamics conducted by McCright and Dunlap found “socioeconomic status significantly affects individuals’ environmental attitudes and policy preferences” (McCright &amp; Dunlap, 2011, p.&nbsp;402). Their research suggests that higher-income individuals might have different priorities or less immediate need for such infrastructure compared to lower-income communities.</p></li>
+</ul>
+<section id="question" class="level5">
+<h5 class="anchored" data-anchor-id="question"><strong><code>Question:</code></strong></h5>
+<p>Could an assumption be made in which areas at risk of spatially distorted signalling have a greater propensity for higher median income and lower population density?</p>
+<p>Let’s touch a bit on the social psychology at potentially at play.</p>
+<ul>
+<li><p><strong>Resources and Political Mobilization</strong>:</p>
+<ul>
+<li><p><strong>Higher Income Brackets</strong>: Addressing this question involves considering the impact of political and economic influence on energy policy. Verba, Schlozman, and Brady argue that “higher-income individuals typically have more resources and time to engage in political activities, which can influence local energy policies” (Verba, Schlozman, &amp; Brady, 1995, p.&nbsp;234). This might suggest that wealthier areas could exert more influence to prioritize different energy investments or limit the visibility of such projects.</p></li>
+<li><p><strong>Lower Income Brackets</strong>: Conversely, those in lower income brackets may have fewer resources and less time for such activities, potentially resulting in lower levels of wind plant advocacy and adoption.</p></li>
+</ul></li>
+<li><p><strong>Donations and Lobbying</strong>:</p>
+<ul>
+<li>High-income individuals or entities may make substantial donations to lobbying groups or political campaigns to promote specific agendas, including energy policies that align with their interests. Hertel and Tsigas highlight that “financial contributions and lobbying play a significant role in shaping policy decisions” (Hertel &amp; Tsigas, 2002, p.&nbsp;78). This could mean that higher-income areas, with their greater financial resources, might be able to affect decisions on wind plant locations or energy policy. This financial influence can interfere the development and implementation of local energy projects.</li>
+</ul></li>
+<li><p><strong>Influence of Socioeconomic Status</strong>:</p>
+<ul>
+<li>The presence of wind plants might be influenced by socioeconomic status in ways that reflect broader patterns of power and influence. These insights align with the notion that “economic power and market conditions influence decisions related to energy infrastructure” (Kirschen &amp; Strbac, 2004, p.&nbsp;112). Therefore, it is plausible that higher-income areas might both contribute to and benefit from a different set of energy policies compared to lower-income areas. Areas with higher incomes might prioritize other forms of energy or infrastructure development based on their resources and political connections.</li>
+</ul></li>
+</ul>
+<p>Now that we’ve explored probabilities for our two models in a systematic way, it’s important to have an understanding of these relationships on a continuous scale. To gain a deeper understanding of the logistic regression model, we will leverage the Odds Ratio. We will create a table displaying the Odds Ratio, which quantifies how frequently a binary event occurs relative to its baseline. This approach provides a comprehensive and more efficient way to interpret the relationships between variables in the model.</p>
+</section>
+</section>
+</section>
+<section id="interpreting-coefficients-using-odds-ratio" class="level3">
+<h3 class="anchored" data-anchor-id="interpreting-coefficients-using-odds-ratio">Interpreting Coefficients Using Odds Ratio</h3>
+<p>To better interpret the relationship in our logistic regression model, we will focus on odds rather than probabilities. Although odds and probabilities are often confused, they are distinct concepts that are related through the following formula:</p>
+<p><span class="math display">\[\operatorname{logit}(p)=\log \left(\frac{p}{1-p}\right)=\beta_0+\beta_1  (Population Density) + \beta_2  (Median Income) +\varepsilon \]</span></p>
+<p>The&nbsp;<strong>odds</strong> of a binary event are the ratio of how often it happens, to how often it doesn’t happen. Here, <span class="math display">\[\hat{p}​\]</span>represents the predicted probability, and <span class="math display">\[exp⁡(β^0+β^1⋅x)\exp(\hat{\beta}_0 + \hat{\beta}_1 \cdot x)exp(β^​0​+β^​1​⋅x) \]</span> denotes the odds based on our model.</p>
+<p>We will create an <code>odds_hat</code> variable to represent the predicted odds. The <strong>odds ratio</strong> for a one-unit increase in the predictor variable, x, is given by:</p>
+<p><span class="math display">\[
+e^{\hat{\beta}_1}
+\]</span></p>
+<p>This ratio indicates how the odds of the outcome change with a one-unit increase in x. Importantly:</p>
+<ul>
+<li><p><strong>Interpretation of Odds Ratio</strong>: eβ<sup>1e</sup>{_1}eβ^​1​ is the factor by which the odds are multiplied for a one-unit increase in the predictor variable x</p></li>
+<li><p><strong>Independence from Predictor Value</strong>: This ratio does not depend on the specific value of x; it represents a constant multiplicative effect on the odds regardless of x’s value.</p></li>
+</ul>
+<p>Thus, the odds ratio provides a useful and consistent measure of the effect of a predictor variable on the odds of the outcome in logistic regression.</p>
+<section id="logistic-model-with-one-continuous-variable-1" class="level5">
+<h5 class="anchored" data-anchor-id="logistic-model-with-one-continuous-variable-1"><code>Logistic Model with One Continuous Variable</code></h5>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate predictions and calculate odds</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>status_popden_predicted_odds <span class="ot">&lt;-</span> status <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">augment</span>(<span class="at">type.predict =</span> <span class="st">"response"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y_hat =</span> .fitted,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">odds_hat =</span> y_hat <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> y_hat)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Order by odds in descending order</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(odds_hat)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select top 5 rows</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)            </span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create and style the table</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>status_popden_predicted_odds <span class="sc">%&gt;%</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(y_hat, odds_hat) <span class="sc">%&gt;%</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_hat =</span> scales<span class="sc">::</span><span class="fu">percent</span>(y_hat, <span class="at">accuracy =</span> <span class="dv">1</span>),</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds_hat =</span> scales<span class="sc">::</span><span class="fu">number</span>(odds_hat, <span class="at">accuracy =</span> <span class="dv">1</span>)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Table 5: Top 10 Predicted Odds and Probabilities from Logistic Regression"</span>,</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">format =</span> <span class="st">"html"</span>,</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">digits =</span> <span class="dv">2</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>),</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">"center"</span>,</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">font_size =</span> <span class="dv">12</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>Table 5: Top 10 Predicted Odds and Probabilities from Logistic Regression</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">y_hat</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">odds_hat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">321</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">99%</td>
+<td style="text-align: left;">159</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">99%</td>
+<td style="text-align: left;">79</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">99%</td>
+<td style="text-align: left;">77</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">99%</td>
+<td style="text-align: left;">69</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">99%</td>
+<td style="text-align: left;">69</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">98%</td>
+<td style="text-align: left;">63</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">98%</td>
+<td style="text-align: left;">58</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">98%</td>
+<td style="text-align: left;">58</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">98%</td>
+<td style="text-align: left;">57</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<p>Our model estimates that one unit increase in population density is associated with a change in the odds ratio of <span class="math inline">\(e^(0.0002) =1.0002\)</span>, or a 2.0e-04% increase in the odds of wind plant having an <code>operating</code> status.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure you have the correct model object</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of the model to check coefficients</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>model_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(status)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the odds ratio for population density</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming population density is the second coefficient</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>odds_ratio_pop_den <span class="ot">&lt;-</span> <span class="fu">exp</span>(model_summary<span class="sc">$</span>coefficients[<span class="st">"pop_den"</span>, <span class="st">"Estimate"</span>])</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a descriptive text with the rounded odds ratio</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">"Odds Ratio for Population Density is "</span>, <span class="fu">round</span>(odds_ratio_pop_den, <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Odds Ratio for Population Density is 1.0002"</code></pre>
+</div>
+</div>
+<p><code>Logistic Model with Two Continuous Variables</code></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate predictions and calculate odds</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>status_popden_predicted_odds_2 <span class="ot">&lt;-</span> status_2 <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">augment</span>(<span class="at">type.predict =</span> <span class="st">"response"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y_hat =</span> .fitted,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">odds_hat =</span> y_hat <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> y_hat)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Order by odds in descending order</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(odds_hat)) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select top 5 rows</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)            </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create and style the table</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>status_popden_predicted_odds_2 <span class="sc">%&gt;%</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(y_hat, odds_hat) <span class="sc">%&gt;%</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_hat =</span> scales<span class="sc">::</span><span class="fu">percent</span>(y_hat, <span class="at">accuracy =</span> <span class="dv">1</span>),</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds_hat =</span> scales<span class="sc">::</span><span class="fu">number</span>(odds_hat, <span class="at">accuracy =</span> <span class="dv">1</span>)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Table 6: Top 10 Predicted Odds and Probabilities from Logistic Regression"</span>,</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">format =</span> <span class="st">"html"</span>,</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">digits =</span> <span class="dv">2</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>),</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">"center"</span>,</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">font_size =</span> <span class="dv">12</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>Table 6: Top 10 Predicted Odds and Probabilities from Logistic Regression</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">y_hat</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">odds_hat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">1 103</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">415</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">99%</td>
+<td style="text-align: left;">146</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">99%</td>
+<td style="text-align: left;">119</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">99%</td>
+<td style="text-align: left;">109</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">99%</td>
+<td style="text-align: left;">109</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">99%</td>
+<td style="text-align: left;">102</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">99%</td>
+<td style="text-align: left;">87</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">99%</td>
+<td style="text-align: left;">84</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">99%</td>
+<td style="text-align: left;">81</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<p><span class="math display">\[\operatorname{logit}(p)=\log \left(\frac{p}{1-p}\right)=\beta_0+\beta_1  (Population Density) + \beta_2  (Median Income) +\varepsilon \]</span></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure you have the correct model object</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of the model to check coefficients</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>model_summary_2 <span class="ot">&lt;-</span> <span class="fu">summary</span>(status_2)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract and calculate the odds ratio for population density</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>odds_ratio_pop_den <span class="ot">&lt;-</span> <span class="fu">exp</span>(model_summary_2<span class="sc">$</span>coefficients[<span class="st">"pop_den"</span>, <span class="st">"Estimate"</span>])</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract and calculate the odds ratio for median income</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: Since the odds ratio for median income is typically 1 - exp(Estimate), this should be done correctly</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>odds_ratio_med_inc <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(model_summary_2<span class="sc">$</span>coefficients[<span class="st">"med_inc"</span>, <span class="st">"Estimate"</span>])</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate descriptive texts with the rounded odds ratios</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">"Odds Ratio for Population Density: "</span>, <span class="fu">round</span>(odds_ratio_pop_den, <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Odds Ratio for Population Density: 1.0002"</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">"Odds Ratio for Median Income: "</span>, <span class="fu">round</span>(odds_ratio_med_inc, <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Odds Ratio for Median Income: 0"</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="probabilistic-predictions" class="level3">
+<h3 class="anchored" data-anchor-id="probabilistic-predictions">Probabilistic Predictions</h3>
+<p>To evaluate the probability of having an active wind plant, we use out-of-sample predictions with the <code>type.predict</code> argument set to “response” to obtain fitted values on the probability scale.</p>
+<p><code>Logistic Model with One Continuous Variable</code></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># probability scale</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>probability_predictions <span class="ot">&lt;-</span> <span class="fu">augment</span>(status, <span class="at">type.predict =</span> <span class="st">"response"</span>) </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>probability_predictions <span class="ot">&lt;-</span> probability_predictions <span class="sc">%&gt;%</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Order by odds in descending order</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(.fitted)) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select top 5 rows</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)            </span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>probability_predictions_table <span class="ot">&lt;-</span> probability_predictions <span class="sc">%&gt;%</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Predicted_Probability =</span> .fitted,</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">Std_Dev =</span> .sigma) <span class="sc">%&gt;%</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Predicted_Probability, Std_Dev) <span class="sc">%&gt;%</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Predicted_Probability =</span> scales<span class="sc">::</span><span class="fu">percent</span>(Predicted_Probability, <span class="at">accuracy =</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Table 7: Probability Predictions from Logistic Regression Model"</span>,</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">format =</span> <span class="st">"html"</span>,</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>),</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> <span class="st">"center"</span>,</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>                <span class="at">font_size =</span> <span class="dv">12</span>)</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>probability_predictions_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>Table 7: Probability Predictions from Logistic Regression Model</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Predicted_Probability</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Std_Dev</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">100%</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">99%</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">99%</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">99%</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">99%</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">99%</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">98%</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">98%</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">98%</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">98%</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<p><code>Logistic Model with Two Continuous Variables</code></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># probability scale</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>probability_predictions_2 <span class="ot">&lt;-</span> <span class="fu">augment</span>(status_2, <span class="at">type.predict =</span> <span class="st">"response"</span>) </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>probability_predictions_2 <span class="ot">&lt;-</span> probability_predictions_2 <span class="sc">%&gt;%</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Order by odds in descending order</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(.fitted)) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select top 5 rows</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)            </span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>probability_predictions_table_2 <span class="ot">&lt;-</span> probability_predictions_2 <span class="sc">%&gt;%</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Predicted_Probability =</span> .fitted,</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">Std_Dev =</span> .sigma) <span class="sc">%&gt;%</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Predicted_Probability, Std_Dev) <span class="sc">%&gt;%</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Predicted_Probability =</span> scales<span class="sc">::</span><span class="fu">percent</span>(Predicted_Probability, <span class="at">accuracy =</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Table 8: Probability Predictions from Logistic Regression Model"</span>,</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">format =</span> <span class="st">"html"</span>,</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>),</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> <span class="st">"center"</span>,</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>                <span class="at">font_size =</span> <span class="dv">12</span>)</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>probability_predictions_table_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>Table 8: Probability Predictions from Logistic Regression Model</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Predicted_Probability</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Std_Dev</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">100%</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">100%</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">99%</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">99%</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">99%</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">99%</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">99%</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">99%</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">99%</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">99%</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<p>For example, our bivariate model predicts the odds that an area with a population density of 124 (<span class="math inline">\(mi^-2\)</span>) and a median income of $46,094 and would have an operating wind plant is ~97%.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># New data for prediction</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>exploring_model <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">pop_den =</span> <span class="dv">124</span>, <span class="at">med_inc =</span> <span class="dv">46094</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get predictions</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>predicted_probability <span class="ot">&lt;-</span> <span class="fu">augment</span>(status_2, <span class="at">newdata =</span> exploring_model, <span class="at">type.predict =</span> <span class="st">"response"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(.fitted) <span class="sc">%&gt;%</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Predicted_Probability =</span> scales<span class="sc">::</span><span class="fu">percent</span>(.fitted, <span class="at">accuracy =</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"Predicted Probability"</span> <span class="ot">=</span> Predicted_Probability) <span class="sc">%&gt;%</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Population Density"</span> <span class="ot">=</span> exploring_model<span class="sc">$</span>pop_den,</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Median Income"</span> <span class="ot">=</span> exploring_model<span class="sc">$</span>med_inc,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">.before =</span> <span class="dv">1</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the table</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>predicted_probability <span class="sc">%&gt;%</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Predicted Probability for Population Density and Median Income Under Specific Conditions"</span>,</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">format =</span> <span class="st">"html"</span>,</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">digits =</span> <span class="dv">2</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>),</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">"center"</span>,</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">font_size =</span> <span class="dv">12</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>Predicted Probability for Population Density and Median Income Under Specific Conditions</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">Population Density</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Median Income</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">.fitted</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Predicted Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">124</td>
+<td style="text-align: right;">46094</td>
+<td style="text-align: right;">0.97</td>
+<td style="text-align: left;">97%</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+</section>
+<section id="comprehensive-interaction-model-containing-binary-predictor-variable" class="level3">
+<h3 class="anchored" data-anchor-id="comprehensive-interaction-model-containing-binary-predictor-variable">Comprehensive Interaction Model Containing Binary Predictor Variable</h3>
+<section id="coefficient-and-odds-ratio-table" class="level4">
+<h4 class="anchored" data-anchor-id="coefficient-and-odds-ratio-table">Coefficient and Odds Ratio Table</h4>
+<p>To interpret the model, we compute the odds ratios for each coefficient, providing insight into how each variable and its interactions affect wind plant activity.</p>
+<p><span class="math display">\[\operatorname{logit}(p)=\log \left(\frac{p}{1-p}\right)=\beta_0+\beta_1  (Population Density) * \beta_2  (Median Income) * \beta_3  (AntiWindOpinion) +\varepsilon \]</span></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the comprehensive model</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>comprehensive_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(status <span class="sc">~</span> pop_den <span class="sc">*</span> med_inc <span class="sc">*</span> is_anti_wind,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> wind_us,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">family =</span> <span class="st">'binomial'</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(comprehensive_model)</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute odds ratios for the model coefficients</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co">#exp(coef(comprehensive_model))</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract coefficients and compute odds ratios</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>coef_summary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">Term =</span> <span class="fu">names</span>(<span class="fu">coef</span>(comprehensive_model)),</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">Estimate =</span> <span class="fu">coef</span>(comprehensive_model),</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">Odds_Ratio =</span> <span class="fu">exp</span>(<span class="fu">coef</span>(comprehensive_model))</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Create and style the table</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(coef_summary, <span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">4</span>, <span class="at">caption =</span> <span class="st">"Table 10: Summary of Coefficients and Odds Ratios"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>), <span class="at">position =</span> <span class="st">"center"</span>, <span class="at">font_size =</span> <span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>Table 10: Summary of Coefficients and Odds Ratios</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Odds_Ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">4.1017</td>
+<td style="text-align: right;">60.4441</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">pop_den</td>
+<td style="text-align: left;">pop_den</td>
+<td style="text-align: right;">0.0011</td>
+<td style="text-align: right;">1.0011</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">med_inc</td>
+<td style="text-align: left;">med_inc</td>
+<td style="text-align: right;">0.0000</td>
+<td style="text-align: right;">1.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">is_anti_wind</td>
+<td style="text-align: left;">is_anti_wind</td>
+<td style="text-align: right;">-0.7008</td>
+<td style="text-align: right;">0.4962</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">pop_den:med_inc</td>
+<td style="text-align: left;">pop_den:med_inc</td>
+<td style="text-align: right;">0.0000</td>
+<td style="text-align: right;">1.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">pop_den:is_anti_wind</td>
+<td style="text-align: left;">pop_den:is_anti_wind</td>
+<td style="text-align: right;">-0.0016</td>
+<td style="text-align: right;">0.9984</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">med_inc:is_anti_wind</td>
+<td style="text-align: left;">med_inc:is_anti_wind</td>
+<td style="text-align: right;">0.0000</td>
+<td style="text-align: right;">1.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">pop_den:med_inc:is_anti_wind</td>
+<td style="text-align: left;">pop_den:med_inc:is_anti_wind</td>
+<td style="text-align: right;">0.0000</td>
+<td style="text-align: right;">1.0000</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<p>This table provides a comprehensive view of how each variable and their interactions contribute to the likelihood of wind plant activity, facilitating a better understanding of the model’s results.</p>
+<ul>
+<li>Main Effects: The odds ratios for pop_den, med_inc, and is_anti_wind indicate the individual effects of each variable on the likelihood of having an active wind plant.</li>
+<li>Interaction Effects: The interaction terms show how the relationship between each pair of variables influences the odds of wind plant activity. For instance, the interaction between pop_den and med_inc captures how the effect of population density on wind plant status changes with median income.</li>
+</ul>
+</section>
+</section>
+<section id="our-findings" class="level3">
+<h3 class="anchored" data-anchor-id="our-findings">Our Findings</h3>
+<p>Our analysis of wind plant activity using logistic regression models has provided valuable insights into the factors influencing the presence of operational wind plants.</p>
+<section id="main-takeaways-1" class="level4">
+<h4 class="anchored" data-anchor-id="main-takeaways-1">Main Takeaways</h4>
+<p><strong>Population Density:</strong> Effect: A unit increase in population density is associated with a slight increase in the odds of having an operational wind plant. This suggests that areas with higher population densities are marginally more likely to host wind plants.</p>
+<p><strong>Median Income:</strong> Effect: An increase in median income is linked to a decrease in the odds of having an operational wind plant. Higher income areas show a lower likelihood of wind plant activity, potentially due to different local priorities or economic factors.</p>
+<p><strong>Anti-Wind Infrastructure Opinion:</strong> Effect: Areas with higher opposition to wind infrastructure are less likely to have operational wind plants. This aligns with expectations that local opposition impacts the establishment of wind plants.</p>
+<p>Model Performance:</p>
+<p><strong>P-Values</strong>: The p-values for the majority of the coefficients in our models were above the significance level of 0.05. This indicates that while our models show some trends, the results are not statistically significant enough to make strong conclusions. The lack of significance suggests that there may be insufficient evidence to definitively assess the impact of these variables on wind plant activity.However, the intercept provided a baseline log-odds of having an operational wind plant fell within the range of approximately 60% for observations in this data set. The gaps within the data for areas without operating wind plants result in heavy bias towards operating wind plants.</p>
+</section>
+<section id="future-works-considerations" class="level4">
+<h4 class="anchored" data-anchor-id="future-works-considerations">Future Works Considerations</h4>
+<p>If given the opportunity, I would expand the dataset to include any more possible non-operational wind plants and explore in greater detail how exogenous our variables are and determine which values are likely interacting, to produce the best model fit. By expanding the dataset and refining the model, we can better understand the dynamics influencing the operational status of wind plants and make more informed conclusions. Additionally, I would bolster this analysis by identifying and including relevant variables to address the omitted variables bias present in this statistical exploration.</p>
+</section>
+</section>
+<section id="citations" class="level3">
+<h3 class="anchored" data-anchor-id="citations">Citations</h3>
+<ol type="1">
+<li>Stokes, Leah C., et al.&nbsp;“Prevalence and Predictors of Wind Energy Opposition in North America.” Proceedings of the National Academy of Sciences, vol.&nbsp;120, no. 40, Sept.&nbsp;2023, doi:10.1073/pnas.2302313120.</li>
+<li>Stoke, L. C. “Front Matter.” American Journal of Political Science, vol.&nbsp;60, no. 4, 2016. JSTOR, http://www.jstor.org/stable/24877456. Accessed 26 October. 2023</li>
+<li>Kahn, M. E. (2007). <em>Green Cities: Urban Growth and the Environment</em>. Brookings Institution Press.</li>
+<li>McCright, A. M., &amp; Dunlap, R. E. (2011). The Politicization of Climate Change and Polarization in the American Public’s Views of Global Warming. <em>Society &amp; Natural Resources, 24</em>(5), 398-413.</li>
+<li>Verba, S., Schlozman, K. L., &amp; Brady, H. E. (1995). <em>Voice and Equality: Civic Voluntarism in American Politics</em>. Harvard University Press.</li>
+<li>Hertel, T. W., &amp; Tsigas, M. E. (2002). <em>The Role of Political Lobbying and Financial Contributions in Policy Making</em>. In <em>Public Policy Analysis</em> (pp.&nbsp;67-90). Routledge.</li>
+<li>Kirschen, D. S., &amp; Strbac, G. (2004). <em>Fundamentals of Power System Economics</em>. Wiley.</li>
+</ol>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{ingersoll2023,
+  author = {Ingersoll, Sofia},
+  title = {Spatially {Distorted} {Signalling:} {How} {Opinions}
+    {Against} {Wind} {Infrastructure} {Delay} {Our} {Transition} to
+    {Renewable} {Energy}},
+  date = {2023-12-14},
+  url = {https://saingersoll.github.io/posts/SDS_Wind_Infrastructure},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-ingersoll2023" class="csl-entry quarto-appendix-citeas" role="listitem">
+Ingersoll, Sofia. 2023. <span>“Spatially Distorted Signalling: How
+Opinions Against Wind Infrastructure Delay Our Transition to Renewable
+Energy.”</span> December 14, 2023. <a href="https://saingersoll.github.io/posts/SDS_Wind_Infrastructure">https://saingersoll.github.io/posts/SDS_Wind_Infrastructure</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Copyright 2023, Sofia Ingersoll
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/saingersoll">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

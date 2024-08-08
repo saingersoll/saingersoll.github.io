@@ -15,4 +15,4 @@ css: styles.scss
 
 ## Welcome!
 
-Here you'll find a collection of projects I've worked on throughout my career as a Graduate Research Assistant at the 2035 Initiative and my Mater's program for Environmental Data Science at the Bren School, UCSB.
+Here you'll find a collection of selected projects from my Maters program for Environmental Data Science at the Bren School of Environmental Science & Management, University of California Santa Barbara.

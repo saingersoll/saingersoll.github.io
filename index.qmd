@@ -19,8 +19,36 @@ about:
 css: styles.scss
 ---
 
-### Howdy y'all! I'm Sofia (it rhymes with papaya, Sof-aya).
+## Howdy there! 
 
-I am a creative strategist who loves tackling the never-ending challenges that come with coding and communicating complex information to an audience with diverse backgrounds. In my free time, I'm a chemist in the kitchen, an amateur Spotify DJ, and a zealous zumba goer. Feel free to explore my website and learn more about me, my work at The 2035 Initiative, and my other projects.
+## I'm Sofia, it rhymes with papaya (Sof-aya)
 
-If my content resonates with you, let's connect and discuss how I can bring value to your team!
+People know me as a carbon crusader, an environmental data scientist, and a certified chemist (in and out of the kitchen). I utilize data science to amplify the voices of vulnerable communities to drive sustainable climate-solutions paired with tangible policy suggestions.
+
+Currently, I'm at The 2035 Initiative researching global climate adaptation and resiliency in disadvantaged communities and aiding in the development of an equitable clean energy grid model for CA. I employ techniques like geospatial analysis, and statistics to quantify and visualize diverse sets of empirical research and environmental data to support transformational policy change.
+
+I am a continuous learner. I actively seek to satiate my curiosity for emerging energy technologies, as well as, strategies to tackle GHG emissions and the carbon economy.
+
+Feel free to explore my website and learn more about me and a selection of my projects. If my content resonates with you, let’s connect and discuss how I can bring value to your team!
+
+------------------------------------------------------------------------
+
+## Experience
+
+> **GIS & Remote Sensing Data Analyst** \| The 2035 Initiative, Santa Barbara, CA \| Oct 2023 - Present
+
+> **Communications Manager & Lead Software Developer** \| Climate and Global Dynamics Lab National Center for Atmospheric Research (CGDL NCAR), Santa Barbara, CA \| Jan 2024 - Jun 2024
+
+> **Data Analyst** \| UCSD Department of Analytical and Atmospheric Chemistry \| Dec 2021 - Jun 2023
+
+> **Investment Specialist** \| Keller Williams Realty, Inc. Partnered with Big H Homes \| Jul 2019 - Aug 2020
+
+------------------------------------------------------------------------
+
+## Education
+
+> **Bren School of Environmental Science & Management, University of California Santa Barbara** \| Master of Environmental Data Science \| (June 2024)
+
+> **University of California San Diego – Earl Warren College** \| La Jolla, CA \| BS in Chemistry \| (June 2023)
+
+> **Moorpark College** \| Moorpark, CA \| AS in Mathematics, Physics, Natural Sciences, and Chemistry \| (May 2021)
