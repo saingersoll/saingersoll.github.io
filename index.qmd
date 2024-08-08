@@ -19,7 +19,7 @@ about:
 css: styles.scss
 ---
 
-## Howdy there! 
+## Howdy there!
 
 ## I'm Sofia, it rhymes with papaya (Sof-aya)
 
@@ -29,7 +29,7 @@ Currently, I'm at The 2035 Initiative researching global climate adaptation and 
 
 I am a continuous learner. I actively seek to satiate my curiosity for emerging energy technologies, as well as, strategies to tackle GHG emissions and the carbon economy.
 
-Feel free to explore my website and learn more about me and a selection of my projects. If my content resonates with you, let’s connect and discuss how I can bring value to your team!
+Feel free to explore my website and learn more about me and a selection of my projects. If my content resonates with you, let's connect and discuss how I can bring value to your team!
 
 ------------------------------------------------------------------------
 
@@ -49,6 +49,6 @@ Feel free to explore my website and learn more about me and a selection of my pr
 
 > **Bren School of Environmental Science & Management, University of California Santa Barbara** \| Master of Environmental Data Science \| (June 2024)
 
-> **University of California San Diego – Earl Warren College** \| La Jolla, CA \| BS in Chemistry \| (June 2023)
+> **University of California San Diego -- Earl Warren College** \| La Jolla, CA \| BS in Chemistry \| (June 2023)
 
 > **Moorpark College** \| Moorpark, CA \| AS in Mathematics, Physics, Natural Sciences, and Chemistry \| (May 2021)
