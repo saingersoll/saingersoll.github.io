@@ -1,5 +1,6 @@
 ---
 title: "Spatially Distorted Signaling: How Opinions Against Wind Infrastructure Delay Our Transition to Renewable Energy"
+description: "Spatial Distorted Signalling (SDS) describes the mobilization of minority opinion holders pushing back electorally and promote legislation that aligns with their beliefs.This study aims to reproduce these outcomes with U.S. wind plant data to understand how population density, income, and anti-wind opinions impact wind plant activity, providing insights into local resistance and its effects on renewable energy projects."
 author: "Sofia Ingersoll"
 editor: visual
 date: "2023-12-14"
