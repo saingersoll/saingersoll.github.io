@@ -13,7 +13,7 @@ website:
      # - href: projects.qmd
       #  text: Projects
       - href: posts.qmd
-        text: Highlighted Projects
+        text: Projects
     #  - href: "https://saingersoll/saingersoll.github.io/"
      #   class: "navbar-logo"
       #  src: "./images/personal_logo.png"
