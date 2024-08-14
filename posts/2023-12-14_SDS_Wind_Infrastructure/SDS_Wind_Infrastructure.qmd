@@ -17,7 +17,7 @@ output:
       toc_float: yes
 categories: [Statistical Analysis, Logit, Wind Power, Energy Access, Sustainable Energy Decarbonization Transition]
 title-block-banner: true
-css: styles.scss
+#css: styles.scss
 citation:
   url: https://saingersoll.github.io/posts/SDS_Wind_Infrastructure
 image: wind_farm.png
