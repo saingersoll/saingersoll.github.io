@@ -584,6 +584,8 @@ ggplot(plot_data, aes(x = income_group_label,
                       fill = pop_den_group_label)) +
   geom_bar(stat = "identity", position = "dodge") +
   scale_fill_manual(values = color_palette) +
+  geom_smooth(aes(group = 1), color = "#F84C0B", size = 1, method = "loess", se = FALSE) +  # Add smooth trendline
+  
   labs(
     title = "Probability of Active Wind Power Plant Operating Status",
     subtitle = paste0("Assessing Median Income and Population Density Percentiles"),
