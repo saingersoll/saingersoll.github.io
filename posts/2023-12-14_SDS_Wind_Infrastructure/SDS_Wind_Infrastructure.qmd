@@ -39,7 +39,9 @@ image: wind_farm.png
 
     Areas with higher opposition to wind infrastructure are less likely to have operational wind plants. This aligns with expectations that local opposition impacts the establishment of wind plants. Therefore, addressing and mitigating local resistance is essential for enhancing the feasibility and acceptance of wind energy initiatives.
 
-![](wind_farm.png)
+![](wind_farm.png){fig-align="center" width="630"}
+
+The world's largest wind turbine, MySE-16-260. Includes a rotor diameter of 853 feet to produce 16-megawatt, located in Pingtan, Fujian Province, China (Yang, Getty Images).
 
 ### Overview
 
