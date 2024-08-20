@@ -1,6 +1,5 @@
 ---
 title: "Spatially Distorted Signaling: How Opinions Against Wind Infrastructure Delay Our Transition to Renewable Energy"
-description: "Spatial Distorted Signalling (SDS) describes the mobilization of minority opinion holders pushing back electorally and promote legislation that aligns with their beliefs.This study aims to reproduce these outcomes with U.S. wind plant data to understand how population density, income, and anti-wind opinions impact wind plant activity, providing insights into local resistance and its effects on renewable energy projects."
 author: "Sofia Ingersoll"
 editor: visual
 date: "2023-12-14"
@@ -17,7 +16,7 @@ output:
       toc_float: yes
 categories: [Statistical Analysis, Logit, Wind Power, Energy Access, Sustainable Energy Decarbonization Transition]
 title-block-banner: true
-#css: styles.scss
+css: styles.scss
 citation:
   url: https://saingersoll.github.io/posts/SDS_Wind_Infrastructure
 image: wind_farm.png
@@ -86,7 +85,7 @@ The data source that was utilized in this project, US Wind Data, focuses on the 
 #### Variables of Interest:
 
 | Name         | Description                                                                                                                             |
-|----------------|--------------------------------------------------------|
+|--------------------|----------------------------------------------------|
 | status       | Describes the project operating status. In this study, we have converted it into a binary variable: 1 is operating, 0 is not_operating. |
 | pop_den      | Tract-level 2010 census data for population density (per mi\^2)                                                                         |
 | med_inc      | Tract-level 2010 census data for median income (\$)                                                                                     |
@@ -533,19 +532,20 @@ kable(pop_den_prob,
       caption = "Table 4: Probability of Active Wind Power Plant Operating Status at Different Population Densities")
 ```
 
-```{r probability_plot_pop_den_med_inc, fig.width=7, fig.height=4, message = FALSE}
+```{r, fig.width=7, fig.height=4, message = FALSE}
 # Define the function to calculate probability
 find_probability_2 <- function(pop_den, med_inc, coefficients) {
   # Logistic regression function
-  logit <- coefficients_2["(Intercept)"] + coefficients_2["pop_den"] * pop_den + coefficients_2["med_inc"] * med_inc
+  logit <- coefficients["(Intercept)"] + coefficients["pop_den"] * pop_den + coefficients["med_inc"] * med_inc
   p <- exp(logit) / (1 + exp(logit))
   return(p)
 }
 
 # Define quantiles for population density and income
-quantiles_pop_den <- c(0, 4.31505, 12.53426, 40.79216, 13940.51491)
-quantiles_med_inc <- c(14962.0, 41424.0, 47750.0, 55405.5, 185769.0)
+quantiles_pop_den <- c(4.31505, 12.53426, 40.79216, 13940.51491)
 
+quantiles_med_inc <- quantile(wind_sf$med_inc)
+quantiles_med_inc <- c(41424.0, 47750.0, 55405.5, 185769.0)
 
 # Coefficients from the logistic regression model
 coefficients_2 <- status_2$coefficients
@@ -553,101 +553,65 @@ coefficients_2 <- status_2$coefficients
 # Create a data frame for the plot
 plot_data <- expand.grid(
   income_group = quantiles_med_inc,
-  pop_den_group = quantiles_pop_den) %>%
- 
-   mutate(
+  pop_den_group = quantiles_pop_den
+) %>%
+  mutate(
     probability = mapply(
-      
       function(inc, den) find_probability_2(den, inc, coefficients_2),
       income_group,
       pop_den_group
     ),
-   
-     income_group_label = factor(income_group,
-                                 levels = quantiles_med_inc,
-                                 labels = paste0("Income Quantile ", 1:5)),
-    
-    # name change for plotting ease
+    income_group_label = factor(income_group,
+                                levels = quantiles_med_inc,
+                                labels = paste0(seq(25, 100, by = 25), "%")),
     pop_den_group_label = factor(pop_den_group, 
                                  levels = quantiles_pop_den,
-                                 labels = paste0("Quantile ",
-                                                 1:5))
- )
+                                 labels = paste0("Percentile ", seq(25, 100, by = 25), "%"))
+  )
 
-
+# Define color palette for population density
 color_palette <- c(
-  "Quantile 1" = "grey80",  # Very light blue
-  "Quantile 2" = "#D0EAFB",  # Light blue
-  "Quantile 3" = "#A6C7E1",  # Medium-light blue
-  "Quantile 4" = "#4A90D3",  # Medium blue
-  "Quantile 5" = "#003C71"   # Dark blue
+  "Percentile 25%" = "grey80",
+  "Percentile 50%" = "#D0EAFB",
+#  "Percentile 60%" = "#A6C7E1",
+  "Percentile 75%" = "#4A90D3",
+  "Percentile 100%" = "#003C71"
 )
-
 
 # Create the plot
 ggplot(plot_data, aes(x = income_group_label,
                       y = probability,
                       fill = pop_den_group_label)) +
-  
-  geom_bar(stat = "identity",
-           position = "dodge") +
-  
+  geom_bar(stat = "identity", position = "dodge") +
   scale_fill_manual(values = color_palette) +
-  
-  
   labs(
-    title = "Probability of Active Wind Power Plant Operating Status" ,
-    subtitle = paste0("Assessing Median Income ($) and Population Density (", expression("mi^-2 "), ") Quantiles"),
-    x = "Income Quantile ($)",
+    title = "Probability of Active Wind Power Plant Operating Status",
+    subtitle = paste0("Assessing Median Income and Population Density Percentiles"),
+    x = "Income Percentile ($)",
     y = "Probability",
-    fill = "Population Density Quantile"
+    fill = "Population Density Percentile"
   ) +
-  
   theme_minimal() +
-  
   theme(
-    
-    text = element_text(family = "Georgia",
-                        size = 18),
-    
+    text = element_text(family = "Georgia", size = 18),
     axis.text.x = element_text(size = 10),
-    
     axis.text.y = element_text(size = 10),
-    
     axis.title.x = element_text(size = 12),
-    
     axis.title.y = element_text(size = 12),
-    
-    
-    plot.title = element_text(size = 17,
-                              face = "bold",
-                              hjust = .99),
-    
-    plot.subtitle = element_text(size = 15,
-                                 hjust = 1.25),
-
-    # Adjust legend
+    plot.title = element_text(size = 17, face = "bold", hjust = .99),
+    plot.subtitle = element_text(size = 15, hjust = 1.25),
     legend.position = "top",
-    # Smaller legend title
-    legend.title = element_text(size = 12),   
-    # Smaller legend text
-    legend.text = element_text(size = 10),    
-    # Smaller legend key (box size)
-    legend.key.size = unit(0.5, "cm"),        
-    # Space between legend items
-    legend.spacing.x = unit(0.2, "cm"),     
-    # Space between legend items
-    legend.spacing.y = unit(0.2, "cm"),      
-    legend.background = element_rect(fill = "white",
-                                     color = "grey100",
-                                      # Background box
-                                     size = 0.5)
-
+    legend.title = element_text(size = 12),
+    legend.text = element_text(size = 10),
+    legend.key.size = unit(0.5, "cm"),
+    legend.spacing.x = unit(0.2, "cm"),
+    legend.spacing.y = unit(0.2, "cm"),
+    legend.background = element_rect(fill = "white", color = "grey100", size = 0.5)
   ) +
-  
-  guides(fill = guide_legend(title = "Population Density Quantile", 
+  guides(fill = guide_legend(title = expression("Population Density (Log Scale, " ~ mi^-2 ~ ")"), 
                              title.position = "top",
                              title.hjust = 0.5))
+
 ```
 
 The probability distribution of having an active local wind plant across different population density and median income quantiles reveals some notable trends:
