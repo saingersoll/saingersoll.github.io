@@ -23,8 +23,6 @@ citation:
 image: wind_farm.png
 ---
 
-# Spatially Distorted Signaling: How Opinions Against Wind Infrastructure Delay Our Transition to Renewable Energy
-
 ### 🗃️GitHub Repo: <https://github.com/saingersoll/Spatially-Distorted-Signaling-US-Wind-Infrastructure>
 
 ### **Main Takeaways**
@@ -86,7 +84,7 @@ The data source that was utilized in this project, US Wind Data, focuses on the 
 #### Variables of Interest:
 
 | Name         | Description                                                                                                                             |
-|--------------------|----------------------------------------------------|
+|-----------------------|-------------------------------------------------|
 | status       | Describes the project operating status. In this study, we have converted it into a binary variable: 1 is operating, 0 is not_operating. |
 | pop_den      | Tract-level 2010 census data for population density (per mi\^2)                                                                         |
 | med_inc      | Tract-level 2010 census data for median income (\$)                                                                                     |
@@ -167,6 +165,9 @@ wind_sf <- wind_data %>%
 Before diving in, let's get a sense of where we'll be investigating. Using \`ggplot()\`, we can visualize the locations of wind infrastructure power plants throughout the United States. To achieve a more granular map, we'll need to utilize another data set to create a base layer for our map in order to observe these wind plants with respect to state and county jurisdictions.
 
 ```{r map_data, message = FALSE}
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ----        Map Wind Plants    ----
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # First visual of the U.S. wind data provided by the geometry points
 wind_plants <- ggplot(wind_sf) +
   annotation_map_tile(type = "osm") +
@@ -500,6 +501,9 @@ To simplify our workflow, we're going to solve for p using the `uniroot` functi
 We're going to inspect the operational probability according to the population density quantile.
 
 ```{r pop_den_quantile_prob_model_1}
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ----    Case 1 Quantile Prob   ----
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Define a function to calculate probability from logistic regression coefficients
 find_probability <- function(pop_den, coefficients) {
   fun <- function(p) {
@@ -534,6 +538,9 @@ kable(pop_den_prob,
 ```
 
 ```{r, fig.width=7, fig.height=4, message = FALSE}
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ----    Case 2 Quantile Prob   ----
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Define the function to calculate probability
 find_probability_2 <- function(pop_den, med_inc, coefficients) {
   # Logistic regression function
@@ -670,6 +677,9 @@ Thus, the odds ratio provides a useful and consistent measure of the effect of a
 ##### `Logistic Model with One Continuous Variable`
 
 ```{r one_var_table_pred_odds}
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ----       Case 1 Log Odds     ----
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Generate predictions and calculate odds
 status_popden_predicted_odds <- status %>%
   augment(type.predict = "response") %>%
@@ -702,6 +712,9 @@ status_popden_predicted_odds %>%
 Our model estimates that one unit increase in population density is associated with a change in the odds ratio of $e^(0.0002) =1.0002$, or a 2.0e-04% increase in the odds of wind plant having an `operating` status.
 
 ```{r one_var_odds_ratio}
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ----       Case 1 Summary      ----
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Ensure you have the correct model object
 # Summary of the model to check coefficients
 model_summary <- summary(status)
@@ -717,6 +730,9 @@ paste0("Odds Ratio for Population Density is ", round(odds_ratio_pop_den, 4))
 `Logistic Model with Two Continuous Variables`
 
 ```{r two_var_table_pred_odds}
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ----       Case 2 Log Odds     ----
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Generate predictions and calculate odds
 status_popden_predicted_odds_2 <- status_2 %>%
   augment(type.predict = "response") %>%
@@ -749,6 +765,9 @@ status_popden_predicted_odds_2 %>%
 $$\operatorname{logit}(p)=\log \left(\frac{p}{1-p}\right)=\beta_0+\beta_1  (Population Density) + \beta_2  (Median Income) +\varepsilon $$
 
 ```{r two_var_odds ratio}
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ----       Case 2 Summary      ----
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Ensure you have the correct model object
 # Summary of the model to check coefficients
 model_summary_2 <- summary(status_2)
@@ -772,6 +791,9 @@ To evaluate the probability of having an active wind plant, we use out-of-sample
 `Logistic Model with One Continuous Variable`
 
 ```{r one_var_prob_pred}
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ----     Case 1 Predictions    ----
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # probability scale
 probability_predictions <- augment(status, type.predict = "response") 
 
@@ -800,6 +822,9 @@ probability_predictions_table
 `Logistic Model with Two Continuous Variables`
 
 ```{r two_var_prob_pred}
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ----     Case 2 Predictions    ----
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # probability scale
 probability_predictions_2 <- augment(status_2, type.predict = "response") 
 
@@ -827,6 +852,9 @@ probability_predictions_table_2
 For example, our bivariate model predicts the odds that an area with a population density of 124 ($mi^-2$) and a median income of \$46,094 and would have an operating wind plant is \~97%.
 
 ```{r bivariate_exploration}
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ----     Sample Predictions    ----
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # New data for prediction
 exploring_model <- data.frame(pop_den = 124, med_inc = 46094)
 
@@ -869,6 +897,9 @@ This table provides a comprehensive view of how each variable and their interact
 -   Interaction Effects: The interaction terms show how the relationship between each pair of variables influences the odds of wind plant activity. For instance, the interaction between pop_den and med_inc captures how the effect of population density on wind plant status changes with median income.
 
 ```{r comprehensive_model}
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ----     Comprehensive Model   ----
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Fit the comprehensive model
 comprehensive_model <- glm(status ~ pop_den * med_inc * is_anti_wind,
                            data = wind_us,
