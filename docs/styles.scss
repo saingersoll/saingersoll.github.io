@@ -51,12 +51,13 @@ $code-block-bg: $cream;
 
 .center-text {
   text-align: center;
+  color: $heavy-metal;
 }
 
 // button-styling
 .button-styling {
   background: $fruit-salad;
-  color: $sandal;
+  color: $arizona;
   border-color: $heavy-metal;
 }
 // button text size (landing page)
@@ -74,10 +75,12 @@ $code-block-bg: $cream;
 // larger text
 .large-text {
   font-size: 25px;
+  color: $heavy-metal;
 }
 // slightly smaller than default text
 .small-text {
   font-size: 17px;
+  color: $heavy-metal;
 }
 // smallest text
 .extra-small-text{
@@ -96,11 +99,13 @@ $code-block-bg: $cream;
 .center-text {
   text-align: center;
   left: 50%;
+  color: $heavy-metal;
 }
 
 // right-align text
 .right-align-text{
   text-align: right;
+  color: $heavy-metal;
 }
 
 // allow images inline with text
@@ -123,6 +128,6 @@ $code-block-bg: $cream;
 .custom-subtitle {
   font-size: 22px;
   font-style: italic;
-  color: $fruit-salad;
+  color: $heavy-metal;
 }
 
