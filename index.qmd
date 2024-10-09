@@ -1,5 +1,6 @@
 ---
 title: "Sofia Ingersoll"
+subtitle: "/soF-AYA Ing-er-saul/"
 image: images/headshot.png
 toc: false
 about:
@@ -19,23 +20,27 @@ about:
 css: styles.scss
 ---
 
-### Howdy! I'm Sofia (Sof-aya), it rhymes with papaya ![](images/papaya.png){width="20"}
+### **Howdy! I'm Sofia (Sof-aya), it rhymes with papaya** ![](images/papaya.png){width="20"}
 
-I'm known as a carbon crusader, an environmental data scientist, and a certified chemist in-and-out of the kitchen. I am a recent graduate student interested in strategizing climate and global resilience solutions utilizing GIS techniques. After finishing my undergraduate degree in Chemistry, I moved to Santa Barbara in 2023 to further my education and develop my career path by earning a Master’s in Environmental Data Science with the Bren School of Environmental Science & Management, UCSB. At the outset of the program, I also began a student research assistantship with The 2035 Initiative at UCSB. Throughout my assistantship, I gained experience in using various GIS techniques and softwares; troubleshooting and debugging; using HPC environments; and routinely reporting updates to diverse interdisciplinary teams. 
+**I am an environmental data scientist devoted to insight informed action. I aim to bridge the communication gap amongst scientists, policymakers, developers, and the public by delivering information in an engaging and accessible way.**
 
-I hope to continue participating in projects that elicit real change, propelling me forward in my career trajectory. At this early stage in my career, I intend to focus my experience as a data scientist on writing policy suggestions for sustainability and resiliency related issues. I am most interested in research related to preparation for extreme climate events, the clean energy transition, assessing public health exposure to pollutants after hazardous events, and resource management.
+I have very recently completed my year contract as a Data Scientist for The 2035 Initiative. In my time there, I had the unique opportunity to actively contribute to a collection of forward-thinking projects geared towards climate adaptation and global resiliency. I have learned experience developing geospatial workflows for a variety of geo-data types, as well as a foundational understanding of working with satellite and remote sensing materials. ![](images/orbit.png){width="30"}
 
 ------------------------------------------------------------------------
 
 ## Experience
 
-> **Data Scientist – Graduate Research Assistant** \| The 2035 Initiative, Goleta, CA \| Oct 2023 - Oct 2024
+> **Data Scientist – Graduate Research Assistant** \| Oct 2023 - Oct 2024\
+> The 2035 Initiative, CA
 
-> **Communications Manager & Lead Data Engineer** \| National Center for Atmospheric Research Climate & Global Dynamics Lab, Goleta, CA \| Jan 2024 - Jun 2024
+> **Communications Manager & Lead Data Engineer** \| Jan 2024 - Jun 2024\
+> National Center for Atmospheric Research Climate & Global Dynamics Lab, CA
 
-> **Environmental Data Analyst – Undergraduate Research Assistant** \| UCSD Department of Analytical and Atmospheric Chemistry, La Jolla, CA \| Dec 2022 - Jun 2023
+> **Environmental Data Analyst** \| Dec 2022 - Jun 2023\
+> UCSD Department of Analytical and Atmospheric Chemistry, CA
 
-> **Investment Specialist - Director of Marketing & Special Events** \| Keller Williams Realty, Inc. Partnered with Big H Homes, Westlake Village, CA \| Jul 2019 - Aug 2020
+> **Investment Specialist - Director of Marketing & Special Events** \| Jul 2019 - Aug 2020\
+> Keller Williams Realty, Inc. Partnered with Big H Homes, CA
 
 ------------------------------------------------------------------------
 

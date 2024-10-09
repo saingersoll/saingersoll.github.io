@@ -1,20 +1,26 @@
 /*-- scss:defaults --*/
 
+// Import fonts (define mainfont in _quarto.yml)
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display#=swap');
+
+// fonts
+$nunito: 'Nunito', sans-serif; 
+$josefin: 'Josefin Sans', sans-serif; 
+$roboto: 'Roboto', sans-serif;
 // Import fonts
-@import url("https://fonts.gstatic.com");
+//@import url("https://fonts.gstatic.com");
+
 
 // color-scheme: 
-$heavy-metal: #293F2C;
-$sandal: #B18873;
-$light-green: #D1D9CE;
+$heavy-metal: #333D29;
+$fruit-salad: #A4AC86;
 $cream: #FDFBF7;
-$rockblue: #A2B7CC;
-$fruit-salad: #606c38;
-//#2C5F34;
-//#569A50;
-$gray: #64605f;
-$purple: #9158A2;
-$orange: #ad7237;
+$sandal: #936639;
+$arizona: #A68A64;
+
 
 // base document colors
 $navbar-bg: $heavy-metal; // navbar 
@@ -47,47 +53,44 @@ $code-block-bg: $cream;
   text-align: center;
 }
 
+// button-styling
 .button-styling {
   background: $fruit-salad;
   color: $sandal;
   border-color: $heavy-metal;
 }
-
 // button text size (landing page)
 .about-link-text { 
   font-size: 18px;
 }
-
 // button icon size (landing page)
 .bi { 
   font-size: 18px;
 }
-
 // listing description text styling
 .description {
   font-size: 25px;
 }
-
 // larger text
 .large-text {
   font-size: 25px;
 }
-
 // slightly smaller than default text
 .small-text {
   font-size: 17px;
 }
-
 // smallest text
 .extra-small-text{
   font-size: 14px;  
 }
 
+
+
 // extra space above line of text (but not as much as <br>)
-.topbr {
-    display: block;
-    margin-top: 1em;
-}
+//.topbr {
+  //display: block;
+   // margin-top: 1em;
+//}
 
 // center align text
 .center-text {
@@ -116,5 +119,10 @@ $code-block-bg: $cream;
   width: auto;
 }
 
-
+// subtitle 
+.custom-subtitle {
+  font-size: 22px;
+  font-style: italic;
+  color: $fruit-salad;
+}
 

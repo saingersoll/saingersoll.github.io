@@ -28,14 +28,14 @@ website:
     right: 
       - icon: github
         href: https://github.com/saingersoll
-format:
-  html:
-    theme: 
-      - styles.scss
-    mainfont: Nunito  
-    toc: true
-    page-layout: full
-editor: visual
+#format:
+ # html:
+  #  theme: 
+   #   - styles.scss
+    #mainfont: Nunito  
+    #toc: true
+    #page-layout: full
+#editor: visual
 #nunito is a nice font style 
 # font styles from google fonts need bold and nonbolded downloaded in order to work
       #light: quartz
@@ -43,4 +43,12 @@ editor: visual
      # - styles.scss  to use style sheet for themes
 
 
-
+format:
+  html:
+    page-layout: full
+    sidebar: false
+    theme: 
+      - styles.scss
+    mainfont: Roboto
+    toc: true
+    editor: visual
