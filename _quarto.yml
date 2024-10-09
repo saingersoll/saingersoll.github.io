@@ -48,7 +48,8 @@ format:
     page-layout: full
     sidebar: false
     theme: 
-      light: styles.scss
+      #light: 
+      - styles.scss
      # dark: [ theme-dark.scss]
     mainfont: Roboto
     toc: true
