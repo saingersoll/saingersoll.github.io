@@ -24,30 +24,36 @@ css: styles.scss
 
 **I am an environmental data scientist devoted to insight informed action. I aim to bridge the communication gap amongst scientists, policymakers, developers, and the public by delivering information in an engaging and accessible way.**
 
-I have very recently completed my year contract as a Data Scientist for The 2035 Initiative. In my time there, I had the unique opportunity to actively contribute to a collection of forward-thinking projects geared towards climate adaptation and global resiliency. I have learned experience developing geospatial workflows for a variety of geo-data types, as well as a foundational understanding of working with satellite and remote sensing materials. ![](images/orbit.png){width="30"}
+I have very recently completed my year contract as a Data Scientist for The 2035 Initiative. In my time there, I had the unique opportunity to actively contribute to a collection of forward-thinking projects geared towards climate adaptation and global resiliency. I have learned experience developing geospatial workflows for a variety of geo-data types, as well as a foundational understanding of working with satellite and remote sensing materials. I hope to continue participating in projects that elicit real and meaningful change. ![](images/orbit.png){width="30"}
 
 ------------------------------------------------------------------------
 
 ## Experience
 
-> **Data Scientist – Graduate Research Assistant** \| Oct 2023 - Oct 2024\
-> The 2035 Initiative, CA
+![](images/remote-sensing-satellite.png){width="20"} **Data Scientist – Graduate Research Assistant** \| Oct 2023 - Oct 2024\
+The 2035 Initiative, CA
 
-> **Communications Manager & Lead Data Engineer** \| Jan 2024 - Jun 2024\
-> National Center for Atmospheric Research Climate & Global Dynamics Lab, CA
+![](images/document-setting.png){width="20"} **Communications Manager & Lead Data Engineer** \| Jan 2024 - Jun 2024\
+National Center for Atmospheric Research Climate & Global Dynamics Lab, CA
 
-> **Environmental Data Analyst** \| Dec 2022 - Jun 2023\
-> UCSD Department of Analytical and Atmospheric Chemistry, CA
+![](images/analysis.png){width="20"} **Environmental Data Analyst** \| Dec 2022 - Jun 2023\
+UCSD Department of Analytical and Atmospheric Chemistry, CA
 
-> **Investment Specialist** \| Jul 2019 - Aug 2020\
-> Keller Williams Realty, Inc. Partnered with Big H Homes, CA
+![](images/data-analysis.png){width="20"} **Investment Specialist** \| Jul 2019 - Aug 2020\
+Keller Williams Realty, Inc. Partnered with Big H Homes, CA
 
 ------------------------------------------------------------------------
 
 ## Education
 
-> **Bren School of Environmental Science & Management, University of California Santa Barbara** \| Master of Environmental Data Science \| June 2024
+![](images/bren-leaf-art.jpg){width="30" height="21"} **Master of Environmental Data Science** \| June 2024
 
-> **University of California San Diego - Earl Warren College** \| La Jolla, CA \| BS in Chemistry \| June 2023
+Bren School of Environmental Science & Management, UCSB \| Goleta, CA
 
-> **Moorpark College** \| Moorpark, CA \| AS in Mathematics, Physics, Natural Sciences, and Chemistry \| May 2021
+![](images/UCSD_Seal.png){width="24"} **B.S. in Chemistry** \| June 2023
+
+University of California San Diego - Earl Warren College \| La Jolla, CA
+
+![](images/MCstackedlogo.png){width="30"} **A.S. in Mathematics, Physics, Natural Sciences, and Chemistry** \| May 2021
+
+Moorpark College \| Moorpark, CA
