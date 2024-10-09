@@ -46,7 +46,7 @@ Keller Williams Realty, Inc. Partnered with Big H Homes \| Westlake Village CA
 
 ## Education
 
-![](images/bren-leaf-art.jpg){width="30" height="21"} **Master of Environmental Data Science** \| June 2024
+![](images/brens.png){width="20" height="22"} **Master of Environmental Data Science** \| June 2024
 
 Bren School of Environmental Science & Management, UCSB \| Goleta, CA
 

@@ -32,11 +32,7 @@ website:
           text: GitHub
           href: https://github.com/saingersoll
       
-    #  - href: "https://saingersoll/saingersoll.github.io/"
-     #   class: "navbar-logo"
-      #  src: "./images/personal_logo.png"
-       # alt: "The name 'Sofia Ingersoll' written in brown text. Below the name is an icon showing a computer with code and a cloud behind it. Beneath that reads the phrase 'Creative Strategist' in brown."
-    #  - href: resources.qmd
+     #  - href: resources.qmd
      #   text: Resources
     logo: "images/personal_logot.png"
   page-footer: 
@@ -46,27 +42,14 @@ website:
     right: 
       - icon: github
         href: https://github.com/saingersoll
-#format:
- # html:
-  #  theme: 
-   #   - styles.scss
-    #mainfont: Nunito  
-    #toc: true
-    #page-layout: full
-#editor: visual
-#nunito is a nice font style 
-# font styles from google fonts need bold and nonbolded downloaded in order to work
-      #light: quartz
-     # dark: darkly
-     # - styles.scss  to use style sheet for themes
-
 
 format:
   html:
     page-layout: full
     sidebar: false
     theme: 
-      - styles.scss
+      light: styles.scss
+     # dark: [ theme-dark.scss]
     mainfont: Roboto
     toc: true
     editor: visual
