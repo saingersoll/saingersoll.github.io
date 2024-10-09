@@ -8,15 +8,15 @@ about:
   image-shape: rounded
   image-width: 20em
   links: 
+    - text: Email
+      href: mailto::sofia.ingersoll@outlook.com
+      icon: envelope
     - text: LinkedIn
       href: https://www.linkedin.com/in/sofia-ingersoll-078b931b7
       icon: linkedin
     - text: Github
       icon: github
       href: https://github.com/saingersoll
-    - text: Email
-      href: mailto::sofia.ingersoll@outlook.com
-      icon: email
 css: styles.scss
 ---
 

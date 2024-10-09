@@ -3,8 +3,9 @@ project:
   output-dir: docs
 
 website:
- # title: "Sofia Ingersoll"
+  back-to-top-navigation: true
   navbar:
+    title: false
     right:
       - href: index.qmd
         text: Home
@@ -14,6 +15,23 @@ website:
       #  text: Projects
       - href: posts.qmd
         text: Projects
+      - href: Ingersoll_Sofia_Resume.pdf
+        text: Resume
+      - href: Ingersoll_Sofia_CV.pdf
+        text: CV
+    left:
+      - text: Get in Touch!
+        menu: 
+        - icon: envelope
+          text: Email
+          href: mailto::sofia.ingersoll@outlook.com 
+        - icon: linkedin
+          text: LinkedIn
+          href: https://www.linkedin.com/in/sofia-ingersoll-078b931b7
+        - icon: github
+          text: GitHub
+          href: https://github.com/saingersoll
+      
     #  - href: "https://saingersoll/saingersoll.github.io/"
      #   class: "navbar-logo"
       #  src: "./images/personal_logo.png"
