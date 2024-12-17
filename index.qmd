@@ -14,32 +14,37 @@ about:
     - text: LinkedIn
       href: https://www.linkedin.com/in/sofia-ingersoll-078b931b7
       icon: linkedin
-    - text: Github
+    - text: GitHub
       icon: github
       href: https://github.com/saingersoll
 css: styles.scss
 ---
 
-### **Howdy! I'm Sofia (Sof-aya), it rhymes with papaya** ![](images/papaya.png){width="20"}
+### **Hiya! I'm Sofia (Sof-aya), it rhymes with papaya** ![](images/papaya.png){width="20"}
 
 **I am an environmental data scientist devoted to insight informed action. I aim to bridge the communication gap amongst scientists, policymakers, developers, and the public by delivering information in an engaging and accessible way.**
 
-I have very recently completed my year contract as a Data Scientist for The 2035 Initiative. In my time there, I had the unique opportunity to actively contribute to a collection of forward-thinking projects geared towards climate adaptation and global resiliency. I have learned experience developing geospatial workflows for a variety of geo-data types, as well as a foundational understanding of working with satellite and remote sensing materials. I hope to continue participating in projects that elicit real and meaningful change. ![](images/orbit.png){width="30"}
+I was recently contracted as the Project Lead and Geospatial Data Analyst for the *San Bernardino Wildland Fires Project* at NASA's Jet Propulsion Laboratory. In my time there, I will have the unique opportunity to actively contribute to a forward-thinking project geared towards climate adaptation and local resiliency. I have a learned experience developing geospatial workflows for a variety of geo-data types. As well as a foundational understanding of working with satellite and remote sensing materials, both of which I am excited to utilize. After my time at NASA JPL, I hope to continue participating in projects that elicit real and meaningful change. ![](images/orbit.png){width="30"}
 
 ------------------------------------------------------------------------
 
 ## Experience
 
-![](images/remote-sensing-satellite.png){width="20"} **Data Scientist – Graduate Research Assistant** \| Oct 2023 - Oct 2024\
-The 2035 Initiative \| Goleta, CA
+![](images/clipboard-312691810.png){width="20"} **Project Lead & Geospatial Data Analyst** \| Expected 1/25 - 4/25 \|\
+NASA DEVELOP Analytical Mechanics Associate \@ Jet Propulsion Laboratory \| Pasadena, CA \| *San Bernardino Wildland Fires Project*\
 
-![](images/document-setting.png){width="20"} **Communications Manager & Lead Data Engineer** \| Jan 2024 - Jun 2024\
-National Center for Atmospheric Research Climate & Global Dynamics Lab \| CA
+![](images/remote-sensing-satellite.png){width="20"} **Environmental** **Data Scientist** \| 10/23 - 10/24 \|\
+The 2035 Initiative, UCSB \| Goleta, CA
 
-![](images/analysis.png){width="20"} **Environmental Data Analyst** \| Dec 2022 - Jun 2023\
-UCSD Department of Analytical and Atmospheric Chemistry \| La Jolla, CA
+![](images/document-setting.png){width="20"} **Master's Capstone Lead Data Engineer &** **Comms Manager** \| 1/24 - 6/24 \|\
+National Center for Atmospheric Research Climate & Global Dynamics \| Goleta, CA \
+*Understanding the Influence of Parameter Value Uncertainty on Climate Model Output: Developing an Interactive Dashboard*
 
-![](images/data-analysis.png){width="20"} **Investment Specialist** \| Jul 2019 - Aug 2020\
+![](images/analysis.png){width="20"} **Environmental Data Analyst** \| 12/22 - 6/23 \|\
+UCSD Department of Analytical and Atmospheric Chemistry \| La Jolla, CA \
+*Measuring Airborne Toxics and Determining Oceanic Relationships (MATADOR)*
+
+![](images/data-analysis.png){width="20"} **Investment Specialist** \| 7/19 - 8/20 \|\
 Keller Williams Realty, Inc. Partnered with Big H Homes \| Westlake Village CA
 
 ------------------------------------------------------------------------
