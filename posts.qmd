@@ -15,4 +15,4 @@ css: styles.scss
 
 ## Welcome!
 
-Here you'll find a collection of selected projects from my Maters program for Environmental Data Science at the Bren School of Environmental Science & Management, University of California, Santa Barbara.
+Below are a collection of selected projects completed during my time in the Maters of Environmental Data Science (MEDS) program at the Bren School of Environmental Science & Management, University of California, Santa Barbara (2023-2024).
