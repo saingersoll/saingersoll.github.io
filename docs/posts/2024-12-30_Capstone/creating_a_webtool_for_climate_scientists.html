@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sofia Ingersoll">
+<meta name="dcterms.date" content="2024-12-30">
+<meta name="description" content="This post details my Master in Environmental Data Science (‘MEDS’) Capstone Project, Understanding the Influence of Parameter Value Uncertainty on Climate Model Output: Developing an Interactive Dashboard, and explains all of the jargon above. The duration of the project was completed during my time at the Bren School, UCSB and lasted from Jan.&nbsp;’24 till June ’24. Our client &amp; advisor for this project was NCAR Climate &amp; Global Dynamics Lab’s, Dr.&nbsp;Daniel Kennedy. Our objective was to create a web tool that provides climate scientists insights into their climate model configurations. Additionally, it was to enhance understanding of how the simulated terrestrial systems are interacting in different situations, alongside the associated uncertainty and accuracy. This is to better calibrate the Community Land Model version 5 (CLM5), and subsequently the land modeling component of the Community Earth System Model version 2 (CESM2).">
+
+<title>Creating a Climate Modeling Web Tool for NCAR Climate &amp; Global Dynamics Lab</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="../../site_libs/tippyjs-3.2.0/themes/google.css" rel="stylesheet">
+<link href="../../site_libs/tippyjs-3.2.0/themes/light-border.css" rel="stylesheet">
+<link href="../../site_libs/tippyjs-3.2.0/themes/light.css" rel="stylesheet">
+<link href="../../site_libs/tippyjs-3.2.0/themes/translucent.css" rel="stylesheet">
+<script src="../../site_libs/tippyjs-3.2.0/tippy.all.min.js"></script>
+<script src="../../site_libs/tippy-binding-0.1.0/tippy.js"></script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/personal_logot.png" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-get-in-touch" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Get in Touch!</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-get-in-touch">    
+        <li>
+    <a class="dropdown-item" href="mailto::sofia.ingersoll@outlook.com" rel="" target=""><i class="bi bi-envelope" role="img">
+</i> 
+ <span class="dropdown-text">Email</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.linkedin.com/in/sofia-ingersoll-078b931b7" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="dropdown-text">LinkedIn</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/saingersoll" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="dropdown-text">GitHub</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html" rel="" target="">
+ <span class="menu-text">MEDS Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../Ingersoll_Sofia_Resume.pdf" rel="" target="">
+ <span class="menu-text">Resume</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../Ingersoll_Sofia_CV.pdf" rel="" target="">
+ <span class="menu-text">CV</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Creating a Climate Modeling Web Tool for NCAR Climate &amp; Global Dynamics Lab</h1>
+                  <div>
+        <div class="description">
+          This post details my Master in Environmental Data Science (‘MEDS’) Capstone Project, Understanding the Influence of Parameter Value Uncertainty on Climate Model Output: Developing an Interactive Dashboard, and explains all of the jargon above. The duration of the project was completed during my time at the Bren School, UCSB and lasted from Jan.&nbsp;’24 till June ’24. Our client &amp; advisor for this project was NCAR Climate &amp; Global Dynamics Lab’s, Dr.&nbsp;Daniel Kennedy. Our objective was to create a web tool that provides climate scientists insights into their climate model configurations. Additionally, it was to enhance understanding of how the simulated terrestrial systems are interacting in different situations, alongside the associated uncertainty and accuracy. This is to better calibrate the Community Land Model version 5 (CLM5), and subsequently the land modeling component of the Community Earth System Model version 2 (CESM2).
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Machine Learning</div>
+                <div class="quarto-category">Earth Systems Modeling</div>
+                <div class="quarto-category">Science Communication</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Sofia Ingersoll </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 30, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#understanding-climate-models" id="toc-understanding-climate-models" class="nav-link active" data-scroll-target="#understanding-climate-models">Understanding Climate Models</a></li>
+  <li><a href="#about-ncar-climate-global-dynamics-lab" id="toc-about-ncar-climate-global-dynamics-lab" class="nav-link" data-scroll-target="#about-ncar-climate-global-dynamics-lab">About NCAR Climate &amp; Global Dynamics Lab</a></li>
+  <li><a href="#our-approach" id="toc-our-approach" class="nav-link" data-scroll-target="#our-approach">Our Approach</a></li>
+  <li><a href="#tangible-solutions" id="toc-tangible-solutions" class="nav-link" data-scroll-target="#tangible-solutions">Tangible Solutions</a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
+  <li><a href="#glossary" id="toc-glossary" class="nav-link" data-scroll-target="#glossary">Glossary</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+<div class="{center}">
+<p><a href="https://github.com/GaiaFuture/.github">GitHub Organization</a> | <a href="https://bren.ucsb.edu/sites/default/files/2024-06/GaiaFuture%20-%20Technical%20Documentation.pdf">Technical Documentation</a> | <a href="https://vimeo.com/brenucsb/review/971010240/db2f7587ba">Public Presentation</a> | <a href="https://datadryad.org/stash/dataset/doi:10.5061/dryad.vq83bk422#aff615">Data Repository</a></p>
+</div>
+<div class="{center}">
+<p><img src="photos/gaiafuture.png" class="img-fluid" width="2282"> <em><strong>Figure 1</strong>: The Gaia Future Team. Affiliations: The Bren School of Environmental Science &amp; Management, UCSB; National Center for Atmospheric Research Climate &amp; Global Dynamics Lab (“NCAR CGD”); National Center for Ecological Analysis and Synthesis (“NCEAS”).</em></p>
+</div>
+<p><em>** Note: For the less scientifically inclined, this document may contain some unfamiliar terms. I am providing a glossary to assist, these words will be underlined throughout the text with pop-up definitions. **</em></p>
+<section id="understanding-climate-models" class="level3 {center}">
+<h3 class="anchored" data-anchor-id="understanding-climate-models">Understanding Climate Models</h3>
+</section>
+<div class="{left}">
+<p><img src="photos/what_cm_is.png" class="img-fluid"></p>
+<p><em><strong>Figure 2</strong>: Defining what a climate model is and its components: <span id="inputParameters"><u>input parameter</u></span> and <span id="climateVariables"><u>climate variable output</u></span><u>.</u></em></p>
+</div>
+<p>Climate models are one of the most frequently utilized tools in climate science. In the most simple terms, they employ complex mathematics to simulate different scenarios on Earth (NOAA, 2014). They provide predictive insights into what the future may hold and are a powerful tool used to understand and mitigate potential climate hazards.</p>
+<div class="{right}">
+<p><img src="photos/land_comp_tl.png" class="img-fluid" width="2282"></p>
+<p><em><strong>Figure 3</strong>: Timeline of land surface categories introduction into climate modeling system (Fisher, Koven, 2020).</em></p>
+</div>
+<p>There are several components of Earth’s systems to consider when modeling. On the right, we can see the rapid evolution of land surface modeling since the early 70s (Fisher, Koven, 2020). Over the last decade more than a handful of categories entered the world of climate modeling. For each of these model categories, there are a handful of input parameters (e.g.&nbsp;soil texture) and predicted climate variable outputs (e.g.&nbsp;surface temperature).</p>
+<div class="{left}">
+<p><img src="photos/how_cm_work.png" class="img-fluid"></p>
+<p><em><strong>Figure 4</strong>: Utilizing the example of soil texture, a parameter with a wide range of varieties available on Earth (e.g.&nbsp;sand vs waterlogged soil), to explain how a predicted climate variable such as surface temperature will vary significantly depending on the input <span id="parameter">parameter</span> value.</em></p>
+</div>
+<p>Due to the high variability in Earth’s biomes, there is inherent <span id="uncertainty"><u>uncertainty</u></span> when modeling climate predictions (Navarro, 2024). To more accurately calibrate climate models and optimize their predictive <span id="accuracy"><u>accuracy</u></span>, the values assigned to input parameters require evaluation and assessment. In order to do so, climate scientists must overcome the difficulties of interpreting the large volumes of convoluted predictions.</p>
+<section id="about-ncar-climate-global-dynamics-lab" class="level3 {center}">
+<h3 class="anchored" data-anchor-id="about-ncar-climate-global-dynamics-lab">About NCAR Climate &amp; Global Dynamics Lab</h3>
+</section>
+<section id="climate-modeling-experiment-parameter-perturbation-experiments-ppe" class="level4">
+<h4 class="anchored" data-anchor-id="climate-modeling-experiment-parameter-perturbation-experiments-ppe">Climate Modeling Experiment: Parameter Perturbation Experiments (“PPE”)</h4>
+<p>Our team’s client, <a href="https://www.cgd.ucar.edu/">NCAR CGD</a> is an Earth system science research center sponsored by the National Science Foundation. Their research aims to increase our understanding of climate variability and climate change. Towards the outset of the MEDS program, myself and a colleague met with a member of the CGD team to discuss a recent experiment their team had conducted, the <a href="https://www.cgd.ucar.edu/events/seminar/2023/katie-dagon-and-daniel-kennedy-132940">Parameter Perturbation Experiment (“PPE”)</a>. Their experiment generated a total of <span id="tenTerabytes"><u>10 terabytes of data</u></span>. It utilized the <a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2018MS001583">Community Land Model version 5 (“CLM5”)</a>, the land component of the <a href="https://www.cesm.ucar.edu/models/cesm2">Community Earth System Model version 2 (CESM2)</a>, and consisted of two methods. Our project focused on the Latin Hypercube (“LHC”) approach.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="photos/knobs.png" class="img-fluid figure-img" width="420"></p>
+<figcaption class="figure-caption"><em><strong>Figure 5:</strong> When imagining the method described below, it’s useful to envision a dashboard with several turning knobs <u>input parameter</u> for each scenario to predict <u>climate variable.</u> Art by <a href="https://www.shutterstock.com/image-vector/set-control-panel-elements-spacecraft-technical-1537154573">Agor2012</a>.</em></figcaption>
+</figure>
+</div>
+</section>
+<section id="latin-hypercube-lhc" class="level4">
+<h4 class="anchored" data-anchor-id="latin-hypercube-lhc">Latin Hypercube (LHC)</h4>
+<p>The Latin Hypercube experiment attains in reflecting the natural chaos of the world by allowing for dynamic changes throughout all input parameters for each simulation<strong>.</strong> No two parameters contain the same input value (Eidhammer, et. al., 2024). However, they all fall within a standardized range of 0 and 1 and are an estimation of accepted values found in nature. In reality, these parameters are ever-changing, making the LHC approach a closer representation to Earth’s systems. Be that as it may, it is just as difficult to interpret.&nbsp;</p>
+</section>
+<section id="the-issues" class="level4">
+<h4 class="anchored" data-anchor-id="the-issues">The Issues</h4>
+<ol type="1">
+<li><p>The <span id="rawData"><u>raw data</u></span> and metadata documentation was not easily accessible.</p></li>
+<li><p>Required additional <span id="wrangling"><u>wrangling</u></span> and visualizations in order to interpret simulation predictions.</p></li>
+<li><p>Lacked prediction <span id="uncertaintyMeasurements"><u>uncertainty measurements</u></span>, thus inhibiting model calibration.</p></li>
+</ol>
+</section>
+<section id="our-goal" class="level4">
+<h4 class="anchored" data-anchor-id="our-goal">Our Goal</h4>
+<p>Our mission was to create a web tool that invites discovery, discussion, and innovation amongst climate scientists utilizing the PPE LHC data. Our team sought to deliver:</p>
+<ol type="1">
+<li><p>Descriptive <span id="metadata"><u>metadata</u></span> describing the model components and their associated Earth system category.&nbsp;</p></li>
+<li><p>Adaptive <span id="machineLearning"><u>machine learning</u></span> tools and visualization to display a 1:1 input parameter-climate variable relationship with 3 <span id="stdDev"><u>st. dev. of associated uncertainty</u></span>.</p></li>
+<li><p>Sensitivity visualization capable of ranking each input parameters contribution to the climate variable prediction, alongside a <span id="crossValidationTest"><u>cross validation accuracy plot</u>.</span>&nbsp;</p></li>
+<li><p>Organized and optimized internal data archival system that grows with new user <span id="query">queries</span>.</p></li>
+<li><p>A <span id="containerizedWebTool"><u>containerized web tool</u></span> compatible with <span id="continuousIntegration"><u>continuous integration</u>.</span>&nbsp;</p></li>
+</ol>
+<div class="{center}">
+<p><img src="photos/dashboard.png" class="img-fluid"></p>
+<p><em><strong>Figure 6:</strong> This is our web tool. On the left is an overview of the landing page with a prediction. The right displays the metadata associated with the categorized input parameters.</em></p>
+</div>
+</section>
+<section id="our-approach" class="level3 {center}">
+<h3 class="anchored" data-anchor-id="our-approach">Our Approach</h3>
+</section>
+<ol type="1">
+<li><p>Create a robust file processing system: specifications include time range, parameter, and climate variable.</p></li>
+<li><p>Develop an flexible machine learning emulator that can capture the complexity in the data and individually isolate a 1-to-1 parameter-climate variable relationship with embedded uncertainty and accuracy testing.</p></li>
+<li><p>Provide informative visualizations packaged in a user-friendly web application that requires minimal upkeep.&nbsp;</p></li>
+</ol>
+<div class="{center}">
+<p><img src="photos/workflow.png" class="img-fluid"><em><strong>Figure 7</strong>: Reproducible workflow for NCAR CDG’s PPE data visualization and interpretation.</em></p>
+</div>
+<section id="tangible-solutions" class="level3 {center}">
+<h3 class="anchored" data-anchor-id="tangible-solutions">Tangible Solutions</h3>
+</section>
+<section id="optimized-computing-data-archival-tactics" class="level4">
+<h4 class="anchored" data-anchor-id="optimized-computing-data-archival-tactics">Optimized Computing &amp; Data Archival Tactics</h4>
+<div class="{center}">
+<p><img src="photos/datawrangle.png" class="img-fluid"></p>
+<p><em><strong>Figure 8:</strong> Data wrangling workflow, from raw PPE data into tidy data for machine learning analysis. Blue represents the user selected climate variable that was simulated and orange is the collection of accepted parameter values.</em></p>
+</div>
+<p>We wanted to make the information relevant to a user’s interest, so options to select a timeline, input parameter, and climate variable were essential. For the query of interest, appropriate weights to the <span id="temporalDimension"><u>temporal dimension</u></span> were applied, so that time reflected calendar months accurately. Additionally, <span id="spatialWeight"><u>spatial weights</u></span> for <span id="gridcell"><u>grid cells</u></span> were assigned according to respective land area. Once wrangled, these data sets were ready for machine learning analysis.</p>
+<p>To reduce the computational burden and carbon consumption associated with our web tool, we employed the unique package, <a href="https://docs.python.org/3/library/pickle.html">pickle</a>. Similar to the traditional idea of preserving, ‘pickling’ is a systematic approach to storing data long-term in a low storage way. The phrase is coined by the package provider. ‘Pickling’ processes high volumes of data files using serialization for fast storage and loading (pickle, 2024). In contrast, ‘unpickling’ undoes this process for quick predictions and visualizations. Whenever applicable, our application stores and retrieves data in lieu of repeating tabulations. As the web tool is more heavily used, the data archive will increase and the overall computational workload will be reduced overtime.&nbsp;</p>
+</section>
+<section id="machine-learning-emulator-data-visualizations" class="level4">
+<h4 class="anchored" data-anchor-id="machine-learning-emulator-data-visualizations">Machine Learning Emulator &amp; Data Visualizations</h4>
+<p>*Bare with me, we are entering the densest sections, they contain pertinent details about our model components.*</p>
+</section>
+<section id="gaussian-process-regression-uncertainty" class="level4">
+<h4 class="anchored" data-anchor-id="gaussian-process-regression-uncertainty"><em>Gaussian Process Regression + Uncertainty</em></h4>
+<div class="{center}">
+<p><img src="photos/datawrkflw.png" class="img-fluid"></p>
+<p><em><strong>Figure 9:</strong> ‘Black box’ machine learning workflow displaying the preliminary data visualization outputs.</em></p>
+</div>
+<p>The objective when creating our tool was to provide climate scientists visual insights into how interesting certain parameter-climate variable relationships are over time with a <span id="definedConfidence"><u>defined level of confidence</u></span>. To interpret the complex PPE data, a machine learning tool with flexible capabilities had to be built to provide insights into relationships and predictive uncertainty. The specific ML tool employed in this case was <span id="gpr">Gaussian Process Regression (“GPR”)</span>.&nbsp;</p>
+<p>In <span id="laymansTerms"><u>layman’s terms</u></span>, GPR can isolate individual parameters and determine their relationship with a predicted climate variable and the associated uncertainty (Görtler, et al., 2019). It is easiest to consider the <span id="mlEmulator"><u>GPR emulator</u></span> as a <span id="blackBox"><u>‘black box’</u></span>. The tool itself simplifies the heavy lifting of the scientist by computing a surplus of predictions for a scenario without a defined <span id="statisticalEquation"><u>statistical equation</u></span> (Rasmussen, Williams, 2006). It emulates the climate scenario as described by the PPE data. The tool applies <span id="bayesianStatistics"><u>Bayesian statistics</u></span> to average the predictions and provide 3 standard deviations of uncertainty. This can be seen above in the regression plot on the left side.</p>
+</section>
+<section id="fast-fourier-amplitude-sensitivity-transformation-cross-validation-accuracy-testing" class="level4">
+<h4 class="anchored" data-anchor-id="fast-fourier-amplitude-sensitivity-transformation-cross-validation-accuracy-testing"><em>FAST: Fourier Amplitude Sensitivity Transformation + Cross Validation Accuracy Testing</em></h4>
+<p>This following feature will allow climate scientists the ability to identify major contributors to specific climate events. Leveraging our machine learning tool, a <span id="sensitivityAnalysis"><u>sensitivity analysis</u></span> feature for predictions was developed using a method called FAST, Fourier Amplitude Sensitivity Transformation. In the simplest terms, FAST&nbsp; can isolate each parameter and rank them according to their relative influence on a predicted climate variable. Mathematically, FAST conducts a sensitivity analysis by decomposing the <span id="variance"><u>variance</u></span> of the involved components and assigning it accordingly to parameters for a predicted scenario (Fang, Gertner, et. al., 2003). To assess the accuracy of the GPR and FAST predictions, a cross validation test was conducted for each simulation, plotted, and paired with the associated R² value. This is the inset plot seen above on the right.</p>
+</section>
+<section id="containerized-web-application-with-continuous-integration" class="level4">
+<h4 class="anchored" data-anchor-id="containerized-web-application-with-continuous-integration">Containerized Web Application with Continuous Integration</h4>
+<div class="{center}">
+<p><img src="photos/docker.png" class="img-fluid" width="690"></p>
+<p><em><strong>Figure 10:</strong> Workflow to describe the back-end workflow of the dashboard operating system.</em></p>
+</div>
+<p>Our team prepared a maintenance plan for our web tool hand-off. All essential software is embedded within our product. We used the Docker approach to do so and containerize our web app. This prevents any package updates made in the future from breaking our code. The deliverable is currently in the hands of the NCAR Software Team and is awaiting publication. Its future application will lead to climate model calibrations that will contribute upstream to the <a href="https://www.wcrp-climate.org/wgcm-cmip">Coupled Model Intercomparison Project (“CMIP”)</a> provided by the <a href="https://www.ipcc.ch/about/">Intergovernmental Panel on Climate Change (“IPCC”)</a>.</p>
+</section>
+<section id="acknowledgements" class="level3">
+<h3 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h3>
+<p>The author of this blog post would like to say a special thank the cross-country team that supported our project:</p>
+<p><em>National Center for Atmospheric Research</em>: Dr.&nbsp;Daniel Kennedy, Project Scientist; Nick Cote, Software Engineer;</p>
+<p><em>Bren School of Environmental Science &amp; Management</em>: Dr.&nbsp;Carmen Galaz García, Assistant Teaching Professor; Dr.&nbsp;Satie Airamé, Assistant Dean; Emily Case, Capstone Project Coordinator;</p>
+<p><em>Columbia University</em>: Dr.&nbsp;Linnia Hawkins, Associate Research Scientist</p>
+</section>
+<section id="glossary" class="level3">
+<h3 class="anchored" data-anchor-id="glossary">Glossary</h3>
+<div class="cell">
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-e3a4feb31a41a3ccade6" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-e3a4feb31a41a3ccade6">{"x":{"element":"tenTerabytes","opts":{"content":"A large amount of digital information equivalent to approximately 10,000 gigabytes. Often used to store or analyze extensive datasets."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-4301b33d7910150cdca7" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-4301b33d7910150cdca7">{"x":{"element":"accuracy","opts":{"content":"A measure of how close a predicted value is to the true value, often expressed as a percentage."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-503af832b634feeab208" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-503af832b634feeab208">{"x":{"element":"bayesianStatistics","opts":{"content":"A statistical approach that uses probability distributions to represent uncertainty in estimates and incorporates prior knowledge."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-9f3ba83f61a05373c127" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-9f3ba83f61a05373c127">{"x":{"element":"blackBox","opts":{"content":"A system or model where the internal workings are not visible or understood, but inputs and outputs are observed."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-1dd5a352ff3a378789bf" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-1dd5a352ff3a378789bf">{"x":{"element":"cesm2","opts":{"content":"A comprehensive climate model used for simulating Earth's climate system and its components."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-1b3c326d69bc9a6c96d9" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-1b3c326d69bc9a6c96d9">{"x":{"element":"climateVariables","opts":{"content":"Measurable aspects of the climate system, such as temperature or precipitation, affected by natural and human processes, often used as a predicted output in models."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-15182e1e34eab2777ab4" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-15182e1e34eab2777ab4">{"x":{"element":"containerizedWebTool","opts":{"content":"A web-based application deployed within a container, which ensures consistency and scalability across computing environments."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-b06f64e88febc4e3d2df" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-b06f64e88febc4e3d2df">{"x":{"element":"continuousIntegration","opts":{"content":"A software development practice where code changes are automatically tested and integrated into a shared repository to ensure stability."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-185eb7fcd033b22e0ea2" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-185eb7fcd033b22e0ea2">{"x":{"element":"cmip","opts":{"content":"A collaborative framework designed to improve climate models and compare their predictions on a global scale."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-b56e89d50736a20695ad" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-b56e89d50736a20695ad">{"x":{"element":"crossValidationTest","opts":{"content":"A statistical method used to evaluate a model's predictive performance by partitioning data into training and testing subsets."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-e6996658eca4b7982c20" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-e6996658eca4b7982c20">{"x":{"element":"definedConfidence","opts":{"content":"A quantified level of certainty, often expressed as a percentage, indicating the likelihood that a result is accurate."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-207a135f3103bc70196e" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-207a135f3103bc70196e">{"x":{"element":"fast","opts":{"content":"A technique used to assess the sensitivity of a model's output to its input parameters."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-b24f52d362a457440d5f" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-b24f52d362a457440d5f">{"x":{"element":"gpr","opts":{"content":"A non-parametric, probabilistic model used in machine learning to predict outputs and quantify uncertainty."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-a855616d085268afbdbd" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-a855616d085268afbdbd">{"x":{"element":"gridcell","opts":{"content":"A single unit or cell within a spatial grid used in climate modeling, representing a defined area of Earth's surface."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-c811ffecfc09727ea6c8" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-c811ffecfc09727ea6c8">{"x":{"element":"inputParameters","opts":{"content":"Numerical values or conditions used to run simulations in a model, influencing the output (e.g., soil texture, atmospheric pressure)."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-e08c6999f8a14d078d94" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-e08c6999f8a14d078d94">{"x":{"element":"insetPlot","opts":{"content":"A smaller plot embedded within a larger plot to provide additional detail or context."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-d774b1ce194e42284d35" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-d774b1ce194e42284d35">{"x":{"element":"ipcc","opts":{"content":"An international organization that assesses scientific knowledge on climate change to guide policy decisions."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-1101adb0bd0740bcbc5f" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-1101adb0bd0740bcbc5f">{"x":{"element":"laymansTerms","opts":{"content":"Simple, non-technical language used to explain complex concepts."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-e5f84e24f3d3c30c4ce5" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-e5f84e24f3d3c30c4ce5">{"x":{"element":"machineLearning","opts":{"content":"A method of data analysis that automates analytical model building by using algorithms that learn from data to find patterns and make decisions without human intervention."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-68031c6c81faeaaa7c35" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-68031c6c81faeaaa7c35">{"x":{"element":"mlEmulator","opts":{"content":"A computational model that mimics the behavior of a more complex system to save time and resources."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-59d0ae78460bb9e90685" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-59d0ae78460bb9e90685">{"x":{"element":"metadata","opts":{"content":"Information that describes other data, such as its source, format, or context, to improve usability and understanding."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-9f7aec3edc691f20d64d" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-9f7aec3edc691f20d64d">{"x":{"element":"parameter","opts":{"content":"A variable within a model or equation that influences its output."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-b4cf8da4b158b1edcea1" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-b4cf8da4b158b1edcea1">{"x":{"element":"predictiveUncertainty","opts":{"content":"The range of possible values for a prediction, reflecting the model's uncertainty."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-f950393c5f5371c6a2b3" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-f950393c5f5371c6a2b3">{"x":{"element":"query","opts":{"content":"A request for specific information from a database or dataset."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-8a84a19d0565326b91b0" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-8a84a19d0565326b91b0">{"x":{"element":"r2Value","opts":{"content":"A statistical measure of how well a model’s predictions match observed data, ranging from 0 (no fit) to 1 (perfect fit)."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-d670d22810d887963450" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-d670d22810d887963450">{"x":{"element":"rawData","opts":{"content":"Unprocessed data collected directly from sources, often requiring cleaning and formatting."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-42356a628a031b33df20" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-42356a628a031b33df20">{"x":{"element":"regressionPlot","opts":{"content":"A graph that visualizes the relationship between independent and dependent variables, often used in statistical modeling."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-7b6c1297263970d56ff8" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-7b6c1297263970d56ff8">{"x":{"element":"sensitivityAnalysis","opts":{"content":"A technique used to determine how different input variables affect a model's output."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-d72d0fb73616c3a0f269" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-d72d0fb73616c3a0f269">{"x":{"element":"stdDev","opts":{"content":"A measure of data spread that quantifies the variation around the mean."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-8889e4eab04b7b51f563" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-8889e4eab04b7b51f563">{"x":{"element":"statisticalEquation","opts":{"content":"A mathematical formula that represents relationships between variables in a dataset."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-bc48561c487c885a0afa" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-bc48561c487c885a0afa">{"x":{"element":"spatialWeight","opts":{"content":"A factor used in spatial analysis to account for the influence of one area on another."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-2d878ff367f7c11df321" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-2d878ff367f7c11df321">{"x":{"element":"temporalDimension","opts":{"content":"The time-based aspect of data or models, often used to track changes over time."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-b778ba8a04c7e89fe2f5" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-b778ba8a04c7e89fe2f5">{"x":{"element":"variance","opts":{"content":"A statistical measure that describes the spread of data points around the mean."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-76c80db9514069827aad" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-76c80db9514069827aad">{"x":{"element":"uncertaintyMeasurements","opts":{"content":"Quantitative estimates of the doubt associated with a model's predictions."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-aba77386ea9c365f9cbc" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-aba77386ea9c365f9cbc">{"x":{"element":"wrangling","opts":{"content":"The process of cleaning, transforming, and organizing raw data for analysis."}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell-output-display">
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-2a7168de0dbbddf02dbf" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-2a7168de0dbbddf02dbf">{"x":{"element":"uncertainty","opts":{"content":"Variability or error in the model predictions due to unknown factors, leading to potential inaccuracies in the output."}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="glossary">
+<ul>
+<li><p><strong>10 terabytes of data</strong>: A large amount of digital information equivalent to approximately 10,000 gigabytes. Often used to store or analyze extensive datasets.</p></li>
+<li><p><strong>Accuracy</strong>: A measure of how close a predicted value is to the true value, often expressed as a percentage.</p></li>
+<li><p><strong>Bayesian statistics</strong>: A statistical approach that uses probability distributions to represent uncertainty in estimates and incorporates prior knowledge.</p></li>
+<li><p><strong>Black box</strong>: A system or model where the internal workings are not visible or understood, but inputs and outputs are observed.</p></li>
+<li><p><strong>Climate variable</strong>: A measurable factor related to climate, such as temperature, precipitation, or wind speed, often used as a predicted output in models.</p></li>
+<li><p><strong>Community Earth System Model version 2 (CESM2)</strong>: A comprehensive climate model used for simulating Earth’s climate system and its components.</p></li>
+<li><p><strong>Containerized web tool</strong>: A web-based application deployed within a container, which ensures consistency and scalability across computing environments.</p></li>
+<li><p><strong>Continuous integration</strong>: A software development practice where code changes are automatically tested and integrated into a shared repository to ensure stability.</p></li>
+<li><p><strong>Coupled Model Intercomparison Project (“CMIP”)</strong>: A collaborative framework designed to improve climate models and compare their predictions on a global scale.</p></li>
+<li><p><strong>Cross Validation Test</strong>: A statistical method used to evaluate a model’s predictive performance by partitioning data into training and testing subsets.</p></li>
+<li><p><strong>Defined level of confidence</strong>: A quantified level of certainty, often expressed as a percentage, indicating the likelihood that a result is accurate.</p></li>
+<li><p><strong>Fourier Amplitude Sensitivity Transformation (“FAST”)</strong>: A technique used to assess the sensitivity of a model’s output to its input parameters.</p></li>
+<li><p><strong>Gaussian Process Regression (GPR)</strong>: A non-parametric, probabilistic model used in machine learning to predict outputs and quantify uncertainty.</p></li>
+<li><p><strong>Gridcell</strong>; A single unit or cell within a spatial grid used in climate modeling, representing a defined area of Earth’s surface.</p></li>
+<li><p><strong>Inset plot</strong>: A smaller plot embedded within a larger plot to provide additional detail or context.</p></li>
+<li><p><strong>Intergovernmental Panel on Climate Change (“IPCC”)</strong>: An international organization that assesses scientific knowledge on climate change to guide policy decisions.</p></li>
+<li><p><strong>Layman’s terms</strong>: Simple, non-technical language used to explain complex concepts.</p></li>
+<li><p><strong>Machine learning emulator</strong>: A computational model that mimics the behavior of a more complex system to save time and resources.</p></li>
+<li><p><strong>Metadata</strong>: Information that describes other data, such as its source, format, or context, to improve usability and understanding.</p></li>
+<li><p><strong>Parameter</strong>: A variable within a model or equation that influences its output.</p></li>
+<li><p><strong>Predictive Uncertainty</strong>: The range of possible values for a prediction, reflecting the model’s uncertainty.</p></li>
+<li><p><strong>Query</strong>: A request for specific information from a database or dataset.</p></li>
+<li><p>R² <strong>value</strong>: A statistical measure of how well a model’s predictions match observed data, ranging from 0 (no fit) to 1 (perfect fit).</p></li>
+<li><p><strong>Raw data</strong>: Unprocessed data collected directly from sources, often requiring cleaning and formatting.</p></li>
+<li><p><strong>Regression plot</strong>: A graph that visualizes the relationship between independent and dependent variables, often used in statistical modeling.</p></li>
+<li><p><strong>Sensitivity analysis</strong>: A technique used to determine how different input variables affect a model’s output.</p></li>
+<li><p><strong>St.&nbsp;dev. | standard deviation</strong>: A measure of data spread that quantifies the variation around the mean.</p></li>
+<li><p><strong>Statistical equation</strong>: A mathematical formula that represents relationships between variables in a dataset.</p></li>
+<li><p><strong>Spatial weight</strong>: A factor used in spatial analysis to account for the influence of one area on another.</p></li>
+<li><p><strong>Temporal dimension</strong>: The time-based aspect of data or models, often used to track changes over time.</p></li>
+<li><p><strong>Variance</strong>: A statistical measure that describes the spread of data points around the mean.</p></li>
+<li><p><strong>Uncertainty measurements</strong>: Quantitative estimates of the doubt associated with a model’s predictions. Wrangling The process of cleaning, transforming, and organizing raw data for analysis.</p></li>
+</ul>
+</div>
+</section>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">References</h3>
+<ol type="1">
+<li><p>Agor. “Set of Control Panel Elements for Spacecraft, Technical Knobs.” Shutterstock, 2012,<a href="https://www.shutterstock.com/image-vector/set-control-panel-elements-spacecraft-technical-1537154573" class="uri">https://www.shutterstock.com/image-vector/set-control-panel-elements-spacecraft-technical-1537154573</a>. Accessed 03 Dec.&nbsp;2024.</p></li>
+<li><p>Dagon, Katie, and Daniel Kennedy. Parameter Perturbation Experiment (PPE). National Center for Atmospheric Research, 2023,<a href="https://www.cgd.ucar.edu/events/seminar/2023/katie-dagon-and-daniel-kennedy-132940" class="uri">https://www.cgd.ucar.edu/events/seminar/2023/katie-dagon-and-daniel-kennedy-132940</a>. Accessed 03 Mar.&nbsp;2024.</p></li>
+<li><p>Eidhammer, Trude &amp; Gettelman, Andrew &amp; Thayer-Calder, Katherine &amp; Watson-Parris, Duncan &amp; Elsaesser, Gregory &amp; Morrison, Hugh &amp; van Lier-Walqui, Marcus &amp; Song, Ci &amp; Mccoy, Daniel. (2024). An extensible perturbed parameter ensemble for the Community Atmosphere Model version 6. Geoscientific Model Development. 17. 7835-7853. 10.5194/gmd-17-7835-2024. Accessed 03 Dec.&nbsp;2024.</p></li>
+<li><p>Fang, S., Gertner, G.Z., Shinkareva, S. et al.&nbsp;Improved generalized Fourier amplitude sensitivity test (FAST) for model assessment. Statistics and Computing <strong>13</strong>, 221–226 (2003). <a href="https://doi.org/10.1023/A:1024266632666" class="uri">https://doi.org/10.1023/A:1024266632666</a></p></li>
+<li><p>Görtler, et al., “A Visual Exploration of Gaussian Processes”, Distill (2019), <a href="https://distill.pub/2019/visual-exploration-gaussian-processes/" class="uri">https://distill.pub/2019/visual-exploration-gaussian-processes/</a> . Accessed 03 Dec.&nbsp;2024.</p></li>
+<li><p>Intergovernmental Panel on Climate Change. About the IPCC. IPCC,<a href="https://www.ipcc.ch/about/" class="uri">https://www.ipcc.ch/about/</a>. Accessed 3 March 2024.</p></li>
+<li><p>Lawrence, David M., et al.&nbsp;“The Community Land Model Version 5: Description of New Features, Benchmarking, and Impact of Forcing Uncertainty.” Journal of Advances in Modeling Earth Systems, vol.&nbsp;11, no. 12, 2019, pp.&nbsp;4245–4287, https://doi.org/10.1029/2018MS001583. Accessed 30 Dec.&nbsp;2024.</p></li>
+<li><p>National Center for Atmospheric Research, Climate and Global Dynamics Division. About CGD. University Corporation for Atmospheric Research,<a href="https://www.cgd.ucar.edu/" class="uri">https://www.cgd.ucar.edu/</a>. Accessed 31 Dec.&nbsp;2024.</p></li>
+<li><p>National Center for Atmospheric Research. Community Earth System Model Version 2 (CESM2). University Corporation for Atmospheric Research,<a href="https://www.cesm.ucar.edu/models/cesm2" class="uri">https://www.cesm.ucar.edu/models/cesm2</a>. Accessed 30 Dec.&nbsp;2024.</p></li>
+<li><p>Navarro, A., Lee, G., Martín, R. et al.&nbsp;“Uncertainties in measuring precipitation hinders precise evaluation of loss of diversity in biomes and ecotones”. npj Clim Atmos Sci <strong>7</strong>, 35 (2024). <a href="https://doi.org/10.1038/s41612-024-00581-w" class="uri">https://doi.org/10.1038/s41612-024-00581-w</a> Accessed 03 Dec.&nbsp;2024.</p></li>
+<li><p>NOAA. “Climate Models.” NOAA Climate.Gov, 14 Nov.&nbsp;2014, www.climate.gov/maps-data/climate-data-primer/predicting-climate/climate-models. Accessed 03 Dec.&nbsp;2024.</p></li>
+<li><p>Pickle — Python Object Serialization. Python Software Foundation,<a href="https://docs.python.org/3/library/pickle.html" class="uri">https://docs.python.org/3/library/pickle.html</a>. Accessed 30 Dec.&nbsp;2024.</p></li>
+<li><p>Rasmussen, C. E., &amp; Williams, C. K. I., “Gaussian Processes for Machine Learning”, MIT Press (2006). Accessed 3 March 2024</p></li>
+<li><p>World Climate Research Programme. Coupled Model Intercomparison Project (CMIP). WCRP,<a href="https://www.wcrp-climate.org/wgcm-cmip" class="uri">https://www.wcrp-climate.org/wgcm-cmip</a>. Accessed 3 March. 2024.</p></li>
+</ol>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{ingersoll2024,
+  author = {Ingersoll, Sofia},
+  title = {Creating a {Climate} {Modeling} {Web} {Tool} for {NCAR}
+    {Climate} \&amp; {Global} {Dynamics} {Lab}},
+  date = {2024-12-30},
+  url = {https://saingersoll.github.io/posts/creating_a_webtool_for_climate_scientists.html},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-ingersoll2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Ingersoll, Sofia. 2024. <span>“Creating a Climate Modeling Web Tool for
+NCAR Climate &amp; Global Dynamics Lab.”</span> December 30, 2024. <a href="https://saingersoll.github.io/posts/creating_a_webtool_for_climate_scientists.html">https://saingersoll.github.io/posts/creating_a_webtool_for_climate_scientists.html</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Copyright 2023, Sofia Ingersoll
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/saingersoll">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

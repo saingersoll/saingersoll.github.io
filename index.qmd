@@ -37,11 +37,11 @@ NASA DEVELOP Analytical Mechanics Associate \@ Jet Propulsion Laboratory \| Pasa
 The 2035 Initiative, UCSB \| Goleta, CA
 
 ![](images/document-setting.png){width="20"} **Master's Capstone Lead Data Engineer &** **Comms Manager** \| 1/24 - 6/24 \|\
-National Center for Atmospheric Research Climate & Global Dynamics \| Goleta, CA \
+National Center for Atmospheric Research Climate & Global Dynamics \| Goleta, CA\
 *Understanding the Influence of Parameter Value Uncertainty on Climate Model Output: Developing an Interactive Dashboard*
 
 ![](images/analysis.png){width="20"} **Environmental Data Analyst** \| 12/22 - 6/23 \|\
-UCSD Department of Analytical and Atmospheric Chemistry \| La Jolla, CA \
+UCSD Department of Analytical and Atmospheric Chemistry \| La Jolla, CA\
 *Measuring Airborne Toxics and Determining Oceanic Relationships (MATADOR)*
 
 ![](images/data-analysis.png){width="20"} **Investment Specialist** \| 7/19 - 8/20 \|\
