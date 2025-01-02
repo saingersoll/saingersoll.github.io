@@ -156,7 +156,7 @@ Our team prepared a maintenance plan for our web tool hand-off. All essential so
 
 ### Acknowledgements
 
-The author of this blog post would like to say a special thank the cross-country team that supported our project:
+The author of this blog post would like to say a special thank you to the cross-country team that supported our project:
 
 *National Center for Atmospheric Research*: Dr. Daniel Kennedy, Project Scientist; Nick Cote, Software Engineer;
 
