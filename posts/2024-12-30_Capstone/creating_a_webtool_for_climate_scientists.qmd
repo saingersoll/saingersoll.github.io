@@ -16,9 +16,7 @@ citation:
 format: html
 ---
 
-::: {center}
-[GitHub Organization](https://github.com/GaiaFuture/.github) \| [Technical Documentation](https://bren.ucsb.edu/sites/default/files/2024-06/GaiaFuture%20-%20Technical%20Documentation.pdf) \| [Public Presentation](https://vimeo.com/brenucsb/review/971010240/db2f7587ba) \| [Data Repository](https://datadryad.org/stash/dataset/doi:10.5061/dryad.vq83bk422#aff615)
-:::
+#### ☞  [GitHub Organization](https://github.com/GaiaFuture/.github) \| [Technical Documentation](https://bren.ucsb.edu/sites/default/files/2024-06/GaiaFuture%20-%20Technical%20Documentation.pdf) \| [Public Presentation](https://vimeo.com/brenucsb/review/971010240/db2f7587ba) \| [Data Repository](https://datadryad.org/stash/dataset/doi:10.5061/dryad.vq83bk422#aff615)
 
 ::: {center}
 ![](photos/gaiafuture.png){width="2282"} ***Figure 1**: The Gaia Future Team. Affiliations: The Bren School of Environmental Science & Management, UCSB; National Center for Atmospheric Research Climate & Global Dynamics Lab (“NCAR CGD”); National Center for Ecological Analysis and Synthesis (“NCEAS”).*
@@ -62,7 +60,7 @@ Due to the high variability in Earth’s biomes, there is inherent [[uncertainty
 
 Our team’s client, [NCAR CGD](https://www.cgd.ucar.edu/) is an Earth system science research center sponsored by the National Science Foundation. Their research aims to increase our understanding of climate variability and climate change. Towards the outset of the MEDS program, myself and a colleague met with a member of the CGD team to discuss a recent experiment their team had conducted, the [Parameter Perturbation Experiment (“PPE”)](https://www.cgd.ucar.edu/events/seminar/2023/katie-dagon-and-daniel-kennedy-132940). Their experiment generated a total of [[10 terabytes of data]{.underline}]{#tenTerabytes}. It utilized the [Community Land Model version 5 ("CLM5")](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2018MS001583), the land component of the [Community Earth System Model version 2 (CESM2)](https://www.cesm.ucar.edu/models/cesm2), and consisted of two methods. Our project focused on the Latin Hypercube (“LHC”) approach.
 
-![***Figure 5:** When imagining the method described below, it’s useful to envision a dashboard with several turning knobs [input parameter]{.underline} for each scenario to predict [climate variable]{.underline}[.]{.underline} Art by [Agor2012](https://www.shutterstock.com/image-vector/set-control-panel-elements-spacecraft-technical-1537154573).*](photos/knobs.png){width="420"}
+![***Figure 5:** When imagining the method described below, it’s useful to envision a dashboard with several turning knobs [input parameter]{.underline} for each scenario to predict [climate variable.]{.underline} Art by [Agor2012](https://www.shutterstock.com/image-vector/set-control-panel-elements-spacecraft-technical-1537154573).*](photos/knobs.png){width="420"}
 
 #### Latin Hypercube (LHC)
 
