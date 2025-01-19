@@ -1,7 +1,7 @@
 ---
 title: "Sofia Ingersoll"
 subtitle: "/soF-AYA Ing-er-saul/"
-image: images/headshot.png
+image: images/headshot.jpeg
 toc: false
 about:
   template: trestles
