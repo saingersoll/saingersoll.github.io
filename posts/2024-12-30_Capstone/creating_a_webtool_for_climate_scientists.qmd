@@ -16,7 +16,7 @@ citation:
 format: html
 ---
 
-#### ☞  [GitHub Organization](https://github.com/GaiaFuture/.github) \| [Technical Documentation](https://bren.ucsb.edu/sites/default/files/2024-06/GaiaFuture%20-%20Technical%20Documentation.pdf) \| [Public Presentation](https://vimeo.com/brenucsb/review/971010240/db2f7587ba) \| [Data Repository](https://datadryad.org/stash/dataset/doi:10.5061/dryad.vq83bk422#aff615)
+#### ☞ [GitHub Organization](https://github.com/GaiaFuture/.github) \| [Technical Documentation](https://bren.ucsb.edu/sites/default/files/2024-06/GaiaFuture%20-%20Technical%20Documentation.pdf) \| [Public Presentation](https://vimeo.com/brenucsb/review/971010240/db2f7587ba) \| [Data Repository](https://datadryad.org/stash/dataset/doi:10.5061/dryad.vq83bk422#aff615)
 
 ::: {center}
 ![](photos/gaiafuture.png){width="2282"} ***Figure 1**: The Gaia Future Team. Affiliations: The Bren School of Environmental Science & Management, UCSB; National Center for Atmospheric Research Climate & Global Dynamics Lab (“NCAR CGD”); National Center for Ecological Analysis and Synthesis (“NCEAS”).*
