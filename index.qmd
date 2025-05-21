@@ -22,18 +22,21 @@ css: styles.scss
 
 ### **Hiya! I'm Sofia (Sof-aya), it rhymes with papaya** ![](images/papaya.png){width="20"}
 
-**I am an environmental data scientist devoted to insight informed action. I aim to bridge the communication gap amongst scientists, policymakers, developers, and the public by delivering information in an engaging and accessible way.**
+**I am an environmental data scientist devoted to finding evidenced-based solutions to drive informed action and pave the way to a more sustainable future. I aim to bridge the understanding gap between researchers, policymakers, NPOs, private industries, and the public by delivering information in an engaging and accessible way.**
 
-I was recently contracted as the Project Lead and Geospatial Data Analyst for the *San Bernardino Wildland Fires Project* at NASA's Jet Propulsion Laboratory. In my time there, I will have the unique opportunity to actively contribute to a forward-thinking project geared towards climate adaptation and local resiliency. I have a learned experience developing geospatial workflows for a variety of geo-data types. As well as a foundational understanding of working with satellite and remote sensing materials, both of which I am excited to utilize. After my time at NASA JPL, I hope to continue participating in projects that elicit real and meaningful change. ![](images/orbit.png){width="30"}
+I was recently contracted as the Machine Learning Data Engineer and Geospatial Data Analyst for the *Los Angeles County Ecological Conservation Project* at NASA's Jet Propulsion Laboratory. For this project I will have the unique opportunity to actively contribute to a forward-thinking project geared towards climate adaptation and local resiliency. I have a learned experience developing geospatial workflows for a variety of geo-data types. As well as a foundational understanding of working with machine learning in tandem with satellite and remote sensing materials, both of which I am excited to utilize. My interests lie in strengthening climate adaptation and resilience in vulnerable communities by supporting clean energy, resource management, extreme hazard preparation/recovery, and pollution mitigation projects. After my time at NASA JPL, I hope to continue participating in projects that elicit real and meaningful change. ![](images/orbit.png){width="30"}
 
 ------------------------------------------------------------------------
 
 ## Experience
 
-![](images/clipboard-312691810.png){width="20"} **Project Lead & Geospatial Data Analyst** \| Expected 1/25 - 4/25 \|\
-NASA DEVELOP Analytical Mechanics Associate \@ Jet Propulsion Laboratory \| Pasadena, CA \| *San Bernardino Wildland Fires Project*\
+![](images/clipboard-678023564.png){width="20"} **Machine Learning Data Engineer &** **GIS Analyst** \| Expected 6/25 - 8/25 \|\
+NASA DEVELOP Analytical Mechanics Associate \@ Jet Propulsion Laboratory \| Pasadena, CA \| Los Angeles County Ecological Conservation Project: Mapping and Identifying the Health of Urban Oak Trees in Los Angeles County
 
-![](images/remote-sensing-satellite.png){width="20"} **Environmental** **Data Scientist** \| 10/23 - 10/24 \|\
+![](images/clipboard-988972325.png){width="20"} **Project Lead & Geospatial Data Analyst** \| 1/25 - 4/25 \|\
+NASA DEVELOP Analytical Mechanics Associate \@ Jet Propulsion Laboratory \| Pasadena, CA \| *San Bernardino Wildland Fires Project: Assessing the Conditions of Pre-Fire and Post-Fire Vegetation in San Bernardino California with NASA Earth Observations*
+
+![](images/clipboard-312691810.png){width="20"} **Environmental** **Data Scientist** \| 10/23 - 10/24 \|\
 The 2035 Initiative, UCSB \| Goleta, CA
 
 ![](images/document-setting.png){width="20"} **Master's Capstone Lead Data Engineer &** **Comms Manager** \| 1/24 - 6/24 \|\
