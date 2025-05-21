@@ -35,7 +35,7 @@ Another issue is that there is a long term trend of diminishing supply for low-i
 -   Working with a wide range of local individuals who represent community groups, industries, and institutions, to leverage the wisdom of active partners in our community will assist in the facilitation of access to fair housing, clean water, air, and green spaces.
 -   Going beyond building homes, the public sector should collaborate with local industries and nonprofit organizations to create workshops/vocational schools and local job opportunities. Increasing the overall quality of life for residents through the implementation of a ground-up (community-based) rehabilitation process for unhoused people.
 
-![](images/clipboard-2224071121.png)
+![](images/clipboard-2224071121.png){width="800"}
 
 *Figure 1: Star of Hope Mission 501(C)(3) Housing Development for displaced people in Houston, Texas (U.S. Dept. of Housing & Urban Development).*
 
@@ -65,7 +65,7 @@ Understanding the economic trends in infrastructure developments across the coun
 
 Developing policy guidelines and incentives for developers with deep pockets to invest in housing developments located in marginalized communities would introduce a pool of affluent individuals into the local economy. This is one approach to increasing the median income within a community and introducing new tax revenue into the community funding. However, it is critical that there is a firm grip on the reins of gentrification, so that it does not run amok. Restructuring gentrification so that the objective is to tackle the displacement problem through the introduction of housing that assists in increasing population density is imperative for these projects to be successful. The goal of these housing projects would be to bring in more people, improve transportation, accessibility, and affordability.
 
-![](images/clipboard-125227380.png)*Figure 2: Home with accessory dwelling unit (ADU) attached in Lewiston-Auburn, Maine (U.S. Dept. of Housing & Urban Development).*
+![](images/clipboard-125227380.png){width="800"}*Figure 2: Home with accessory dwelling unit (ADU) attached in Lewiston-Auburn, Maine (U.S. Dept. of Housing & Urban Development).*
 
 # Barriers
 
@@ -89,7 +89,7 @@ The second solution is establishing a system in which the development of luxury 
 
 The complication of zoning laws and codes provides greater loopholes for private developers to do less good. A simplification of the 'code book' that gives developers clear rules for the percentage of their buildings that should be mixed use. The key here is mixed-use. The building of affordable housing within luxury developments means that "you can't make a shithole."
 
-![](images/clipboard-4267348449.png)
+![](images/clipboard-4267348449.png){width="800"}
 
 *Figure 3: 171 new low-Income housing developments in South Bronx, New York (New York City Housing Preservation & Development).*
 
@@ -124,7 +124,7 @@ The biggest barrier preventing affordable housing development production is the 
 
 A huge fault in the affordable housing system are the parameters in which low-income individuals are categorized within. In many instances, communities express a desire for a more appropriate affordable housing policy that considers the needs of residents. One way of improving policies is through the expansion of each City's minimum inclusionary housing requirement to increase the unit affordability to reflect the needs and earning within the community.
 
-![](images/clipboard-1994812059.png)
+![](images/clipboard-1994812059.png){width="800"}
 
 *Figure 4: Zoning district map for the City of San Buenaventura (Ventura), CA (City of Ventura).*
 
@@ -138,7 +138,7 @@ The development of a strategic plan and associated environmental analysis to ide
 
 A means to streamline the production of affordable housing is the inclusion of incentives such as: increased housing density, relaxed parking requirements, or other similar concessions influence the production of affordable housing. These incentives are currently pushed by planning departments across the country. Adapting and utilizing the State's Regional Housing Needs Assessment for adoption of overlay zones, identification needed mitigation funds, and providing "ready to approve" plans or priority review for constructing additional housing units, and strengthening coalitions to help tackle regional problems.
 
-![](images/35A322F9-0A8C-44DC-A8A1-D968586C262B_1_105_c.jpeg)
+![](images/35A322F9-0A8C-44DC-A8A1-D968586C262B_1_105_c.jpeg){width="800"}
 
 *Figure 5: Main street of City District 1 in Ventura, CA (Ingersoll).*
 
@@ -183,7 +183,7 @@ Questions to consider:
 
     c.  How did you choose those variables/indicators?
 
-![](images/clipboard-1945109334.png)
+![](images/clipboard-1945109334.png){width="800"}
 
 *Figure 6: The AVE (Activate, Visit, Experience)* *was created* *in* *Viriginia Beach, Virginia to increase mobility access and is a part of a larger holistic community revitalization project (U.S. Dept. of Housing & Urban Development).*
 
