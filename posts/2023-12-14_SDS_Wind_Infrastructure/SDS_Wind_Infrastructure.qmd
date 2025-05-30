@@ -29,11 +29,11 @@ image: wind_farm.png
 
 ### Overview
 
-Spatial Distorted Signalling (SDS) is a term that describes the mobilization of minority opinion holders to electorally push-back and promote legislation that aligns with their beliefs. This phenomenon has the ability to skew accurate representation of public opinions due to effective organization practices. This leads to a disproportionate number of minority opinion holder interactions with local legislators and the judicial system. Leah Stokes (et.al) has explored the SDS phenomenon as a natural experiment in her piece, *Electoral Backlash against Climate Policy: A Natural Experiment on Retrospective Voting and Local Resistance to Public Policy* ([2016](https://www.jstor.org/stable/24877466)). The findings in this paper describe that rural Canadian communities had a greater ability to mobilize and organize political push back against majority chair holders in parliament after the passing of legislation which invited large scale developments of wind infrastructure through incentives. Stokes' subsequent work, *Replication Data for: Prevalence and Predictors of Wind Energy Opposition in North America* ([2023](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LE2V0R)), further explores variables like political affiliation and local mobilization. This study aims to reproduce those outcomes with U.S. wind plant data to understand how population density, income, and anti-wind opinions impact wind plant operational activity, providing insights into local resistance and its effects on renewable energy projects.
+Spatial Distorted Signalling (SDS) is a term that describes the mobilization of minority opinion holders to electorally push-back and promote legislation that aligns with their beliefs (Stokes, et al, [2016](https://www.jstor.org/stable/24877466)). The SDS phenomenon has the ability to skew the accurate representation of public opinions due to effective organization practices. This leads to a disproportionate number of minority opinion holder interactions spent influencing local legislators and collective voting in smaller elections. Natural occurrences of the SDS phenomenon were recently observed in rural Canadian communities after new legislation was passed by the Green Party to incentivize large-scale wind power developments. Minority opinion holders gathered strategically to vote out the Green Party in the following election in retaliation and succeded. The policy was amended shortly after, halting new production of wind power infrastructure. Within the U.S. a number of wind plant developments have encountered similar outcomes. In this investigation, we will seek to understand how population density, median income, and anti-wind power opinions impacted wind plant operational activity (2000-2016), providing insights into local resistance and its effects on renewable energy projects.
 
 ### **`Main Takeaways`**
 
-The overarching model analysis did not provide significant findings, but alluded to individually significant interacting relationships that may be inhibiting the forward progression in clean energy developments. These interactions are worth exploring with expanded datasets, as a limited amount of data was utilized for this study, restricting the sample analysis. Using what is currently available, we will interpret the socioeconomic factors in this model as they relate to real-world social dynamics.
+The overarching logit model analysis did not provide significant findings, but alluded to influential covariate interactions. The multivariate interaction model was leveraged to tabulate individually significant propensities. The probabilities revealed increased median income appeared to inhibit the forward progression in clean energy developments. Further exploration of the covariate interactions are encouraged with expanded datasets, as a limited amount of data was utilized for this study, restricting the sample analysis. Using what is currently available, we will interpret the socioeconomic factors in this model as they relate to real-world social and political dynamics.
 
 #### **`Population Density`**
 
@@ -60,7 +60,7 @@ The data source that was utilized in this project, US Wind Data, focuses on the 
 #### Variables of Interest:
 
 | Name         | Description                                                                                                                             |
-|------------------|------------------------------------------------------|
+|--------------------|----------------------------------------------------|
 | status       | Describes the project operating status. In this study, we have converted it into a binary variable: 1 is operating, 0 is not_operating. |
 | pop_den      | Tract-level 2010 census data for population density (per mi\^2)                                                                         |
 | med_inc      | Tract-level 2010 census data for median income (\$)                                                                                     |
@@ -160,7 +160,7 @@ tm_shape(wind_sf) +
 
 Before jumping into any analysis, it's important to get a sense of how the data is distributed and if there are any underlying trends or biases. We will employ a multivariate model to describe the effect of census tract level population density on the operating status of wind power infrastructure. A combination of binary and interaction logit regression will be considered. The initial model will apply OLS regression, this is really a formality to demonstrate why OLS is not the correct approach for interpreting our relationships of interest. The following will be a model with two continuous variables. These variables focus more on regionally dependent factors that intuitively seem to have an impact on mobilization variables that we don't have time to cover in this project. We'll be working with a mix of discrete and continuous data, so there some wrangling will be necessary to run the regressions we're interested in.
 
-```{r indicator_var_wrangle}
+```{r indicator_var_wrangle_activity_distribution_visuals, fig.width=36, fig.height=18, message = FALSE}
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ---- Inspect & Standarize Data ----
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -208,12 +208,8 @@ wind_us <- wind_us %>%
 # ----        Check point!       ----
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # are our only outputs 0 or 1?
-paste("The indicator column contains", {unique(wind_us$status)})
-```
+#paste("The indicator column contains", {unique(wind_us$status)})
 
-The visualizations display the majority of the distribution lies within the actively operating wind infrastructure plants. This is an early indication of the degree of sample bias influencing our analysis. A trend of inactive plants and lower population density is notable in both figures. Collectively they demonstrate smaller population densities contain more inactive wind infrastructure plants. This could be attributed to with weight of a singular vote in regions with smaller demographics. Local mobilization of minority opinion holders in these regions have a greater availability to push back against policymakers. However, this visual does not encapsulate all of the necessary information required to determine this with full certainty. Our data set has low availability for non-operating infrastructure and as such, in the regression figure on the right these are being treated as outliers.
-
-```{r activity_distribution_visuals, fig.width=36, fig.height=18, message = FALSE}
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ----           Violin Distribution          ----
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -383,7 +379,9 @@ combined_plot <- density_plot +
 combined_plot
 ```
 
-**Figure 3**: The two visual aids above contain violin plot with jitter points (left) and a comparative regression plot using OLS and GLM (right). The x-axis is the population density and the y-axis is the operational status for the wind power plant. **Binary indicator variable will be `status` column `opertating` is 1, and `not_operating` will be 0.** Combining two figures provides us fuller insights into both the general trend and changes in probability of the binary outcome for the population density predictor.
+**Figure 3**: The two visual aids above contain violin plot with jitter points (left) and a comparative regression plot using OLS and GLM (right). The x-axis is the population density and the y-axis is the operational status for the wind power plant. **Binary indicator variable will be `status` column `active` is 1, and `inactive` will be 0.** Combining two figures provides us fuller insights into both the general trend and changes in probability of the binary outcome for the population density predictor.
+
+The visualizations display the majority of the distribution lies within the actively operating wind infrastructure plants. This is an early indication of the degree of sample bias influencing our analysis. A trend of inactive plants and lower population density is notable in both figures. Collectively they demonstrate smaller population densities contain more inactive wind infrastructure plants. This could be attributed to with weight of a singular vote in regions with smaller demographics. Local mobilization of minority opinion holders in these regions have a greater availability to push back against policymakers. However, this visual does not encapsulate all of the necessary information required to determine this with full certainty. Our data set has low availability for non-operating infrastructure and as such, in the regression figure on the right these are being treated as outliers.
 
 ### Odds Ratio for a Logit Model
 
@@ -395,7 +393,7 @@ The Summary of Coefficients Table provides a comprehensive view of how each vari
 
 -   Estimations reveal the model's predicted effect on the activity status from a single unit increase in a variable. Another way to interpret this is using the odds ratio to understand the individual effects of each variable on the likelihood of having an active wind plant. The interaction terms show how the relationship between each pair of variables influences the odds of operational wind plant activity.
 
--   For instance, the interaction between pop_den:is_anti_wind captures how wind plant operational activity is affected with each unit increase in population density in areas with anti-wind power sentiment. In the instance of this dataset for this interation model, an insignificant decrease in the odds of an activate wind plant was observed as population increases in anti-wind power areas. However, this is for the overall model and invites further exploration into how different socioeconomic groups vary in propensity for an active wind plant.
+-   For instance, the interaction between pop_den:is_anti_wind captures how wind plant operational activity is affected with each unit increase in population density in areas with anti-wind power sentiment. In the instance of this dataset for this interaction model, an insignificant decrease in the odds of an activate wind plant was observed as population increases in anti-wind power areas. However, this is for the overall model and invites further exploration into how different socioeconomic groups vary in propensity for an active wind plant.
 
 ```{r comprehensive_model}
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -582,25 +580,13 @@ leaflet(prob_points) %>%
   )
 ```
 
-**Figure 5**: Toggleable map of the wind power plants colored by local energy-sentiments (anti-wind is yellow, pro/neutral is blue). Clicking a bubble will reveal the respective percentiles for the area's categorized covariates, the propensity score, observed wind plant activity rate, and the number of matching observations within the dataset.
+**Figure 5**: Toggleable map of the wind power plants colored by local energy-sentiments (anti-wind is yellow, pro/neutral is blue). Clicking a bubble will reveal the respective percentiles for the area's categorized covariates, the propensity score for an active wind plant, observed wind plant activity rate, and the number of matching observations within the dataset.
 
-#### **`Donations and Lobbying`**
+#### **`Donations, Lobbying, and Political Mobilization`**
 
--   Addressing this question involves considering the impact of political and economic influence on energy policy. Verba, Schlozman, and Brady argue that "higher-income individuals typically have more resources and time to engage in political activities, which can influence local energy policies" (Verba, Schlozman, & Brady, 1995, p. 234). This might suggest that wealthier areas could exert more influence to prioritize different energy investments or limit the visibility of such projects. Conversely, those in lower income brackets may have fewer resources and less time for such activities, potentially resulting in lower levels of wind plant advocacy and adoption.
--   High-income individuals or entities may make substantial donations to lobbying groups or political campaigns to promote specific agendas, including energy policies that align with their interests. Hertel and Tsigas highlight that "financial contributions and lobbying play a significant role in shaping policy decisions" (Hertel & Tsigas, 2002, p. 78). This could mean that higher-income areas, with their greater financial resources, might be able to affect decisions on wind plant locations or energy policy. This financial influence can interfere the development and implementation of local energy projects.
--   Wealthier communities may prioritize different types of energy projects based on their specific economic and environmental goals. They may lobby to invest in more adaptable or luxury technologies rather than large-scale wind projects (Wolsink, 2007). Overall, this suggests that socioeconomic factors play a influential role in shaping the types of renewable energy projects that are pursued and highlights the need for tailored strategies to address diverse community priorities in renewable energy planning.
-
-#### **`Influence of Socioeconomic Status`**
-
--   Interestingly, high-income areas with lower population densities tend to have the lowest likelihood of having an active local wind plant. This observation is intriguing and suggests that higher income alone may decrease the probability of wind power plant activity. A study on socio-economic dynamics conducted by McCright and Dunlap found "socioeconomic status significantly affects individuals' environmental attitudes and policy preferences" (McCright & Dunlap, 2011, p. 402). Their research suggests that higher-income individuals might have different priorities or less immediate need for such infrastructure compared to lower-income communities.
--   An increase in median income is linked to a decrease in the odds of having an operational wind plant. Higher income areas show a lower likelihood of wind plant activity, potentially due to different local priorities or economic factors. Previous studies have found that wealthier communities often have different priorities or face different economic constraints, which can affect their engagement with renewable energy projects (Stokes & Breetz, 2018). Higher-income areas may have more access to alternative energy solutions or face less immediate pressure to implement wind infrastructure.
--   The presence of wind plants might be influenced by socioeconomic status in ways that reflect broader patterns of power and influence. These insights align with the notion that "economic power and market conditions influence decisions related to energy infrastructure" (Kirschen & Strbac, 2004, p. 112). Therefore, it is plausible that higher-income areas might both contribute to and benefit from a different set of energy policies compared to lower-income areas. Areas with higher incomes might prioritize other forms of energy or infrastructure development based on their resources and political connections.
-
-#### **`Resources and Political Mobilization`**
-
--   Consistent with expectations, areas with the highest population density show the highest probability of hosting wind plants in this example. This trend aligns with the assumption that regions with more people may have a higher demand for renewable energy sources like wind power. Studies have shown, "urban areas with higher population densities are often more likely to invest in environmental infrastructure, including wind energy projects" (Kahn, 2007, p. 58).
--   A unit increase in population density is associated with a slight increase in the odds of having an operational wind plant. This suggests that areas with higher population densities are marginally more likely to host wind plants. Areas with higher population density often have increased energy consumption due to higher demand for residential, commercial, and industrial energy (Gillingham, Stock, 2018). This increased demand may drive investment in energy infrastructure, including renewable sources such as wind power (Lund, Mathiesen, 2009). Therein, as urbanization and population density increase, it becomes increasingly feasible and advantageous for these areas to invest in and support wind energy projects.
--   Public opposition is an influencing factor in the siting and development of wind energy projects. Areas with higher opposition to wind infrastructure are less likely to have operational wind plants. Community opposition is a well-documented barrier to wind energy deployment, local resistance can severely impact the implementation of wind energy projects (Krohn & Damborg, 1999). This is supported by other studies that show community attitudes play a crucial role in the success of wind projects, with higher opposition correlating with reduced likelihood of project success (Wolsink, 2007). Therefore, addressing and mitigating local resistance is essential for enhancing the feasibility and acceptance of wind energy initiatives.
+-   Addressing this question involves acknowledging the power that is associated with financial freedom and expendable resources. Higher-income individuals typically have more resources and time to engage in political activities, make substantial donations to lobbying groups, as well as subsidize political campaigns to promote specific agendas (McCright, & Dunlap, 2011, p. 402). This financial influence can interfere the development and implementation of local energy projects. Wealthier communities may prioritize different types of energy projects based on their personal economic and environmental goals. They may lobby to invest in more traditional energy options rather than large-scale sustainability projects (Wolsink, 2007). Propensity scores for this multivariate analysis displayed downward trends in wind plant activity as the median income increased, align with this line of thinking, potentially revealing broader underlining patterns of power and influence at work. As intuitively expected, high-income areas throughout the population density spectrum had the lowest likelihood of having an active local wind plant. This observation is intriguing and suggests that higher income alone may decrease the probability of wind power plant activity.
+-   Higher-income groups may have different priorities or less immediate needs for resilent infrastructure compared to lower-income communities. A study on socioeconomic dynamics found socioeconomic status significantly affects individuals' environmental attitudes and policy preferences (McCright & Dunlap, 2011, p. 402). Areas with higher incomes may prioritize other forms of energy or infrastructure development based on their resources and political connections. One reasoning behind this may be that wealthier communities often have different priorities or face different economic constraints, which can affect their engagement with renewable energy projects (Stokes & Breetz, 2018). The trend observed in this analysis demonstrated wealthier communities had a decrease in the probability of having an active wind plant. These insights align with the notion that economic power and market conditions influence decisions related to energy infrastructure (Kirschen & Strbac, 2004, p. 112). A reason for this may be preexisiting access to alternative energy solutions, reducing the pressure to immediately implement wind infrastructure.
+-   Public opposition is an influencing factor in the siting and development of wind energy projects. As suspected, areas with higher opposition to wind infrastructure are less likely to have operational wind plants. Community opposition is a well-documented barrier to wind energy deployment, local resistance can severely impact the implementation of wind energy projects (Krohn & Damborg, 1999). Community attitudes play a crucial role in the success of wind projects, with higher opposition correlating with reduced likelihood of project success (Wolsink, 2007). Those with expendable resources are able to spend their time organizing, mobilizing, and protesting legislation rather than working to make ends meet like majority opinion holders. Addressing barriers preventing lower-earning community members from participating politically is essential for enhancing the feasibility of wind energy initiatives, as well as understanding minority opinion motivation to resist clean energy developments.
 
 ### Probability of Active Wind Plant Status by Socioeconomic Groups
 
@@ -659,7 +645,7 @@ If given the opportunity, I would expand my analysis to include a more thorough 
 
 ## References
 
-### Data Citation
+#### Data Citation
 
 **Replication Data for: Prevalence and Predictors of Wind Energy Opposition in North America**: DOI [10.7910/DVN/LE2V0R](https://doi.org/10.7910/DVN/LE2V0R)
 
@@ -667,18 +653,15 @@ If given the opportunity, I would expand my analysis to include a more thorough 
 
 -   **Source**: American Wind Association, Columbia Sabin Center
 
-### Citations
+#### Citations
 
-1.  Stokes, Leah C., et al. "Prevalence and Predictors of Wind Energy Opposition in North America." Proceedings of the National Academy of Sciences, vol. 120, no. 40, Sept. 2023, doi:10.1073/pnas.2302313120.
-2.  Stoke, L. C. "Front Matter." American Journal of Political Science, vol. 60, no. 4, 2016. JSTOR, http://www.jstor.org/stable/24877456. Accessed 26 October. 2023
-3.  Kahn, M. E. (2007). *Green Cities: Urban Growth and the Environment*. Brookings Institution Press.
-4.  McCright, A. M., & Dunlap, R. E. (2011). The Politicization of Climate Change and Polarization in the American Public's Views of Global Warming. *Society & Natural Resources, 24*(5), 398-413.
-5.  Verba, S., Schlozman, K. L., & Brady, H. E. (1995). *Voice and Equality: Civic Voluntarism in American Politics*. Harvard University Press.
-6.  Hertel, T. W., & Tsigas, M. E. (2002). *The Role of Political Lobbying and Financial Contributions in Policy Making*. In *Public Policy Analysis* (pp. 67-90). Routledge.
-7.  Kirschen, D. S., & Strbac, G. (2004). *Fundamentals of Power System Economics*. Wiley.
-8.  Gillingham, K., & Stock, J. H. (2018). *The Cost of Reducing Greenhouse Gas Emissions*. *Journal of Economic Perspectives, 32*(4), 169-190. doi:10.1257/jep.32.4.169
-9.  Lund, H., & Mathiesen, B. V. (2009). Energy system analysis of 100% renewable energy systems: The case of Denmark in years 2030 and 2050. *Energy, 34*(5), 524-532. doi:10.1016/j.energy.2008.10.009
-10. Krohn, S., & Damborg, S. (1999). Public attitudes towards wind power. *Renewable Energy, 16*(1), 954-960. doi:10.1016/S0960-1481(98)00339-5
-11. Wolsink, M. (2007). *Wind power implementation: The nature of public beliefs and the social acceptance of renewable energy*. Renewable and Sustainable Energy Reviews, 11(6), 1586-1603. doi:10.1016/j.rser.2005.10.001
-12. Stokes, L. C., & Breetz, H. L. (2018). *Public opinion and wind energy: The impact of socio-economic factors on policy support*. Environmental Politics, 27(1), 1-22. doi:10.1080/09644016.2017.1387160
-13.  “U.S. Department of Agriculture.” *Flickr*, www.flickr.com/photos/usdagov.
+```         
+1. Stokes, Leah C. “Electoral Backlash against Climate Policy: A Natural Experiment on Retrospective Voting and Local Resistance to Public Policy.” American Journal of Political Science, vol. 60, no. 4, 2016, pp. 958–74. JSTOR, http://www.jstor.org/stable/24877466. Accessed 30 May 2025.
+2. “U.S. Department of Agriculture.” Flickr, www.flickr.com/photos/usdagov.
+3. Stokes, Leah C., et al. "Prevalence and Predictors of Wind Energy Opposition in North America." Proceedings of the National Academy of Sciences, vol. 120, no. 40, Sept. 2023, doi:10.1073/pnas.2302313120.
+4. McCright, A. M., & Dunlap, R. E. (2011). The Politicization of Climate Change and Polarization in the American Public's Views of Global Warming. Society & Natural Resources, 24(5), 398-413.
+5. Wolsink, M. (2007). "Wind power implementation: The nature of public beliefs and the social acceptance of renewable energy". Renewable and Sustainable Energy Reviews, 11(6), 1586-1603. doi:10.1016/j.rser.2005.10.001
+6. Stokes, L. C., & Breetz, H. L. (2018). Public opinion and wind energy: The impact of socio-economic factors on policy support*. Environmental Politics, 27(1), 1-22. doi:10.1080/09644016.2017.1387160
+7. Kirschen, D. S., & Strbac, G. (2004). Fundamentals of Power System Economics. Wiley.
+8. Krohn, S., & Damborg, S. (1999). Public attitudes towards wind power. Renewable Energy, 16(1), 954-960. doi:10.1016/S0960-1481(98)00339-5
+```
