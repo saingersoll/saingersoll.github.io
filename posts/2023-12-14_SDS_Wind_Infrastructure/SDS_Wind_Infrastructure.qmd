@@ -656,7 +656,7 @@ If given the opportunity, I would expand my analysis to include a more thorough 
 #### Citations
 
 ```         
-1. Stokes, Leah C. “Electoral Backlash against Climate Policy: A Natural Experiment on Retrospective Voting and Local Resistance to Public Policy.” American Journal of Political Science, vol. 60, no. 4, 2016, pp. 958–74. JSTOR, http://www.jstor.org/stable/24877466. Accessed 30 May 2025.
+1. Stokes, Leah C. “Electoral Backlash against Climate Policy: A Natural Experiment on Retrospective Voting and Local Resistance to Public Policy.” American Journal of Political Science, vol. 60, no. 4, 2016, pp. 958–74. JSTOR, http://www.jstor.org/stable/24877466. Accessed 30 November 2023.
 2. “U.S. Department of Agriculture.” Flickr, www.flickr.com/photos/usdagov.
 3. Stokes, Leah C., et al. "Prevalence and Predictors of Wind Energy Opposition in North America." Proceedings of the National Academy of Sciences, vol. 120, no. 40, Sept. 2023, doi:10.1073/pnas.2302313120.
 4. McCright, A. M., & Dunlap, R. E. (2011). The Politicization of Climate Change and Polarization in the American Public's Views of Global Warming. Society & Natural Resources, 24(5), 398-413.
