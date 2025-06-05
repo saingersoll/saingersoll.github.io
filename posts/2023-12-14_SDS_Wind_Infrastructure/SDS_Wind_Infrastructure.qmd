@@ -60,7 +60,7 @@ The data source that was utilized in this project, US Wind Data, focuses on the 
 #### Variables of Interest:
 
 | Name         | Description                                                                                                                             |
-|--------------------|----------------------------------------------------|
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------|
 | status       | Describes the project operating status. In this study, we have converted it into a binary variable: 1 is operating, 0 is not_operating. |
 | pop_den      | Tract-level 2010 census data for population density (per mi\^2)                                                                         |
 | med_inc      | Tract-level 2010 census data for median income (\$)                                                                                     |
@@ -627,7 +627,7 @@ It is important to note that there was heavy bias towards operational wind plant
 
 -   `Logit & Log Odds Ratio`
 
--   `Average Probability with z-test`
+-   `Average Probability with p-test`
 
 #### Limitations
 
