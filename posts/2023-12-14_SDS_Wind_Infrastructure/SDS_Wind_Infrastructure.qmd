@@ -1,7 +1,7 @@
 ---
 title: "Spatially Distorted Signaling: How Opinions Against Wind Infrastructure Delay Our Transition to Renewable Energy"
 author: "Sofia Ingersoll"
-description: "This study analyzed the activity of U.S. wind power plants (2000-2016) to understand how population density, median income, and anti-wind opinions impacted wind plant operations. In hopes to understand potential delays in our transition to a more sustainable future, an investigation was conducted to quantify propensities in relation to local resistance against renewable energy developments for the listed attributes."
+description: "In hopes to understand potential delays in our transition to a more sustainable future this study analyzed the activity of U.S. wind power plants (2000-2016) to inspect how population density, median income, and anti-wind opinions impacted wind plant operations. An investigation was conducted to quantify propensities in relation to local resistance against renewable energy developments for the listed attributes."
 editor: visual
 date: "2023-12-14"
 format:
@@ -29,19 +29,23 @@ image: wind_farm.png
 
 ### Overview
 
-Spatial Distorted Signalling (SDS) is a term that describes the mobilization of minority opinion holders to electorally push-back and promote legislation that aligns with their beliefs (Stokes, et al, [2016](https://www.jstor.org/stable/24877466)). The SDS phenomenon has the ability to skew the accurate representation of public opinions due to effective organization practices. This leads to a disproportionate number of minority opinion holder interactions spent influencing local legislators and collective voting in smaller elections. Natural occurrences of the SDS phenomenon were recently observed in rural Canadian communities after new legislation was passed by the Green Party to incentivize large-scale wind power developments. Minority opinion holders gathered strategically to vote out the Green Party in the following election in retaliation and succeded. The policy was amended shortly after, halting new production of wind power infrastructure. Within the U.S. a number of wind plant developments have encountered similar outcomes. In this investigation, we will seek to understand how population density, median income, and anti-wind power opinions impacted wind plant operational activity (2000-2016), providing insights into local resistance and its effects on renewable energy projects.
+Spatial Distorted Signalling (SDS) is a term that describes the mobilization of minority opinion holders to promote legislation that aligns with their beliefs and electorally push-back (Stokes, et al, [2016](https://www.jstor.org/stable/24877466)). The SDS phenomenon has the ability to skew the accurate representation of public opinions due to effective organization practices. Leading to a disproportionate number of minority opinion holder interactions used to influence local legislators. As well as more trends in collective voting for smaller elections. Natural occurrences of the SDS phenomenon were recently observed in rural Canadian communities. After new legislation was passed by the Green Party to provide incentive for large-scale wind power developments, minority opinion holders gathered strategically. Their intention was to vote out the Green Party in the following election out of retaliation and they succeeded. The policy was amended shortly after, halting new production of wind power infrastructure. Within the U.S. a number of wind plant developments have encountered similar outcomes. In this investigation, we will seek to understand how population density, median income, and anti-wind power opinions within 3 km of wind power plants impacted the plant's operational activity (2000-2016) to provide insights into localized resistance and its effects on renewable energy projects.
 
 ### **`Main Takeaways`**
 
-The overarching logit model analysis did not provide significant findings, but alluded to influential covariate interactions. The multivariate interaction model was leveraged to tabulate individually significant propensities. The probabilities revealed increased median income appeared to inhibit the forward progression in clean energy developments. Further exploration of the covariate interactions are encouraged with expanded datasets, as a limited amount of data was utilized for this study, restricting the sample analysis. Using what is currently available, we will interpret the socioeconomic factors in this model as they relate to real-world social and political dynamics.
+$$\operatorname{logit}(p)=\log \left(\frac{p}{1-p}\right)=\beta_0+\beta_1  (Population Density) * \beta_2  (Median Income) * \beta_3  (AntiWindOpinion) +\varepsilon$$
+
+The overarching logit model analysis did not provide significant findings, but alluded to influential covariate interactions. The multivariate interaction model was leveraged to tabulate individually significant propensities. The probabilities revealed with an increase in median income there was a decreased in active wind energy developments, regardless of population size, and wind opinion. Further exploration of the covariate interactions are encouraged with expanded datasets, as a limited amount of data was utilized for this study, restricting the sample analysis. Using what is currently available, we will interpret the socioeconomic factors in this model as they relate to real-world social and political dynamics.
 
 #### **`Population Density`**
 
-Interestingly, pro/neutral-wind power areas demonstrated an increase in population density and median income was associated with a decrease in the odds of having an operational wind power plant. It was revealed in areas with pro/neutral-wind power sentiments with the lowest income percentile were an exception and experienced an increase in the odds of an active wind plant as population density increased. Whereas in anti-wind regions, as population density increased an inverse effect was observed. Across all median income groups, anti-wind areas with higher population densities had marginally greater odds of having an active wind plant. These anti-wind findings suggested areas with lower population density are at greater risk of experiencing SDS. Both trends revealed could be an indication of the magnitude in which socioeconomic interactions influence sustainable energy developments.
+Interestingly, pro/neutral-wind power regions revealed as population density and median income increased the odds of having an operational wind power plant decreased. Areas with pro/neutral-wind power sentiments in the lowest income percentile were found to have increased odds of an active wind plant as population density increased.
+
+Whereas in anti-wind regions, across all median income groups, areas with higher population densities had marginally greater odds of having an inactive wind plant. These anti-wind findings suggested areas with higher median income are at greater risk of experiencing SDS. Both trends revealed could be an indication of the magnitude in which socioeconomic interactions influence sustainable energy developments.
 
 #### **`Median Income`**
 
-Overall, higher-income areas were found to have increased odds of deactivated wind plants. Regardless of a pro/neutral-wind power sentiment, as the median wealth increased the odds of operational activity decreased. This may be an indicator that wealthier areas are at greater risk of experiencing SDS due to disproportionate access to financial resources that influence energy policy decisions. Advantages such as wealth assist minority opinion holders when strategically lobbying to tailor policies to better align with their priorities. Uneven socioeconomic power-dynamics lead to minority opinion holders preventing the development of wind power infrastructure, alongside other renewable energy solutions. Overall, these findings suggest that socioeconomic factors play a heavily influential role in shaping renewable energy projects.
+Overall, higher-income areas had decreased odds of having an active wind plant. Regardless of a pro/neutral-wind power sentiment, as the median wealth increased the odds of operational wind plant activity decreased. This may be an indicator that wealthier areas are at greater risk of experiencing SDS due to disproportionate access to financial resources that influence energy policy decisions. Advantages such as wealth assist minority opinion holders when strategically lobbying to tailor policies to better align with their priorities. Uneven socioeconomic power-dynamics lead to minority opinion holders preventing the development of wind power infrastructure, alongside other renewable energy solutions. Overall, these findings suggest that socioeconomic factors play a heavily influential role in shaping renewable energy projects.
 
 #### **`Anti-Wind Infrastructure Opinion`**
 
@@ -60,7 +64,7 @@ The data source that was utilized in this project, US Wind Data, focuses on the 
 #### Variables of Interest:
 
 | Name         | Description                                                                                                                             |
-|--------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+|------------------|------------------------------------------------------|
 | status       | Describes the project operating status. In this study, we have converted it into a binary variable: 1 is operating, 0 is not_operating. |
 | pop_den      | Tract-level 2010 census data for population density (per mi\^2)                                                                         |
 | med_inc      | Tract-level 2010 census data for median income (\$)                                                                                     |
@@ -141,10 +145,10 @@ wind_sf <- wind_data %>%
 # observe these wind plants with respect to state and county jurisdictions. 
 
 # First visual of the U.S. wind data provided by the geometry points
-# Make sure tmap is in interactive mode
+# make sure tmap is in interactive mode
 tmap_mode("view")
 
-# Create the interactive map
+# create the interactive map
 tm_shape(wind_sf) +
   tm_dots(
     col = "darkgreen",
@@ -213,7 +217,7 @@ wind_us <- wind_us %>%
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ----           Violin Distribution          ----
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Create the violin plot with log scale
+# create the violin plot with log scale
 density_plot <- ggplot(data = wind_us, 
                        aes(x = factor(status), 
                            y = pop_den, 
@@ -235,21 +239,21 @@ density_plot <- ggplot(data = wind_us,
   
   # rename x-axis labels for clarity
   scale_x_discrete(labels = c("0" = "Inactive", "1" = "Active")) +  
-  # Apply logarithmic scale to y-axis
+  # apply logarithmic scale to y-axis
   scale_y_log10() + 
   
   theme_538() + 
   
   scale_fill_manual(values = c("skyblue", "darkblue")) +
   
-  # Adjust title font and alignment
+  # adjust title font and alignment
   theme(plot.title = element_text(size = 40,
                                   family = "Georgia", 
                                   face = "bold",
                                   hjust = .99,
                                   color ="#293F2C"),  
         
-        # Adjust subtitle font and alignment
+        # adjust subtitle font and alignment
         plot.subtitle = element_text(size = 38,
                                      family = "Georgia",
                                      color ="#293F2C",
@@ -263,18 +267,18 @@ density_plot <- ggplot(data = wind_us,
                                  family = "Georgia",
                                   color ="#293F2C"),
         
-         # Move legend to the bottom
+         # move legend to the bottom
         legend.position = "top", 
         
-        # Remove legend title if not needed
+        # remove legend title if not needed
         legend.title = element_blank(),  
         
-        # Adjust legend text size
+        # adjust legend text size
         legend.text = element_text(size = 34,
                                    family = "Georgia",
                                    color ="#293F2C"), 
         
-         # Background color for legend
+         # background color for legend
         legend.key = element_rect(fill = "grey94", color = "grey94"), 
         
         plot.background = element_rect(color = "#FDFBF7")
@@ -285,7 +289,7 @@ density_plot <- ggplot(data = wind_us,
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ----        Jitter OLS + GLM                ----
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Optimized jitter plot with smooth lines
+# jitter plot with smooth lines
 jitter_plot_optimized <- ggplot(data = wind_us, 
                                 aes(x = pop_den, 
                                     y = status)) + 
@@ -295,12 +299,14 @@ jitter_plot_optimized <- ggplot(data = wind_us,
               width = 0,
               height = 0.05,
               alpha = 0.6,
-              size = 4) +  # Adjusted size for better visibility
+             # adjusted size for better visibility
+              size = 4) +  
   
   geom_smooth(method = "lm",
               se = FALSE,
               aes(color = "OLS Line"),
-              size = 1.2,  # Slightly thicker line for visibility
+              # slightly thicker line for visibility
+              size = 1.2,  
               linetype = "solid") + 
   
   geom_smooth(method = "glm",
@@ -323,14 +329,14 @@ jitter_plot_optimized <- ggplot(data = wind_us,
   
   theme_538() +
   
-  # Adjust title font and alignment
+  # adjust title font and alignment
   theme(plot.title = element_text(size = 40,
                                   family = "Georgia", 
                                   face = "bold",
                                   hjust = .99,
                                   color ="#293F2C"),  
         
-        # Adjust subtitle font and alignment
+        # adjust subtitle font and alignment
         plot.subtitle = element_text(size = 38,
                                      family = "Georgia",
                                      hjust = 0.5,
@@ -344,24 +350,24 @@ jitter_plot_optimized <- ggplot(data = wind_us,
                                  family = "Georgia",
                                   color ="#293F2C"),
         
-         # Move legend to the bottom
+         # move legend to the bottom
         legend.position = "top", 
         
-        # Remove legend title if not needed
+        # remove legend title if not needed
         legend.title = element_blank(),  
         
-        # Adjust legend text size
+        # adjust legend text size
         legend.text = element_text(size = 34,
                                    family = "Georgia",
                                   color ="#293F2C"), 
         
-         # Background color for legend
+         # background color for legend
         legend.key = element_rect(fill = "grey94", color = "grey94"), 
         
         plot.background = element_rect(color = "#FDFBF7")
         ) +   
-  
-   scale_color_manual(name = "Legend",  # Title for the legend
+  # assign colors + labels
+   scale_color_manual(name = "Legend",  
                      values = c("Data Points" = "#F84C0B", 
                                 "OLS Line" = "blue", 
                                 "GLM Line" = "skyblue"),
@@ -370,10 +376,10 @@ jitter_plot_optimized <- ggplot(data = wind_us,
                                 "GLM Line" = "GLM Line"))
 
 
-# Combine plots horizontally
+# combine plots horizontally
 combined_plot <- density_plot + 
                   jitter_plot_optimized + 
-  # Arrange plots side-by-side
+  # arrange plots side by side
                   plot_layout(ncol = 2)  
 
 combined_plot
@@ -399,26 +405,25 @@ The Summary of Coefficients Table provides a comprehensive view of how each vari
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ----     Comprehensive Model   ----
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Fit the comprehensive model
+# fit the comprehensive model
 comprehensive_model <- glm(status ~ pop_den * med_inc * is_anti_wind,
                            data = wind_us,
                            family = 'binomial')
 
-# Get summary object to extract p-values and standard errors
+# get summary object to extract p-values and standard errors
 model_summary <- summary(comprehensive_model)
 coef_table <- model_summary$coefficients
 
-# Build the summary data frame
+# build the summary data frame
 coef_summary <- data.frame(
   Term = rownames(coef_table),
   Estimate = coef_table[, "Estimate"],
   Std_Error = coef_table[, "Std. Error"],
- # z_value = coef_table[, "z value"],
   p_value = coef_table[, "Pr(>|z|)"],
   Odds_Ratio = exp(coef_table[, "Estimate"])
 )
 
-# Round and style the table
+# round and style the table
 kable(coef_summary, format = "html", digits = 4, caption = "Table 1: Summary of Coefficients, Odds Ratios, and P-values") %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
                 position = "center", font_size = 12)
@@ -433,7 +438,7 @@ Our analysis of wind plant activity using logistic regression models has provide
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ----       GLM Prob by Cat     ----
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Quantile grouping (0–25%, 25–50%, 50–75%, 75–100%)
+# percentile grouping (0–25%, 25–50%, 50–75%, 75–100%)
 wind_us <- wind_us %>%
   mutate(
     income_q = ntile(med_inc, 4),
@@ -449,13 +454,13 @@ wind_us <- wind_us %>%
     anti_label = ifelse(is_anti_wind == 1, "Anti-Wind", "Pro/Neutral")
   )
 
-# Predict probabilities
+# predict probabilities
 wind_us$predicted_prob <- predict(comprehensive_model, newdata = wind_us, type = "response")
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ----  GLM Visualation by Cat   ----
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Average predicted probability per group
+# average predicted probability per group
 plot_data <- wind_us %>%
   group_by(income_label, density_label, anti_label) %>%
   summarise(probability = mean(predicted_prob, na.rm = TRUE), .groups = "drop") %>%
@@ -519,7 +524,7 @@ To answer this, let's touch a bit on the social psychology at potentially at pla
 # MRS. Robinson approach: matching, restriction,
 # stratification, regression
 
-# Summarize grouped probabilities
+# summarize grouped probabilities
 groupwise_propensity <- wind_us %>%
   group_by(income_label, density_label, anti_label) %>%
   summarise(
@@ -533,6 +538,7 @@ groupwise_propensity <- wind_us %>%
     p_value = prop.test(round(mean(status) * n()), n())$p.value,
     .groups = "drop"
   ) %>%
+  # clean it up for plotting
   rename(
     `Income Percentile`  = income_label,
     `Population Density Percentile` = density_label,
@@ -542,18 +548,22 @@ groupwise_propensity <- wind_us %>%
     Count = n,
     `p-value` = p_value
   )
+# we want to know our plant names when we map, so doing a minimal join
+groupwise_propensity <- st_join(x = groupwise_propensity, y = wind_us[, "plant_name"])
 
-# Expand multipoints into points — each point gets repeated attributes
+# expand multipoints into points 
+# each point gets repeated attributes
 prob_points <- groupwise_propensity %>% st_cast("POINT")
 
-# Create color palette
+# create color palette
 pal <- colorFactor(
   palette = c("#E1BE6A", "#40B0A6"),
   domain = prob_points$`Wind Opinion`
 )
 
-# Create popup content for each point
+# create popup content for each point
 popup_content <- paste0(
+  "<strong>Plant Name:</strong> ", prob_points$`plant_name`, "<br>",
   "<strong>Income Percentile:</strong> ", prob_points$`Income Percentile`, "<br>",
   "<strong>Population Density Percentile:</strong> ", prob_points$`Population Density Percentile`, "<br>",
   "<strong>Wind Opinion:</strong> ", prob_points$`Wind Opinion`, "<br>",
@@ -562,6 +572,7 @@ popup_content <- paste0(
   "<strong>Count:</strong> ", prob_points$Count
 )
 
+# display our updated map!
 leaflet(prob_points) %>%
   addTiles() %>%
   addCircleMarkers(
