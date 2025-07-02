@@ -64,7 +64,7 @@ The data source that was utilized in this project, US Wind Data, focuses on the 
 #### Variables of Interest:
 
 | Name         | Description                                                                                                                             |
-|--------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+|-------------|-----------------------------------------------------------|
 | status       | Describes the project operating status. In this study, we have converted it into a binary variable: 1 is operating, 0 is not_operating. |
 | pop_den      | Tract-level 2010 census data for population density (per mi\^2)                                                                         |
 | med_inc      | Tract-level 2010 census data for median income (\$)                                                                                     |
@@ -418,9 +418,9 @@ coef_table <- model_summary$coefficients
 coef_summary <- data.frame(
   Term = rownames(coef_table),
   Estimate = coef_table[, "Estimate"],
-  Std_Error = coef_table[, "Std. Error"],
-  p_value = coef_table[, "Pr(>|z|)"],
-  Odds_Ratio = exp(coef_table[, "Estimate"])
+  `Odds Ratio` = exp(coef_table[, "Estimate"]),
+  `p-value` = coef_table[, "Pr(>|z|)"],
+  `Std Error` = coef_table[, "Std. Error"]
 )
 
 # round and style the table
@@ -576,7 +576,7 @@ popup_content <- paste0(
   "<strong>Wind Opinion:</strong> ", prob_points$`Wind Opinion`, "<br>",
   "<strong>Estimated Probability of Active Wind Plant:</strong> ", round(prob_points$`Estimated Probability of Active Wind Plant`, 3), "<br>",
   "<strong>Observed Wind Plant Status Rate:</strong> ", round(prob_points$`Observed Wind Plant Status Rate`, 3), "<br>",
-  "<strong>No. Matching Areas:</strong> ", prob_points$Count
+  "<strong>No. Matching Areas:</strong> ", prob_points$`No. Matching Areas`
 )
 
 # display our updated map!
