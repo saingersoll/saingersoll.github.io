@@ -64,7 +64,7 @@ The data source that was utilized in this project, US Wind Data, focuses on the 
 #### Variables of Interest:
 
 | Name         | Description                                                                                                                             |
-|------------------|------------------------------------------------------|
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------|
 | status       | Describes the project operating status. In this study, we have converted it into a binary variable: 1 is operating, 0 is not_operating. |
 | pop_den      | Tract-level 2010 census data for population density (per mi\^2)                                                                         |
 | med_inc      | Tract-level 2010 census data for median income (\$)                                                                                     |
@@ -545,11 +545,18 @@ groupwise_propensity <- wind_us %>%
     `Wind Opinion` = anti_label,
     `Estimated Probability of Active Wind Plant` = propensity_score,
     `Observed Wind Plant Status Rate` = observed_active_status,
-    Count = n,
+    `No. Matching Areas` = n,
     `p-value` = p_value
   )
 # we want to know our plant names when we map, so doing a minimal join
-groupwise_propensity <- st_join(x = groupwise_propensity, y = wind_us[, "plant_name"])
+groupwise_propensity <- st_join(x = groupwise_propensity, y = wind_us[, "plant_name"]) %>% 
+  # clean up the name
+  rename(`Plant Name` = plant_name) %>% 
+  # reorder for a more informative table 
+  select(`Plant Name`,`Estimated Probability of Active Wind Plant`,
+         `Observed Wind Plant Status Rate`, `Income Percentile`, 
+         `Population Density Percentile`, `Wind Opinion`, 
+         `No. Matching Areas`,`p-value`)
 
 # expand multipoints into points 
 # each point gets repeated attributes
@@ -563,13 +570,13 @@ pal <- colorFactor(
 
 # create popup content for each point
 popup_content <- paste0(
-  "<strong>Plant Name:</strong> ", prob_points$`plant_name`, "<br>",
+  "<strong>Plant Name:</strong> ", prob_points$`Plant Name`, "<br>",
   "<strong>Income Percentile:</strong> ", prob_points$`Income Percentile`, "<br>",
   "<strong>Population Density Percentile:</strong> ", prob_points$`Population Density Percentile`, "<br>",
   "<strong>Wind Opinion:</strong> ", prob_points$`Wind Opinion`, "<br>",
   "<strong>Estimated Probability of Active Wind Plant:</strong> ", round(prob_points$`Estimated Probability of Active Wind Plant`, 3), "<br>",
   "<strong>Observed Wind Plant Status Rate:</strong> ", round(prob_points$`Observed Wind Plant Status Rate`, 3), "<br>",
-  "<strong>Count:</strong> ", prob_points$Count
+  "<strong>No. Matching Areas:</strong> ", prob_points$Count
 )
 
 # display our updated map!
