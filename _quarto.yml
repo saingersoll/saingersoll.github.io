@@ -15,7 +15,7 @@ website:
       #  text: Projects
       - href: posts.qmd
         text: MEDS Projects
-      - href: Resume_Sofia_Ingersoll.pdf
+      - href: Resume_Ingersoll_Sofia.pdf
         text: Resume
 
     left:
