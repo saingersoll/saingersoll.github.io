@@ -19,7 +19,7 @@ In the summer of 2025, I had the opportunity to be a part of the NASA DEVELOP Lo
 
 ## Project Overview
 
-![Los Angeles County Ecological Conservation (LACEC) presentation at the NASA DEVELOP Summer 2025 West Coast Close Out Conference.](LACEC_Presentation_CloseOut.mov){fig-alt="Slide show which includes figures and graphs related to the team's findings." fig-align="center"}
+![Los Angeles County Ecological Conservation (LACEC) presentation at the NASA DEVELOP Summer 2025 West Coast Close Out Conference.](images/LACEC_Presentation_CloseOut-01.mov){fig-alt="Slide show which includes figures and graphs related to the team's findings." fig-align="center"}
 
 ## The Dangers Oak Trees Face and 2024 Oak Tree Health Predictions
 
