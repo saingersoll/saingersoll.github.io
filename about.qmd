@@ -42,8 +42,8 @@ This is my lovely grandmother, whom I was named after, Sofia Anne. In this photo
 ```{r}
 #| echo: false
 #| fig-align: center
-#| fig-width: 5
-#| fig-height: 3
+#| fig-width: 3
+#| fig-height: 1
 #| fig-alt: "The name, 'Sofia Ingersoll' in brown lettering. Below the name sits a cartoon of a brown computer with code script. Appearing beind the computer icon is a cloud."
 knitr::include_graphics("images/personal_logot.png")
 ```

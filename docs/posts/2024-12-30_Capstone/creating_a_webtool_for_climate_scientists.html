@@ -8,7 +8,7 @@
 
 <meta name="author" content="Sofia Ingersoll">
 <meta name="dcterms.date" content="2024-12-30">
-<meta name="description" content="This post details my Master in Environmental Data Science (‘MEDS’) Capstone Project, Understanding the Influence of Parameter Value Uncertainty on Climate Model Output: Developing an Interactive Dashboard, and explains all of the jargon above. The duration of the project was completed during my time at the Bren School, UCSB and lasted from Jan.&nbsp;’24 till June ’24. Our client &amp; advisor for this project was NCAR Climate &amp; Global Dynamics Lab’s, Dr.&nbsp;Daniel Kennedy. Our objective was to create a web tool that provides climate scientists insights into their climate model configurations. Additionally, it was to enhance understanding of how the simulated terrestrial systems are interacting in different situations, alongside the associated uncertainty and accuracy. This is to better calibrate the Community Land Model version 5 (CLM5), and subsequently the land modeling component of the Community Earth System Model version 2 (CESM2).">
+<meta name="description" content="Understanding the Influence of Parameter Value Uncertainty on Climate Model Output: Developing an Interactive Dashboard">
 
 <title>Creating a Climate Modeling Web Tool for NCAR Climate &amp; Global Dynamics Lab</title>
 <style>
@@ -125,11 +125,15 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../posts.html" rel="" target="">
- <span class="menu-text">MEDS Projects</span></a>
+ <span class="menu-text">Portfolio</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../Resume_Ingersoll_Sofia.pdf" rel="" target="">
  <span class="menu-text">Resume</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../CV_Ingersoll_Sofia.pdf" rel="" target="">
+ <span class="menu-text">CV</span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools">
@@ -145,27 +149,35 @@ ul.task-list li input[type="checkbox"] {
       <h1 class="title">Creating a Climate Modeling Web Tool for NCAR Climate &amp; Global Dynamics Lab</h1>
                   <div>
         <div class="description">
-          This post details my Master in Environmental Data Science (‘MEDS’) Capstone Project, Understanding the Influence of Parameter Value Uncertainty on Climate Model Output: Developing an Interactive Dashboard, and explains all of the jargon above. The duration of the project was completed during my time at the Bren School, UCSB and lasted from Jan.&nbsp;’24 till June ’24. Our client &amp; advisor for this project was NCAR Climate &amp; Global Dynamics Lab’s, Dr.&nbsp;Daniel Kennedy. Our objective was to create a web tool that provides climate scientists insights into their climate model configurations. Additionally, it was to enhance understanding of how the simulated terrestrial systems are interacting in different situations, alongside the associated uncertainty and accuracy. This is to better calibrate the Community Land Model version 5 (CLM5), and subsequently the land modeling component of the Community Earth System Model version 2 (CESM2).
+          Understanding the Influence of Parameter Value Uncertainty on Climate Model Output: Developing an Interactive Dashboard
         </div>
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">Machine Learning</div>
-                <div class="quarto-category">Earth Systems Modeling</div>
+                <div class="quarto-category">MEDS</div>
+                <div class="quarto-category">Multivariate Regresssion Analysis</div>
                 <div class="quarto-category">Science Communication</div>
               </div>
                   </div>
   </div>
     
-  
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author">Sofia Ingersoll </p>
+    </div>
+      <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              Master of Environmental Data Science Program @ The Bren School (UCSB); National Center for Atmospheric Research Climate &amp; Global Dynamics Lab (“NCAR CGD”); National Center for Ecological Analysis and Synthesis (“NCEAS”).
+            </p>
+        </div>
+      </div>
+
   <div class="quarto-title-meta">
 
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Sofia Ingersoll </p>
-            </div>
-    </div>
-      
+        
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
@@ -206,6 +218,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="{center}">
 <p><img src="photos/gaiafuture.png" class="img-fluid" width="2282"> <em><strong>Figure 1</strong>: The Gaia Future Team. Affiliations: The Bren School of Environmental Science &amp; Management, UCSB; National Center for Atmospheric Research Climate &amp; Global Dynamics Lab (“NCAR CGD”); National Center for Ecological Analysis and Synthesis (“NCEAS”).</em></p>
 </div>
+<p>This post details my Master in Environmental Data Science (‘MEDS’) Capstone Project, Understanding the Influence of Parameter Value Uncertainty on Climate Model Output: Developing an Interactive Dashboard, and explains all of the jargon above. The duration of the project was completed during my time at the Bren School, UCSB and lasted from Jan.&nbsp;’24 till June ’24. Our client &amp; advisor for this project was NCAR Climate &amp; Global Dynamics Lab’s, Dr.&nbsp;Daniel Kennedy. Our objective was to create a web tool that provides climate scientists insights into their climate model configurations. Additionally, it was to enhance understanding of how the simulated terrestrial systems are interacting in different situations, alongside the associated uncertainty and accuracy. This is to better calibrate the Community Land Model version 5 (CLM5), and subsequently the land modeling component of the Community Earth System Model version 2 (CESM2).</p>
 <p><em>** Note: For the less scientifically inclined, this document may contain some unfamiliar terms. I am providing a glossary to assist, these words will be underlined throughout the text with pop-up definitions. **</em></p>
 </section>
 <section id="understanding-climate-models" class="level3 {center}">
@@ -325,148 +338,148 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="glossary">Glossary</h3>
 <div class="cell">
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-197b0576cd3fdc9e6258" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-197b0576cd3fdc9e6258">{"x":{"element":"tenTerabytes","opts":{"content":"A large amount of digital information equivalent to approximately 10,000 gigabytes. Often used to store or analyze extensive datasets."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-5d864d2ec61801a7a610" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-5d864d2ec61801a7a610">{"x":{"element":"tenTerabytes","opts":{"content":"A large amount of digital information equivalent to approximately 10,000 gigabytes. Often used to store or analyze extensive datasets."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-63fdafcad77d58968a34" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-63fdafcad77d58968a34">{"x":{"element":"accuracy","opts":{"content":"A measure of how close a predicted value is to the true value, often expressed as a percentage."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-781ad575cdd535b728db" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-781ad575cdd535b728db">{"x":{"element":"accuracy","opts":{"content":"A measure of how close a predicted value is to the true value, often expressed as a percentage."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-1cdd4b0a62dd8f36a3cb" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-1cdd4b0a62dd8f36a3cb">{"x":{"element":"bayesianStatistics","opts":{"content":"A statistical approach that uses probability distributions to represent uncertainty in estimates and incorporates prior knowledge."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-f5f606dce3748ed03a9d" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-f5f606dce3748ed03a9d">{"x":{"element":"bayesianStatistics","opts":{"content":"A statistical approach that uses probability distributions to represent uncertainty in estimates and incorporates prior knowledge."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-161429a30c30c639b6e6" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-161429a30c30c639b6e6">{"x":{"element":"blackBox","opts":{"content":"A system or model where the internal workings are not visible or understood, but inputs and outputs are observed."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-88e91c36b58ec4d6f926" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-88e91c36b58ec4d6f926">{"x":{"element":"blackBox","opts":{"content":"A system or model where the internal workings are not visible or understood, but inputs and outputs are observed."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-f607dd1dfebbdb2bcc59" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-f607dd1dfebbdb2bcc59">{"x":{"element":"cesm2","opts":{"content":"A comprehensive climate model used for simulating Earth's climate system and its components."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-fb20d4e061608b734fe4" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-fb20d4e061608b734fe4">{"x":{"element":"cesm2","opts":{"content":"A comprehensive climate model used for simulating Earth's climate system and its components."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-7014d2627d276a40a386" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-7014d2627d276a40a386">{"x":{"element":"climateVariables","opts":{"content":"Measurable aspects of the climate system, such as temperature or precipitation, affected by natural and human processes, often used as a predicted output in models."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-59dc86450350c116dd4a" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-59dc86450350c116dd4a">{"x":{"element":"climateVariables","opts":{"content":"Measurable aspects of the climate system, such as temperature or precipitation, affected by natural and human processes, often used as a predicted output in models."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-6f24dcf654d5a509e406" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-6f24dcf654d5a509e406">{"x":{"element":"containerizedWebTool","opts":{"content":"A web-based application deployed within a container, which ensures consistency and scalability across computing environments."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-e5fa5b93acee54aca460" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-e5fa5b93acee54aca460">{"x":{"element":"containerizedWebTool","opts":{"content":"A web-based application deployed within a container, which ensures consistency and scalability across computing environments."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-99118a89f1d1f6efd109" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-99118a89f1d1f6efd109">{"x":{"element":"continuousIntegration","opts":{"content":"A software development practice where code changes are automatically tested and integrated into a shared repository to ensure stability."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-d7b7d168880c81bcb6db" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-d7b7d168880c81bcb6db">{"x":{"element":"continuousIntegration","opts":{"content":"A software development practice where code changes are automatically tested and integrated into a shared repository to ensure stability."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-c87eca423915dce0ace0" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-c87eca423915dce0ace0">{"x":{"element":"cmip","opts":{"content":"A collaborative framework designed to improve climate models and compare their predictions on a global scale."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-92a1a57f7e3107731a6f" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-92a1a57f7e3107731a6f">{"x":{"element":"cmip","opts":{"content":"A collaborative framework designed to improve climate models and compare their predictions on a global scale."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-835be57ab8dc14213bef" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-835be57ab8dc14213bef">{"x":{"element":"crossValidationTest","opts":{"content":"A statistical method used to evaluate a model's predictive performance by partitioning data into training and testing subsets."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-25be0334860e6a58a8b7" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-25be0334860e6a58a8b7">{"x":{"element":"crossValidationTest","opts":{"content":"A statistical method used to evaluate a model's predictive performance by partitioning data into training and testing subsets."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-46fbe4c767aad093eea1" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-46fbe4c767aad093eea1">{"x":{"element":"definedConfidence","opts":{"content":"A quantified level of certainty, often expressed as a percentage, indicating the likelihood that a result is accurate."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-2173c478822dd5edc4bf" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-2173c478822dd5edc4bf">{"x":{"element":"definedConfidence","opts":{"content":"A quantified level of certainty, often expressed as a percentage, indicating the likelihood that a result is accurate."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-1b461b68600433d8024c" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-1b461b68600433d8024c">{"x":{"element":"fast","opts":{"content":"A technique used to assess the sensitivity of a model's output to its input parameters."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-c8941018aecbde69514d" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-c8941018aecbde69514d">{"x":{"element":"fast","opts":{"content":"A technique used to assess the sensitivity of a model's output to its input parameters."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-d39a0ae6eb4be4eae90a" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-d39a0ae6eb4be4eae90a">{"x":{"element":"gpr","opts":{"content":"A non-parametric, probabilistic model used in machine learning to predict outputs and quantify uncertainty."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-89a6b3901d819732af52" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-89a6b3901d819732af52">{"x":{"element":"gpr","opts":{"content":"A non-parametric, probabilistic model used in machine learning to predict outputs and quantify uncertainty."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-76ed7300a95bd21d1f78" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-76ed7300a95bd21d1f78">{"x":{"element":"gridcell","opts":{"content":"A single unit or cell within a spatial grid used in climate modeling, representing a defined area of Earth's surface."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-3cd88f3e4bb6fbbadf45" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-3cd88f3e4bb6fbbadf45">{"x":{"element":"gridcell","opts":{"content":"A single unit or cell within a spatial grid used in climate modeling, representing a defined area of Earth's surface."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-597ee69c77ae1789b005" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-597ee69c77ae1789b005">{"x":{"element":"inputParameters","opts":{"content":"Numerical values or conditions used to run simulations in a model, influencing the output (e.g., soil texture, atmospheric pressure)."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-ea6ad2522db6ef486af8" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-ea6ad2522db6ef486af8">{"x":{"element":"inputParameters","opts":{"content":"Numerical values or conditions used to run simulations in a model, influencing the output (e.g., soil texture, atmospheric pressure)."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-c1231ef63eef38d5a253" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-c1231ef63eef38d5a253">{"x":{"element":"insetPlot","opts":{"content":"A smaller plot embedded within a larger plot to provide additional detail or context."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-939766901183eef4715d" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-939766901183eef4715d">{"x":{"element":"insetPlot","opts":{"content":"A smaller plot embedded within a larger plot to provide additional detail or context."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-3412eb7a90a54b4e52fa" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-3412eb7a90a54b4e52fa">{"x":{"element":"ipcc","opts":{"content":"An international organization that assesses scientific knowledge on climate change to guide policy decisions."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-82e213b563cede82dc7a" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-82e213b563cede82dc7a">{"x":{"element":"ipcc","opts":{"content":"An international organization that assesses scientific knowledge on climate change to guide policy decisions."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-ec5c90c1911f1d6f72ab" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-ec5c90c1911f1d6f72ab">{"x":{"element":"laymansTerms","opts":{"content":"Simple, non-technical language used to explain complex concepts."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-931e4fc5c95003a562a4" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-931e4fc5c95003a562a4">{"x":{"element":"laymansTerms","opts":{"content":"Simple, non-technical language used to explain complex concepts."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-f07156a1ffc58865d816" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-f07156a1ffc58865d816">{"x":{"element":"machineLearning","opts":{"content":"A method of data analysis that automates analytical model building by using algorithms that learn from data to find patterns and make decisions without human intervention."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-0043f2f360a0c98ce20a" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-0043f2f360a0c98ce20a">{"x":{"element":"machineLearning","opts":{"content":"A method of data analysis that automates analytical model building by using algorithms that learn from data to find patterns and make decisions without human intervention."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-05321e6a0f5b3a277b70" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-05321e6a0f5b3a277b70">{"x":{"element":"mlEmulator","opts":{"content":"A computational model that mimics the behavior of a more complex system to save time and resources."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-b2267f373e33faf6fcdd" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-b2267f373e33faf6fcdd">{"x":{"element":"mlEmulator","opts":{"content":"A computational model that mimics the behavior of a more complex system to save time and resources."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-f741655edd72a7edc0db" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-f741655edd72a7edc0db">{"x":{"element":"metadata","opts":{"content":"Information that describes other data, such as its source, format, or context, to improve usability and understanding."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-48fd8fc0cec935c9fe90" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-48fd8fc0cec935c9fe90">{"x":{"element":"metadata","opts":{"content":"Information that describes other data, such as its source, format, or context, to improve usability and understanding."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-c035c670ce02c9b6c6cb" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-c035c670ce02c9b6c6cb">{"x":{"element":"parameter","opts":{"content":"A variable within a model or equation that influences its output."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-b41d564156fa96ccfcc8" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-b41d564156fa96ccfcc8">{"x":{"element":"parameter","opts":{"content":"A variable within a model or equation that influences its output."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-58ae073a41530cb99398" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-58ae073a41530cb99398">{"x":{"element":"predictiveUncertainty","opts":{"content":"The range of possible values for a prediction, reflecting the model's uncertainty."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-168547fde4bff67c4097" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-168547fde4bff67c4097">{"x":{"element":"predictiveUncertainty","opts":{"content":"The range of possible values for a prediction, reflecting the model's uncertainty."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-ce4ef27b776c04a7098b" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-ce4ef27b776c04a7098b">{"x":{"element":"query","opts":{"content":"A request for specific information from a database or dataset."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-a7f52c23ae4690c38969" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-a7f52c23ae4690c38969">{"x":{"element":"query","opts":{"content":"A request for specific information from a database or dataset."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-eb396bf4e3451eb435b3" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-eb396bf4e3451eb435b3">{"x":{"element":"r2Value","opts":{"content":"A statistical measure of how well a model’s predictions match observed data, ranging from 0 (no fit) to 1 (perfect fit)."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-a00e48106ecbb88065ef" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-a00e48106ecbb88065ef">{"x":{"element":"r2Value","opts":{"content":"A statistical measure of how well a model’s predictions match observed data, ranging from 0 (no fit) to 1 (perfect fit)."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-44bb8faf57336ada2328" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-44bb8faf57336ada2328">{"x":{"element":"rawData","opts":{"content":"Unprocessed data collected directly from sources, often requiring cleaning and formatting."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-fc328a4ce282fcda8dce" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-fc328a4ce282fcda8dce">{"x":{"element":"rawData","opts":{"content":"Unprocessed data collected directly from sources, often requiring cleaning and formatting."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-89080c79bb02afa2f02b" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-89080c79bb02afa2f02b">{"x":{"element":"regressionPlot","opts":{"content":"A graph that visualizes the relationship between independent and dependent variables, often used in statistical modeling."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-cfefe0dff717e65a8b70" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-cfefe0dff717e65a8b70">{"x":{"element":"regressionPlot","opts":{"content":"A graph that visualizes the relationship between independent and dependent variables, often used in statistical modeling."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-7448699e18e42a52d858" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-7448699e18e42a52d858">{"x":{"element":"sensitivityAnalysis","opts":{"content":"A technique used to determine how different input variables affect a model's output."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-fad97103d99b7d921d88" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-fad97103d99b7d921d88">{"x":{"element":"sensitivityAnalysis","opts":{"content":"A technique used to determine how different input variables affect a model's output."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-7b7a52d1645bcee984f3" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-7b7a52d1645bcee984f3">{"x":{"element":"stdDev","opts":{"content":"A measure of data spread that quantifies the variation around the mean."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-a2612e244bdeb8018bd7" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-a2612e244bdeb8018bd7">{"x":{"element":"stdDev","opts":{"content":"A measure of data spread that quantifies the variation around the mean."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-61f013e7d60a2cbea20f" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-61f013e7d60a2cbea20f">{"x":{"element":"statisticalEquation","opts":{"content":"A mathematical formula that represents relationships between variables in a dataset."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-7788a728f3b103d7d35a" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-7788a728f3b103d7d35a">{"x":{"element":"statisticalEquation","opts":{"content":"A mathematical formula that represents relationships between variables in a dataset."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-391e192fb318d79b7c80" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-391e192fb318d79b7c80">{"x":{"element":"spatialWeight","opts":{"content":"A factor used in spatial analysis to account for the influence of one area on another."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-1ea7a15b7a6f9f1703cd" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-1ea7a15b7a6f9f1703cd">{"x":{"element":"spatialWeight","opts":{"content":"A factor used in spatial analysis to account for the influence of one area on another."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-b3987f3e73f91f5c5c07" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-b3987f3e73f91f5c5c07">{"x":{"element":"temporalDimension","opts":{"content":"The time-based aspect of data or models, often used to track changes over time."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-58dd0379a93af3a82cb9" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-58dd0379a93af3a82cb9">{"x":{"element":"temporalDimension","opts":{"content":"The time-based aspect of data or models, often used to track changes over time."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-fb479cad32762b73e666" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-fb479cad32762b73e666">{"x":{"element":"variance","opts":{"content":"A statistical measure that describes the spread of data points around the mean."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-62689d51336fdaf7791e" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-62689d51336fdaf7791e">{"x":{"element":"variance","opts":{"content":"A statistical measure that describes the spread of data points around the mean."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-1612d43f87ce3b8ce5c8" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-1612d43f87ce3b8ce5c8">{"x":{"element":"uncertaintyMeasurements","opts":{"content":"Quantitative estimates of the doubt associated with a model's predictions."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-a9ffad3a4dc7a59772f5" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-a9ffad3a4dc7a59772f5">{"x":{"element":"uncertaintyMeasurements","opts":{"content":"Quantitative estimates of the doubt associated with a model's predictions."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-69413a678c56ada81774" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-69413a678c56ada81774">{"x":{"element":"wrangling","opts":{"content":"The process of cleaning, transforming, and organizing raw data for analysis."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-64538125b67fa2e98750" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-64538125b67fa2e98750">{"x":{"element":"wrangling","opts":{"content":"The process of cleaning, transforming, and organizing raw data for analysis."}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="cell-output-display">
-<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-2525dfbdd98b06d1b851" width="100%"></span>
-<script type="application/json" data-for="htmlwidget-2525dfbdd98b06d1b851">{"x":{"element":"uncertainty","opts":{"content":"Variability or error in the model predictions due to unknown factors, leading to potential inaccuracies in the output."}},"evals":[],"jsHooks":[]}</script>
+<span class="tippy html-widget html-fill-item" height="464px" id="htmlwidget-911774ae16f9021a19e7" width="100%"></span>
+<script type="application/json" data-for="htmlwidget-911774ae16f9021a19e7">{"x":{"element":"uncertainty","opts":{"content":"Variability or error in the model predictions due to unknown factors, leading to potential inaccuracies in the output."}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="glossary">

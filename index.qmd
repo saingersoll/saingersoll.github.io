@@ -24,13 +24,13 @@ css: styles.scss
 
 **I am an environmental data scientist devoted to finding evidenced-based solutions to drive informed action and pave the way to a more sustainable future. I aim to bridge the understanding gap between researchers, policymakers, NPOs, private industries, and the public by delivering information in an engaging and accessible way.**
 
-I was recently contracted as the Machine Learning Data Engineer and Geospatial Data Analyst for the *Los Angeles County Ecological Conservation Project* at NASA's Jet Propulsion Laboratory. For this project I will have the unique opportunity to actively contribute to a forward-thinking project geared towards climate adaptation and local resiliency. I have a learned experience developing geospatial workflows for a variety of geo-data types. As well as a foundational understanding of working with machine learning in tandem with satellite and remote sensing materials, both of which I am excited to utilize. My interests lie in strengthening climate adaptation and resilience in vulnerable communities by supporting clean energy, resource management, extreme hazard preparation/recovery, and pollution mitigation projects. After my time at NASA JPL, I hope to continue participating in projects that elicit real and meaningful change. ![](images/orbit.png){width="30"}
+In 2025 contracted as a Project Lead and Geospatial Data Analyst for two consecutive projects at NASA's Jet Propulsion Laboratory. I have had the unique opportunity to actively contribute to forward-thinking projects geared towards informing conservation interventions and land management decisions. I have a learned experience developing geospatial workflows for a variety of geo-data types. As well as a foundational understanding of working with machine learning in tandem with satellite and remote sensing materials, both of which I am excited to utilize. My interests lie in strengthening climate adaptation and resilience in vulnerable communities by supporting clean energy, resource management, extreme hazard preparation/recovery, and pollution mitigation projects. I hope to continue participating in projects that elicit real and meaningful change. ![](images/orbit.png){width="30"}
 
 ------------------------------------------------------------------------
 
 ## Experience
 
-![](images/clipboard-678023564.png){width="20"} **Machine Learning Data Engineer &** **GIS Analyst** \| Expected 6/25 - 8/25 \|\
+![](images/clipboard-678023564.png){width="20"} **Machine Learning Data Engineer &** **GIS Analyst** \| 6/25 - 8/25 \|\
 NASA DEVELOP Analytical Mechanics Associate \@ Jet Propulsion Laboratory \| Pasadena, CA \| Los Angeles County Ecological Conservation Project: Mapping and Identifying the Health of Urban Oak Trees in Los Angeles County
 
 ![](images/clipboard-988972325.png){width="20"} **Project Lead & Geospatial Data Analyst** \| 1/25 - 4/25 \|\

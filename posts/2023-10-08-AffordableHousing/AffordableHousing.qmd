@@ -5,11 +5,7 @@ authors:
   - name: Sofia Ingersoll & Luna Herschenfeld-Catlán
     affiliation: Master of Environmental Data Science Program @ The Bren School (UCSB) 
 date: 2023-10-08
-categories: [Ethics, Affordable Housing] # self-defined categories
-#citation: 
-  #url: https://samanthacsik.github.io/posts/2022-10-24-my-blog-post/ 
-  #url: https://ucsb-meds.github.io/meds-install-windows.html/
-  #url: https://brunj7.github.io/EDS-214-analytical-workflows/day_1.html/
+categories: [MEDS] # self-defined categories
 image: affordablehousing.jpg
 #draft: true # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
 citation:

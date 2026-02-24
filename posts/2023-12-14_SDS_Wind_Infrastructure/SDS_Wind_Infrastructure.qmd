@@ -1,7 +1,7 @@
 ---
-title: "Spatially Distorted Signaling: How Opinions Against Wind Infrastructure Delay Our Transition to Renewable Energy"
+title: "The SDS Phenomenon"
 author: "Sofia Ingersoll"
-description: "In hopes to understand potential delays in our transition to a more sustainable future this study analyzed the activity of U.S. wind power plants (2000-2016) to inspect how population density, median income, and anti-wind opinions impacted wind plant operations. An investigation was conducted to quantify propensities in relation to local resistance against renewable energy developments for the listed attributes."
+description: "Spatially Distorted Signaling: How Opinions Against Wind Infrastructure Delay Our Transition to Renewable Energy"
 editor: visual
 date: "2023-12-14"
 format:
@@ -15,7 +15,7 @@ output:
       toc: yes
       toc_depth: 3
       toc_float: yes
-categories: [Statistical Analysis, Logit, Wind Power, Energy Access, Sustainable Energy Decarbonization Transition]
+categories: [Multivariate Regression Analysis, Geospatial Analysis, MEDS, Decarbonization Transition]
 title-block-banner: true
 css: styles.scss
 citation:
@@ -23,7 +23,9 @@ citation:
 image: wind_farm.png
 ---
 
-## Spatially Distorted Signaling: How Opinions Against Wind Infrastructure Delay Our Transition to Renewable Energy
+![Figure 1: Wind turbines on the Bishop Hill wind farm operate among the corn and soybean fields near Bishop Hill, Illinois (U.S. Department of Agriculture, 2017).](wind_farm.png){fig-alt="Beautiful pink and blue sunset in the background with rows of wind turbines in the foreground." fig-align="center" width="630"}
+
+In hopes to understand potential delays in our transition to a more sustainable future this study analyzed the activity of U.S. wind power plants (2000-2016) to inspect how population density, median income, and anti-wind opinions impacted wind plant operations. An investigation was conducted to quantify propensities in relation to local resistance against renewable energy developments for the listed attributes.
 
 ##### 🗃️GitHub Repo: <https://github.com/saingersoll/Spatially-Distorted-Signaling-US-Wind-Infrastructure>
 
@@ -32,8 +34,6 @@ image: wind_farm.png
 Spatial Distorted Signalling (SDS) is a term that describes the mobilization of minority opinion holders to promote legislation that aligns with their beliefs and electorally push-back (Stokes, et al, [2016](https://www.jstor.org/stable/24877466)). The SDS phenomenon has the ability to skew the accurate representation of public opinions due to effective organization practices. Leading to a disproportionate number of minority opinion holder interactions used to influence local legislators. As well as more trends in collective voting for smaller elections. Natural occurrences of the SDS phenomenon were recently observed in rural Canadian communities. After new legislation was passed by the Green Party to provide incentive for large-scale wind power developments, minority opinion holders gathered strategically. Their intention was to vote out the Green Party in the following election out of retaliation and they succeeded. The policy was amended shortly after, halting new production of wind power infrastructure. Within the U.S. a number of wind plant developments have encountered similar outcomes. In this investigation, we will seek to understand how population density, median income, and anti-wind power opinions within 3 km of wind power plants impacted the plant's operational activity (2000-2016) to provide insights into localized resistance and its effects on renewable energy projects.
 
 ### **`Main Takeaways`**
-
-$$\operatorname{logit}(p)=\log \left(\frac{p}{1-p}\right)=\beta_0+\beta_1  (Population Density) * \beta_2  (Median Income) * \beta_3  (AntiWindOpinion) +\varepsilon$$
 
 The overarching logit model analysis did not provide significant findings, but alluded to influential covariate interactions. The multivariate interaction model was leveraged to tabulate individually significant propensities. The probabilities revealed with an increase in median income there was a decreased in active wind energy developments, regardless of population size, and wind opinion. Further exploration of the covariate interactions are encouraged with expanded datasets, as a limited amount of data was utilized for this study, restricting the sample analysis. Using what is currently available, we will interpret the socioeconomic factors in this model as they relate to real-world social and political dynamics.
 
@@ -51,10 +51,6 @@ Overall, higher-income areas had decreased odds of having an active wind plant. 
 
 As suspected, areas with higher opposition to wind infrastructure were less likely to have operational wind plants. Conversely, the opposite was seen for pro/neutral-wind opinion holding areas. This aligns with expectations that local opposition and social mobilization impacts the establishment of wind plants. Therefore, addressing and mitigating local resistance is essential for enhancing the feasibility and acceptance of wind energy initiatives.
 
-![](wind_farm.png){fig-align="center" width="630"}
-
-**Figure 1**: Wind turbines on the Bishop Hill wind farm operate among the corn and soybean fields near Bishop Hill, Illinois (U.S. Department of Agriculture, 2017).
-
 ### `U.S. Wind Power Plant Data`
 
 -   [Replication Data for: Prevalence and predictors of wind energy opposition in North America](https://dataverse.harvard.edu/file.xhtml?fileId=7339850&version=1.0)
@@ -63,8 +59,10 @@ The data source that was utilized in this project, US Wind Data, focuses on the 
 
 #### Variables of Interest:
 
+$$\operatorname{logit}(p)=\log \left(\frac{p}{1-p}\right)=\beta_0+\beta_1  (Population Density) * \beta_2  (Median Income) * \beta_3  (AntiWindOpinion) +\varepsilon$$
+
 | Name         | Description                                                                                                                             |
-|--------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+|------------------|------------------------------------------------------|
 | status       | Describes the project operating status. In this study, we have converted it into a binary variable: 1 is operating, 0 is not_operating. |
 | pop_den      | Tract-level 2010 census data for population density (per mi\^2)                                                                         |
 | med_inc      | Tract-level 2010 census data for median income (\$)                                                                                     |
@@ -83,6 +81,7 @@ Before diving in, let's get a sense of where we'll be investigating.
 # Loading Libraries
 library(tidyverse)        # essential r package 
 library(sf)               # package simplifies spatial dataframes
+library(DT)
 library(tmap)
 library(terra)
 library(broom)
@@ -423,10 +422,12 @@ coef_summary <- data.frame(
   `Std Error` = coef_table[, "Std. Error"]
 )
 
-# round and style the table
-kable(coef_summary, format = "html", digits = 4, caption = "Table 1: Summary of Coefficients, Odds Ratios, and P-values") %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
-                position = "center", font_size = 12)
+
+# display table
+DT::datatable(coef_summary, 
+               caption = htmltools::tags$caption(
+    style = "Table 1: Summary of Coefficients, Odds Ratios, and P-values"),
+              options = list(pageLength = 10, scrollX = TRUE))
 
 ```
 
@@ -521,9 +522,6 @@ To answer this, let's touch a bit on the social psychology at potentially at pla
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ----  Plant Acitivity Visual   ----
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# MRS. Robinson approach: matching, restriction,
-# stratification, regression
-
 # summarize grouped probabilities
 groupwise_propensity <- wind_us %>%
   group_by(income_label, density_label, anti_label) %>%
@@ -608,7 +606,7 @@ leaflet(prob_points) %>%
 
 ### Probability of Active Wind Plant Status by Socioeconomic Groups
 
-```{r wind_prob_tables}
+```{r wind_prob_tables, echo=FALSE}
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ---- Wind Sentiment Tables   ----
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -616,23 +614,18 @@ leaflet(prob_points) %>%
 prob_summary_yes <- groupwise_propensity %>% filter(`Wind Opinion` == "Anti-Wind")
 prob_summary_no <- groupwise_propensity %>% filter(`Wind Opinion` == "Pro/Neutral")    
 
-# Display the table for "Anti-wind"
-kable(prob_summary_yes, format = "html", digits = 3,
-      caption = "Table 2: Probability of Active Wind Plant by Income and Population Density (Anti-Wind Opinion)") %>%
-  kable_styling(
-    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
-    position = "center",
-    font_size = 12
-  )
+DT::datatable(prob_summary_yes, 
+               caption = htmltools::tags$caption(
+    style = "Table 2: Probability of Active Wind Plant by Income and Population Density (Anti-Wind Opinion)"),
+    options = list(pageLength = 10, 
+                   scrollX = TRUE))
 
 # Display the table for "Pro/Neutral Wind"
-kable(prob_summary_no, format = "html", digits = 24,
-      caption = "Table 3: Probability of Active Wind Plant by Income and Population Density (Pro/Neutral-Wind Opinion)") %>%
-  kable_styling(
-    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
-    position = "center",
-    font_size = 12
-  )
+DT::datatable(prob_summary_no, 
+               caption = htmltools::tags$caption(
+    style = "Table 3: Probability of Active Wind Plant by Income and Population Density (Pro/Neutral-Wind Opinion)"),
+    options = list(pageLength = 10, 
+                   scrollX = TRUE))
 ```
 
 ### Model Considerations

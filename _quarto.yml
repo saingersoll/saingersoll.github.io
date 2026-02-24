@@ -14,9 +14,11 @@ website:
      # - href: projects.qmd
       #  text: Projects
       - href: posts.qmd
-        text: MEDS Projects
+        text: Portfolio
       - href: Resume_Ingersoll_Sofia.pdf
         text: Resume
+      - href: CV_Ingersoll_Sofia.pdf
+        text: CV
 
     left:
       - text: Get in Touch!

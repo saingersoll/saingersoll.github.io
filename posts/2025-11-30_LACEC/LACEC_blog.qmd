@@ -1,0 +1,34 @@
+---
+title: "Understanding Oak Tree Health Throughout Los Angeles County"
+description: "Los Angeles County Ecological Conservation Project: Mapping and Identifying the Health of Urban Oak Trees in Los Angeles County"
+author:
+  - name: Sofia Ingersoll 
+    affiliations: Analytical Mechanics Associates, NASA DEVELOP, NASA Jet Propulsion Laboratory, California Institute of Technology.
+date: 2026-1-30
+categories: [Ecological Conservation, Urban Forestry, NASA, Multivariate Regression Analysis, Geospatial Analysis, Science Communication] # self-defined categories
+#draft: true # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
+citation:
+  url: https://saingersoll.github.io/posts/LACEC_blog.html
+format: html
+image: fancy_oak.jpeg
+---
+
+## About the Project
+
+In the summer of 2025, I had the opportunity to be a part of the NASA DEVELOP Los Angeles County Ecological Conservation Project. We partnered with the Los Angeles County Fire Department’s Forestry Division and the Department of Internal Services to address critical concerns regarding local oak trees. It was an honor working with such passionate and knowledgeable people while exploring new ways to assess oak tree and oak woodland health remotely. To learn more about current threats to oak trees and how our findings support local strategic land management tactics, explore the figures below or check out our presentation.
+
+## Project Overview
+
+![Los Angeles County Ecological Conservation (LACEC) presentation at the NASA DEVELOP Summer 2025 West Coast Close Out Conference.](LACEC_Presentation_CloseOut.mov){fig-alt="Slide show which includes figures and graphs related to the team's findings." fig-align="center"}
+
+## The Dangers Oak Trees Face and 2024 Oak Tree Health Predictions
+
+![The figure shows delineated oak tree health predictions within Los Angeles County. The colors of the points represent the associated predicted health ratings.](2025Sum_JPL_LosAngelesEco_1_PageFlyer_FD.png){fig-alt="The figure displays a map of Los Angeles County and colored points to represent predicted tree health and location. The text surrounding the figure in the poster details the specific risks the oak trees face, as well as the tools the team utilized to generate oak health predictions." fig-align="center"}
+
+## Methodology Summary
+
+![The poster includes details on the specific Earth sensing tools we utilized. In addition to an overview of our approach and findings.](2025Sum_JPL_LosAngelesCountyEco_Poster_FD-Final.png){fig-alt="The poster includes details on the specific Earth sensing tools we utilized. In addition to an overview of our approach and findings. There are many different images of graphs, maps, and Earth sensing tools on the poster." fig-align="center"}
+
+![The LACEC Team out field surveying with the help of the Los Angeles County Fire Department's Wen Wang and Sara Chin. On this outing in La Verne, we collected validation data for our oak health predictions using Survey123.](casual_oak.jpeg){fig-alt="Four individuals in their early-mid twenties wearing hiking gear, smiling and standing underneath a massive oak tree." fig-align="center"}
+
+###### ***Note: The technical report associated with this project is currently under internal review before it can be made public. This material is based upon work supported by NASA through contract 80LARC23FA024.***

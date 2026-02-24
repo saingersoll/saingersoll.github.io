@@ -1,15 +1,11 @@
 ---
 title: "Creating a Climate Modeling Web Tool for NCAR Climate & Global Dynamics Lab"
-description: "This post details my Master in Environmental Data Science ('MEDS') Capstone Project, Understanding the Influence of Parameter Value Uncertainty on Climate Model Output: Developing an Interactive Dashboard, and explains all of the jargon above. The duration of the project was completed during my time at the Bren School, UCSB and lasted from Jan. ‘24 till June ‘24. Our client & advisor for this project was NCAR Climate & Global Dynamics Lab’s, Dr. Daniel Kennedy. Our objective was to create a web tool that provides climate scientists insights into their climate model configurations. Additionally, it was to enhance understanding of how the simulated terrestrial systems are interacting in different situations, alongside the associated uncertainty and accuracy. This is to better calibrate the Community Land Model version 5 (CLM5), and subsequently the land modeling component of the Community Earth System Model version 2 (CESM2)."
+description: "Understanding the Influence of Parameter Value Uncertainty on Climate Model Output: Developing an Interactive Dashboard"
 author:
   - name: Sofia Ingersoll 
-    #affiliations: Master of Environmental Data Science Program @ The Bren School (UCSB); National Center for Atmospheric Research Climate & Global Dynamics Lab (“NCAR CGD”); National Center for Ecological Analysis and Synthesis (“NCEAS”).
+    affiliations: Master of Environmental Data Science Program @ The Bren School (UCSB); National Center for Atmospheric Research Climate & Global Dynamics Lab (“NCAR CGD”); National Center for Ecological Analysis and Synthesis (“NCEAS”).
 date: 2024-12-30
-categories: [Machine Learning, Earth Systems Modeling, Science Communication] # self-defined categories
-#citation: 
-  #url: https://samanthacsik.github.io/posts/2022-10-24-my-blog-post/ 
-  #url: https://ucsb-meds.github.io/meds-install-windows.html/
-  #url: https://brunj7.github.io/EDS-214-analytical-workflows/day_1.html/
+categories: [Machine Learning, MEDS, Multivariate Regresssion Analysis, Science Communication] # self-defined categories
 #draft: true # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
 citation:
   url: https://saingersoll.github.io/posts/creating_a_webtool_for_climate_scientists.html
@@ -21,6 +17,8 @@ format: html
 ::: {center}
 ![](photos/gaiafuture.png){width="2282"} ***Figure 1**: The Gaia Future Team. Affiliations: The Bren School of Environmental Science & Management, UCSB; National Center for Atmospheric Research Climate & Global Dynamics Lab (“NCAR CGD”); National Center for Ecological Analysis and Synthesis (“NCEAS”).*
 :::
+
+This post details my Master in Environmental Data Science ('MEDS') Capstone Project, Understanding the Influence of Parameter Value Uncertainty on Climate Model Output: Developing an Interactive Dashboard, and explains all of the jargon above. The duration of the project was completed during my time at the Bren School, UCSB and lasted from Jan. ‘24 till June ‘24. Our client & advisor for this project was NCAR Climate & Global Dynamics Lab’s, Dr. Daniel Kennedy. Our objective was to create a web tool that provides climate scientists insights into their climate model configurations. Additionally, it was to enhance understanding of how the simulated terrestrial systems are interacting in different situations, alongside the associated uncertainty and accuracy. This is to better calibrate the Community Land Model version 5 (CLM5), and subsequently the land modeling component of the Community Earth System Model version 2 (CESM2).
 
 *\*\* Note: For the less scientifically inclined, this document may contain some unfamiliar terms. I am providing a glossary to assist, these words will be underlined throughout the text with pop-up definitions. \*\**
 

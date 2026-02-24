@@ -1,5 +1,5 @@
 ---
-title: "My Portfolio"
+title: "Projects"
 listing: 
  # all Quarto docs in the `posts` directory will be included on your listing page
   contents: posts
@@ -12,7 +12,3 @@ listing:
 title-block-banner: true
 css: styles.scss
 ---
-
-## Welcome!
-
-Below are a collection of selected projects completed during my time in the Maters of Environmental Data Science (MEDS) program at the Bren School of Environmental Science & Management, University of California, Santa Barbara (2023-2024).
