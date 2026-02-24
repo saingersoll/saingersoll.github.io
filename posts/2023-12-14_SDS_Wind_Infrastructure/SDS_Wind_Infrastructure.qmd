@@ -97,7 +97,9 @@ library(patchwork)
 library(kableExtra)
 
 set.seed(99)
-knitr::opts_chunk$set(echo = T, warning = F, message = F)
+#| label: map_data
+#| message: false
+#| warning: false
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ----        Read & Raster      ----
@@ -435,7 +437,7 @@ DT::datatable(coef_summary,
 
 Our analysis of wind plant activity using logistic regression models has provided valuable insights into the factors influencing the presence of operational wind plants.The probability distribution of having an active local wind plant across different population density and median income quantiles reveals some notable trends:
 
-```{r fig.width=10, fig.height=5}
+```{r fig.width=10, fig.height=5, warning=F}
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ----       GLM Prob by Cat     ----
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -503,7 +505,7 @@ ggplot(plot_data, aes(x = income_label, y = probability, fill = density_label)) 
     legend.key.size = unit(0.5, "cm"),
     legend.spacing.x = unit(0.2, "cm"),
     legend.spacing.y = unit(0.2, "cm"),
-    legend.background = element_rect(fill = "white", color = "grey100", size = 0.5)
+    legend.background = element_rect(fill = "white", color = "grey100", linewidth = 0.5)
   ) +
   guides(fill = guide_legend(title = expression("Population Density (Log Scale, " ~ mi^-2 ~ ")"), 
                              title.position = "top",
